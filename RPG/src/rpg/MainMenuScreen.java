@@ -1,9 +1,16 @@
 package rpg;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
+import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 
 import guiTeacher.components.Action;
@@ -55,10 +62,20 @@ public class MainMenuScreen extends FullFunctionScreen implements IState {
 		StyledComponent.setButtonOutline(true);
 		setBackground(Color.BLACK);
 
+		try {
+			File fontFile = new File("resources/Holiday.ttf");
+			//			File fontFile = new File("resources//DayRoman.ttf");
+			Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
+			Font baseFont=font.deriveFont(72f);
+			StyledComponent.setBaseFont(baseFont);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		background = new Graphic(250,150,"resources/magium.png");
 		viewObjects.add(background);
 
-		newGame = new Button(40, 100, 150, 75, "NEW",Color.white, new Action() {
+		newGame = new Button(40, 100, 200, 75, "NEW",Color.white, new Action() {
 
 			@Override
 			public void act() {
@@ -71,7 +88,7 @@ public class MainMenuScreen extends FullFunctionScreen implements IState {
 		newGame.update();
 		viewObjects.add(newGame);
 
-		loadGame = new Button(40, 200, 150, 75, "LOAD",Color.white, new Action() {
+		loadGame = new Button(40, 200, 200, 75, "LOAD",Color.white, new Action() {
 
 			@Override
 			public void act() {
@@ -85,10 +102,9 @@ public class MainMenuScreen extends FullFunctionScreen implements IState {
 		viewObjects.add(loadGame);
 		
 		StyledComponent.setTextColor(Color.WHITE);
-		title = new TextLabel(100, 500, 400, 50, "Magium");
+		title = new TextLabel(300, 450, 400, 100, "Magium");
 		title.update();
 		viewObjects.add(title);
-
 
 
 	}
