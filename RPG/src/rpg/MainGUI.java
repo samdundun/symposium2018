@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import guiTeacher.GUIApplication;
 import guiTeacher.components.Graphic;
@@ -18,6 +20,9 @@ public class MainGUI extends GUIApplication {
 	public static MainGUI game;
 	public static MainMenuScreen mainMenu;
 	public static LocalMap localMap;
+	
+	public static MusicPlayer player;
+
 //	public static WorldMap worldMap;
 //	public static BattleScreen battle;
 //	public static InGameMenu gameMenu;
@@ -41,6 +46,7 @@ public class MainGUI extends GUIApplication {
 	}
 	
 	public static void main(String[] args) {
+		//player = new MusicPlayer("suprise");
 		game = new MainGUI(800, 600);
 		Thread runner = new Thread(game);
 		runner.start();
