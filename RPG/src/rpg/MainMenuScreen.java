@@ -80,7 +80,7 @@ public class MainMenuScreen extends FullFunctionScreen implements IState {
 			@Override
 			public void act() {
 				MainGUI.game.setScreen(MainGUI.localMap);
-
+				MainGUI.game.localMap.OnEnter();
 			}
 		});
 		newGame.setBackgroundColor(Color.white);
