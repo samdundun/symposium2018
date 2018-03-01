@@ -16,6 +16,7 @@ import guiTeacher.userInterfaces.FullFunctionScreen;
 public class LocalMap extends FullFunctionScreen implements IState, KeyListener {
 
 	private SamCustomArea intro;
+	private Graphic leo;
 	
 	public LocalMap(int width, int height) {
 		super(width, height);
@@ -37,6 +38,7 @@ public class LocalMap extends FullFunctionScreen implements IState, KeyListener 
 	@Override
 	public void OnEnter() {
 		intro.setVisible(true);
+		leo.setVisible(true);
 		String start = "My name is Leo and I'm a mage, unknown to the world until today!\nI have entered this mage tournament in the continent of Varathia.\nThis tournament has a prize of the rumored magium, a power which one knows no bounds!\nI intend to seize this power for myself and that begins here.\nI have been magically teleported into the island continent and no word has been spoken yet.\nThe best thing to do for now is to wander and gather intel on what is going on.";
 		intro.setText(start.substring(0,1));
 		Thread printer = new Thread(new Runnable() {
@@ -71,6 +73,7 @@ public class LocalMap extends FullFunctionScreen implements IState, KeyListener 
 					e.printStackTrace();
 				}
 				intro.setVisible(false);
+				leo.setVisible(false);
 			}
 		});
 		printer.start();
@@ -154,6 +157,9 @@ public class LocalMap extends FullFunctionScreen implements IState, KeyListener 
 		
 		intro = new SamCustomArea(0, 400, 800, 200, "");
 		viewObjects.add(intro);
+		
+		leo = new Graphic(400,147,450,253,"resources/leo.png");
+		viewObjects.add(leo);
 
 	}
 	
