@@ -45,7 +45,7 @@ public class LocalMap extends FullFunctionScreen implements IState, KeyListener 
 			public void run() {
 				for(int i = 1; i< start.length(); i++) {
 					try {
-						Thread.sleep(50);
+						Thread.sleep(25);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -53,19 +53,19 @@ public class LocalMap extends FullFunctionScreen implements IState, KeyListener 
 					String contents = "";
 
 					 contents = intro.getText() + start.substring(i, i+1);
-					 if(i%250 == 0) {
+					 intro.setText(contents);
+					 if(i%278 ==0) {
 						 try {
-							Thread.sleep(4000);
+							Thread.sleep(3000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						contents = "";
+						intro.setText("");
 					 }
-					intro.setText(contents);
 				}
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -134,10 +134,7 @@ public class LocalMap extends FullFunctionScreen implements IState, KeyListener 
 				else if(j> 44 && !(i<9)){
 					test = MainGUI.allTiles[38];
 					currentTile = new Graphic(0,0,test.getImage());
-					System.out.println(currentTile);
 					currentTile.setX(16*j);
-					System.out.println(16*j);
-					System.out.println(16*i);
 					currentTile.setY(16*i);
 					viewObjects.add(currentTile);
 				}

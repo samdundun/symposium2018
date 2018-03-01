@@ -47,7 +47,7 @@ public class MainGUI extends GUIApplication {
 	
 	public static void main(String[] args) {
 		//player = new MusicPlayer("suprise");
-		game = new MainGUI(800, 600);
+		game = new MainGUI(810, 600);
 		Thread runner = new Thread(game);
 		runner.start();
 	}
