@@ -41,22 +41,67 @@ public class LocalMap extends FullFunctionScreen implements IState {
 	public void initAllObjects(List<Visible> viewObjects) {
 		Graphic currentTile = null;
 		Graphic test = null;
-		int random = 0;
+		//int random = 0;
+		
+		//LAYER 1
 		for(int i = 0; i < this.getHeight()/16; i++) {
 			for(int j = 0; j < this.getWidth()/16; j++) {
-				while(test == null) {
-				random = (int) (Math.round(Math.random()*1))+56;
-				test = MainGUI.allTiles[random];
+				//This was a test for selecting random tiles, can select tiles freely
+				//while(test == null) {
+				//random = (int) (Math.round(Math.random()*1))+56;
+				if(i< 9 && j > 40) {
+					test = MainGUI.allTiles[13];
 				}
+				else if ((i <10 &&j >= 40) || (j>40 && i <= 9) || (i < 10 && i > 4 && j >38) ||(j < 45 && j > 38 && i ==10)) {
+					test = MainGUI.allTiles[10];
+				}
+				else if(i%2 == 0 || j%2 == 0) {
+					test = MainGUI.allTiles[64];
+				}
+				else if (i%3 == 0 && j%3 == 0) {
+					test = MainGUI.allTiles[12];
+				}
+				else {
+				test = MainGUI.allTiles[65];
+				}
+				//}
 				currentTile = new Graphic(0,0,test.getImage());
 				System.out.println(currentTile);
 				currentTile.setX(16*j);
 				System.out.println(16*j);
 				System.out.println(16*i);
 				currentTile.setY(16*i);
-				currentTile.update();
 				viewObjects.add(currentTile);
-				test = null;
+				//test = null;
+			}
+		}
+		
+		for(int i = 0; i < this.getHeight()/16; i++) {
+			for(int j = 0; j < this.getWidth()/16; j++) {
+				//This was a test for selecting random tiles, can select tiles freely
+				//while(test == null) {
+				//random = (int) (Math.round(Math.random()*1))+56;
+				if((i<5 || i> 31)&& !(j>5 && j<10) && !(j>40 && i <5) || j==0) {
+				test = MainGUI.allTiles[30];
+				currentTile = new Graphic(0,0,test.getImage());
+				System.out.println(currentTile);
+				currentTile.setX(16*j);
+				System.out.println(16*j);
+				System.out.println(16*i);
+				currentTile.setY(16*i);
+				viewObjects.add(currentTile);
+				}
+				else if(j> 44 && !(i<9)){
+				test = MainGUI.allTiles[38];
+				currentTile = new Graphic(0,0,test.getImage());
+				System.out.println(currentTile);
+				currentTile.setX(16*j);
+				System.out.println(16*j);
+				System.out.println(16*i);
+				currentTile.setY(16*i);
+				viewObjects.add(currentTile);
+				}
+				//test = null;
 			}
 		}
 		

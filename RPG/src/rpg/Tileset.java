@@ -29,8 +29,8 @@ public class Tileset {
 			
 			//cuts the tiles up
 			int tilelength = 0;
-			for(int i = 0; i<col-1; i++) {
-				for(int j = 0; j<row-1; j++) {
+			for(int i = 0; i<col; i++) {
+				for(int j = 0; j<row; j++) {
 					tiles[tilelength] = new Graphic(x,y,originalImage.getSubimage(x+pixelWidth*j, y+pixelHeight*i, pixelWidth, pixelHeight));
 					tilelength++;
 				}

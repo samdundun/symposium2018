@@ -15,7 +15,6 @@ import javax.sound.sampled.LineListener;
 public class AudioFile implements LineListener{
 
 	private File soundFile;
-    private String soundName;
     private AudioInputStream ais;
     private AudioFormat format;
     private DataLine.Info info;
@@ -24,18 +23,16 @@ public class AudioFile implements LineListener{
     private boolean playing;
    // private volatile boolean playing;
     
-    public AudioFile(String fileName, String name) {
-    		soundFile = new File(fileName);
-    		System.out.println(soundFile);
-    		soundName = name;
-    		try {
-    			ais = AudioSystem.getAudioInputStream(soundFile);
-    			format = ais.getFormat();
-    			info = new DataLine.Info(Clip.class, format);
-    			clip = (Clip) AudioSystem.getLine(info);
-    			clip.addLineListener(this);
-    			clip.open(ais);
-    			gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+    public AudioFile(String fileName) {
+    	soundFile = new File(fileName);
+    	try {
+			ais = AudioSystem.getAudioInputStream(soundFile);
+			format = ais.getFormat();
+	    	info = new DataLine.Info(Clip.class, format);
+	    	clip = (Clip) AudioSystem.getLine(info);
+	    	clip.addLineListener(this);
+	    	clip.open(ais);
+	    	gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -44,19 +41,11 @@ public class AudioFile implements LineListener{
    
     //default volume
     public void play() {
-    		play(-10);
-    }
-    
-    public void stop() {
-    		clip.stop();
+    	play(-10);
     }
    
-    public String getName() {
-    		return soundName;
-    }
-    	
     public void play(float volume) {
-    		gainControl.setValue(-10);
+    	gainControl.setValue(-10);
 		clip.start();
 		playing = true;
     }
@@ -69,12 +58,11 @@ public class AudioFile implements LineListener{
 	public void update(LineEvent event) {
 		if(event.getType() == LineEvent.Type.START)
 			playing = true;
-		else if(event.getType() == LineEvent.Type.STOP) {
+		else if(event.getType() == LineEvent.Type.STOP)
 			clip.stop();
 			clip.flush();
 			clip.setFramePosition(0);
 			playing = false;
-		}	
 	}
-
+    
 }
