@@ -141,5 +141,9 @@ public class AnimatedComponent extends MovingComponent{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void setCurrentFrame(int i) {
+		currentFrame = i;
+	}
 
 }

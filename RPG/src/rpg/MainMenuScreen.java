@@ -34,18 +34,6 @@ public class MainMenuScreen extends FullFunctionScreen implements IState {
 	}
 
 	@Override
-	public void Update(float elapsedTime) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void Render() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void OnEnter() {
 		// TODO Auto-generated method stub
 

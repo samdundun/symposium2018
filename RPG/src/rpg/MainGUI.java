@@ -19,7 +19,7 @@ public class MainGUI extends GUIApplication {
 	
 	public static MainGUI game;
 	public static MainMenuScreen mainMenu;
-	public static LocalMap localMap;
+	public static IntroMap localMap;
 	
 	public static MusicPlayer player;
 
@@ -40,16 +40,17 @@ public class MainGUI extends GUIApplication {
 	@Override
 	public void initScreen() {
 		mainMenu = new MainMenuScreen(getWidth(), getHeight());
-		localMap = new LocalMap(getWidth(), getHeight());
+		localMap = new IntroMap(getWidth(), getHeight());
 		setScreen(mainMenu);
 
 	}
 	
 	public static void main(String[] args) {
-		//player = new MusicPlayer("suprise");
+		player = new MusicPlayer("bgm");
 		game = new MainGUI(810, 600);
 		Thread runner = new Thread(game);
 		runner.start();
+		player.run();
 	}
 	
 

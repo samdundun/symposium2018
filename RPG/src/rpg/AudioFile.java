@@ -59,10 +59,12 @@ public class AudioFile implements LineListener{
 		if(event.getType() == LineEvent.Type.START)
 			playing = true;
 		else if(event.getType() == LineEvent.Type.STOP)
+		{
 			clip.stop();
 			clip.flush();
 			clip.setFramePosition(0);
 			playing = false;
+		}
 	}
     
 }
