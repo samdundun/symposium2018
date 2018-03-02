@@ -1,5 +1,6 @@
 package rpg;
 
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
 /**
@@ -7,10 +8,14 @@ import java.awt.event.KeyEvent;
  */
 
 import guiTeacher.components.AnimatedComponent;
+import guiTeacher.components.Component;
+import guiTeacher.components.MovingComponent;
 import guiTeacher.interfaces.KeyedComponent;
 
-public class MovingCharacter extends AnimatedComponent implements KeyedComponent {
+public class MovingCharacter extends MovingComponent implements KeyedComponent {
 
+   static final AnimatedComponent[] characterActions = {};
+	
 	public MovingCharacter(int x, int y, int w, int h) {
 		super(x, y, w, h);
 		// TODO Auto-generated constructor stub
@@ -88,5 +93,13 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public void drawImage(Graphics2D g) {
+		AnimatedComponent currentAction = characterActions[0];
+		g.drawImage(currentAction.getImage(), 0, 0, null);
+	}
+
+
 
 }

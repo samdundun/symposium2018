@@ -24,7 +24,7 @@ public class MainGUI extends GUIApplication {
 	public static MusicPlayer player;
 
 //	public static WorldMap worldMap;
-//	public static BattleScreen battle;
+	public static BattleScreen battle;
 //	public static InGameMenu gameMenu;
 	
 	public static final Tileset setOfTiles = new Tileset(0, 0, 16, 16, "resources/basictiles.png");
@@ -41,6 +41,7 @@ public class MainGUI extends GUIApplication {
 	public void initScreen() {
 		mainMenu = new MainMenuScreen(getWidth(), getHeight());
 		localMap = new IntroMap(getWidth(), getHeight());
+		battle = new BattleScreen(getWidth(), getHeight());
 		setScreen(mainMenu);
 
 	}

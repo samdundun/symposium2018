@@ -29,7 +29,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
-		background = new Graphic(0, 0, "resources/battleScene.png");
+		background = new Graphic(0, 0, "resources/battlescene.jpg");
 		viewObjects.add(background);
 
 	}
