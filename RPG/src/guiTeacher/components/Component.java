@@ -77,6 +77,10 @@ public abstract class Component implements Visible {
 //		return image.createGraphics();
 	}
 	
+	public void setImage(BufferedImage b) {
+		image = b;
+	}
+	
 	
 	/**
 	 * 

@@ -1,6 +1,9 @@
 package rpg;
 
+import java.awt.Component;
 import java.awt.Font;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +36,12 @@ public class MainGUI extends GUIApplication {
 	public MainGUI(int width, int height) {
 		super(width, height);
 		setVisible(true);
+		addComponentListener(new ComponentAdapter() 
+		{  
+		        public void componentResized(ComponentEvent evt) {
+		            Component c = (Component)evt.getSource();
+		        }
+		});
 		// TODO Auto-generated constructor stub
 	}
 	

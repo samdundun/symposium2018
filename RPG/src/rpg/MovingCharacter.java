@@ -127,9 +127,10 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 
 	@Override
 	public void drawImage(Graphics2D g) {
-		clear();
 		AnimatedComponent currentAction = characterActions[direction];
-		g.drawImage(currentAction.getImage(),0, 0,this.getWidth(),this.getHeight(), null);
+//		clear();
+		setImage(currentAction.getImage());
+		//g.drawImage(currentAction.getImage(),0, 0,this.getWidth(),this.getHeight(), null);
 	}
 
 
