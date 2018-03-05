@@ -150,7 +150,7 @@ public class IntroMap extends FullFunctionScreen implements IState, KeyListener 
 		leo = new Graphic(400,147,450,253,"resources/leo.png");
 		viewObjects.add(leo);
 		
-		leoSprite = new MainCharacter(100,100,32,32);
+		leoSprite = new MovingCharacter(100,100,32,32);
 		Thread move = new Thread(leoSprite);
 		move.start();
 		viewObjects.add(leoSprite);
