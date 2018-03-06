@@ -3,10 +3,6 @@ package rpg;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
-/**
- * @author Mimi Buan
- */
-
 import guiTeacher.components.AnimatedComponent;
 import guiTeacher.components.Component;
 import guiTeacher.components.MovingComponent;
