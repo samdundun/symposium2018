@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.io.File;
 import java.util.List;
 
+import guiTeacher.components.Action;
 import guiTeacher.components.AnimatedComponent;
 import guiTeacher.components.Graphic;
 import guiTeacher.components.StyledComponent;
@@ -13,7 +14,7 @@ import guiTeacher.userInterfaces.FullFunctionScreen;
 public class BattleScreen extends FullFunctionScreen implements IState {
 
 	private Graphic background;
-	private SamBattleArea attackBox;
+	private SelectMenuArea attackBox;
 	private AnimatedComponent slime;
 
 	public BattleScreen(int width, int height) {
@@ -48,7 +49,38 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 			e.printStackTrace();
 		}
 		
-		attackBox = new SamBattleArea(0, 20, 794, 150, "");
+		String[] options = {"Attack", "Magic", "Items", "Run"};
+		Action[] a = {new Action() {
+			
+			@Override
+			public void act() {
+				// TODO Auto-generated method stub
+				
+			}},new Action() {
+				
+				@Override
+				public void act() {
+					// TODO Auto-generated method stub
+					
+				}
+			},new Action() {
+				
+				@Override
+				public void act() {
+					// TODO Auto-generated method stub
+					
+				}
+			},new Action() {
+				
+				@Override
+				public void act() {
+					MainGUI.game.setScreen(MainGUI.localMap);
+					
+				}
+			}
+		};
+		attackBox = new SelectMenuArea(0, 20, 794, 150, options);
+		attackBox.setOActions(a);
 		viewObjects.add(attackBox);
 		moveFocus(attackBox);
 		

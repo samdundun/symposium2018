@@ -63,6 +63,7 @@ public class IntroMap extends FullFunctionScreen implements IState, KeyListener 
 				}
 				intro.setVisible(false);
 				leo.setVisible(false);
+				leoSprite.setCanMove(true);
 			}
 		});
 		printer.start();
@@ -155,6 +156,7 @@ public class IntroMap extends FullFunctionScreen implements IState, KeyListener 
 		move.start();
 		viewObjects.add(leoSprite);
 		moveFocus(leoSprite);
+		leoSprite.setCanMove(false);
 
 	}
 	
