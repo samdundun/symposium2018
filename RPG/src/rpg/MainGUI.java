@@ -23,12 +23,13 @@ public class MainGUI extends GUIApplication {
 	public static MainGUI game;
 	public static MainMenuScreen mainMenu;
 	public static IntroMap localMap;
+	public static Character leo;
+	public static CharacterScreen cScreen;
 	
 	public static MusicPlayer player;
 
 //	public static WorldMap worldMap;
 	public static BattleScreen battle;
-//	public static InGameMenu gameMenu;
 	
 	public static final Tileset setOfTiles = new Tileset(0, 0, 16, 16, "resources/basictiles.png");
 	public static final Graphic[] allTiles = setOfTiles.getTiles();
@@ -36,13 +37,15 @@ public class MainGUI extends GUIApplication {
 	public MainGUI(int width, int height) {
 		super(width, height);
 		setVisible(true);
-		addComponentListener(new ComponentAdapter() 
-		{  
-		        public void componentResized(ComponentEvent evt) {
-		            Component c = (Component)evt.getSource();
-		        }
-		});
-		// TODO Auto-generated constructor stub
+		
+		//for resizing but will work on later
+//		addComponentListener(new ComponentAdapter() 
+//		{  
+//		        public void componentResized(ComponentEvent evt) {
+//		            Component c = (Component)evt.getSource();
+//		        }
+//		});
+
 	}
 	
 
@@ -51,6 +54,9 @@ public class MainGUI extends GUIApplication {
 		mainMenu = new MainMenuScreen(getWidth(), getHeight());
 		localMap = new IntroMap(getWidth(), getHeight());
 		battle = new BattleScreen(getWidth(), getHeight());
+		leo = new Character(0, 0, 0, 0, 0, 0, 0);
+		leo.setNewStats();
+		cScreen = new CharacterScreen(getWidth(), getHeight());
 		setScreen(mainMenu);
 
 	}

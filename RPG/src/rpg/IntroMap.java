@@ -148,7 +148,7 @@ public class IntroMap extends FullFunctionScreen implements IState {
 		intro = new SamCustomArea(0, 400, 800, 200, "");
 		viewObjects.add(intro);
 		
-		leo = new Graphic(400,147,450,253,"resources/leo.png");
+		leo = new Graphic(400,147,450,253,"resources/leooverhead.png");
 		viewObjects.add(leo);
 		
 		leoSprite = new MovingCharacter(100,100,32,32);
@@ -156,7 +156,7 @@ public class IntroMap extends FullFunctionScreen implements IState {
 		move.start();
 		viewObjects.add(leoSprite);
 		moveFocus(leoSprite);
-		leoSprite.setCanMove(false);
+		leoSprite.setCanMove(true);
 
 	}
 	

@@ -9,7 +9,7 @@ import guiTeacher.interfaces.KeyedComponent;
 
 public class SelectMenuArea extends SamCustomArea implements KeyedComponent {
 
-	private final static String[] actions = {"Attack", "Magic", "Items","Run"};
+//	private final static String[] actions = {"Attack", "Magic", "Items","Run"};
 	private Action[] oActions;
 	private String[] options;
 	private int selected;
