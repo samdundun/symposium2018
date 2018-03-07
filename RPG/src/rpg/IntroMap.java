@@ -13,7 +13,7 @@ import guiTeacher.components.TextBox;
 import guiTeacher.interfaces.Visible;
 import guiTeacher.userInterfaces.FullFunctionScreen;
 
-public class IntroMap extends FullFunctionScreen implements IState, KeyListener {
+public class IntroMap extends FullFunctionScreen implements IState {
 
 	private SamCustomArea intro;
 	private Graphic leo;
