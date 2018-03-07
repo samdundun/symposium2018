@@ -18,22 +18,22 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		super(x, y, w, h);
 
 		//Down left up right
-		characterActions[0].addSequence("resources/characters.png", 180,48, 0, 16, 16, 3);
+		characterActions[0].addSequence("resources/leosprite.png", 180,48, 0, 16, 16, 3);
 		Thread move = new Thread(characterActions[0]);
 		move.start();
 
-		characterActions[1].addSequence("resources/characters.png", 180,48, 16, 16, 16, 3);
+		characterActions[1].addSequence("resources/leosprite.png", 180,48, 16, 16, 16, 3);
 		Thread move1 = new Thread(characterActions[1]);
 		move1.start();
 		characterActions[1].setVisible(false);
 
 
-		characterActions[2].addSequence("resources/characters.png", 180,48, 48, 16, 16, 3);
+		characterActions[2].addSequence("resources/leosprite.png", 180,48, 48, 16, 16, 3);
 		Thread move2 = new Thread(characterActions[2]);
 		move2.start();
 		characterActions[2].setVisible(false);
 
-		characterActions[3].addSequence("resources/characters.png", 180,48, 32, 16, 16, 3);
+		characterActions[3].addSequence("resources/leosprite.png", 180,48, 32, 16, 16, 3);
 		Thread move3 = new Thread(characterActions[3]);
 		move3.start();
 		characterActions[3].setVisible(false);
