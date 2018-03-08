@@ -18,14 +18,24 @@ public class IntroMap extends FullFunctionScreen implements IState {
 	private SamCustomArea intro;
 	private Graphic leo;
 	private MovingCharacter leoSprite;
+	private boolean newGame;
 	
+
+	public void setNewGame(boolean newGame) {
+		this.newGame = newGame;
+	}
+
 	public IntroMap(int width, int height) {
 		super(width, height);
-		// TODO Auto-generated constructor stub
+		this.newGame = false;
 	}
 
 	@Override
 	public void OnEnter() {
+		MainGUI.currScreen = this;
+		
+		if(newGame) {
+		newGame = false;
 		intro.setVisible(true);
 		leo.setVisible(true);
 		String start = "My name is Leo and I'm a mage, unknown to the world until today!\nI have entered this mage tournament in the continent of Varathia.\nThis tournament has a prize of the rumored magium, a power which one knows no bounds!\nI intend to seize this power for myself and that begins here.\nI have been magically teleported into the island continent and no word has been spoken yet.\nThe best thing to do for now is to wander and gather intel on what is going on.";
@@ -67,12 +77,13 @@ public class IntroMap extends FullFunctionScreen implements IState {
 			}
 		});
 		printer.start();
+		}
 
 	}
 
 	@Override
 	public void OnExit() {
-		// TODO Auto-generated method stub
+		MainGUI.prevScreen = this;
 
 	}
 

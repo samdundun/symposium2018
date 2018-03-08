@@ -63,10 +63,14 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 				setVy(3);
 			}
 			if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				MainGUI.currScreen.OnExit();
 				MainGUI.game.setScreen(MainGUI.mainMenu);
+				MainGUI.mainMenu.OnEnter();
 			}
 			if (e.getKeyCode() == KeyEvent.VK_C) {
+				MainGUI.currScreen.OnExit();
 				MainGUI.game.setScreen(MainGUI.cScreen);
+				MainGUI.cScreen.OnEnter();
 			}
 		}
 	}

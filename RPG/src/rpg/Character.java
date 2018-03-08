@@ -1,5 +1,7 @@
 package rpg;
 
+import guiTeacher.components.Action;
+
 public class Character {
 	
 	private int maxHP;
@@ -10,8 +12,27 @@ public class Character {
 	private int vitality;
 	private int agility;
 	private int intelligence;
+	private int neededXP;
+	private int currentXP;
 	private int level;
+	private boolean dead;
 
+	public static final Attack[] attacks = {new Attack() {
+
+		@Override
+		//Basic Attack
+		public void attack(Character a, Character b) {
+			b.setCurrentHP(b.currentHP - a.strength);
+			System.out.println(b.currentHP);
+			
+		}
+	}
+	
+	
+	
+	
+	};
+	
 	public Character(int maxHP, int maxMana, int strength, int vitality, int agility, int intelligence, int level) {
 		this.maxHP = maxHP;
 		this.currentHP = maxHP;
@@ -96,6 +117,22 @@ public class Character {
 		this.level = level;
 	}
 
+	public int getNeededXP() {
+		return neededXP;
+	}
+
+	public void setNeededXP() {
+		this.neededXP = 500 * (level ^ 2) - (500 * level);
+	}
+
+	public int getCurrentXP() {
+		return currentXP;
+	}
+
+	public void setCurrentXP(int currentXP) {
+		this.currentXP = currentXP;
+	}
+
 	public void setNewStats() {
 		this.maxHP = 30;
 		this.currentHP = 30;
@@ -106,6 +143,16 @@ public class Character {
 		this.agility = 3;
 		this.intelligence = 5;
 		this.level = 1;
+		this.currentXP = 0;
+		this.setNeededXP();
+	}
+
+	public boolean isDead() {
+		return dead;
+	}
+
+	public void setDead(boolean dead) {
+		this.dead = dead;
 	}
 
 }

@@ -15,6 +15,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import guiTeacher.GUIApplication;
 import guiTeacher.components.Graphic;
 import guiTeacher.components.StyledComponent;
+import guiTeacher.userInterfaces.FullFunctionScreen;
 import holiday.HolidayCard;
 
 public class MainGUI extends GUIApplication {
@@ -25,6 +26,9 @@ public class MainGUI extends GUIApplication {
 	public static IntroMap localMap;
 	public static Character leo;
 	public static CharacterScreen cScreen;
+	
+	public static IState prevScreen;
+	public static IState currScreen;
 	
 	public static MusicPlayer player;
 
@@ -51,13 +55,14 @@ public class MainGUI extends GUIApplication {
 
 	@Override
 	public void initScreen() {
+		leo = new Character(0, 0, 0, 0, 0, 0, 0);
+		leo.setNewStats();
 		mainMenu = new MainMenuScreen(getWidth(), getHeight());
 		localMap = new IntroMap(getWidth(), getHeight());
 		battle = new BattleScreen(getWidth(), getHeight());
-		leo = new Character(0, 0, 0, 0, 0, 0, 0);
-		leo.setNewStats();
 		cScreen = new CharacterScreen(getWidth(), getHeight());
 		setScreen(mainMenu);
+		mainMenu.OnEnter();
 
 	}
 	

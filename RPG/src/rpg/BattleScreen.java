@@ -16,6 +16,10 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 	private Graphic background;
 	private SelectMenuArea attackBox;
 	private AnimatedComponent slime;
+	private Character bSlime;
+	private AnimatedComponent leo;
+	private HealthBar enemyHP;
+	private HealthBar myHP;
 
 	public BattleScreen(int width, int height) {
 		super(width, height);
@@ -36,6 +40,8 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
+		bSlime = new Character(20, 0, 1, 1, 1, 1, 1);
+		
 		background = new Graphic(0, 0, "resources/battlescene.jpg");
 		viewObjects.add(background);
 		
@@ -54,7 +60,10 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 			
 			@Override
 			public void act() {
-				// TODO Auto-generated method stub
+				MainGUI.leo.attacks[0].attack(MainGUI.leo, bSlime);
+				bSlime.attacks[0].attack(bSlime, MainGUI.leo);
+				myHP.update();
+				enemyHP.update();
 				
 			}},new Action() {
 				
@@ -89,6 +98,22 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 		Thread monster = new Thread(slime);
 		monster.start();
 		viewObjects.add(slime);
+		
+		enemyHP = new HealthBar(600, 470, 100, 10, bSlime);
+		enemyHP.update();
+		viewObjects.add(enemyHP);
+		
+		
+		
+		leo = new AnimatedComponent(100, 500, 32, 32);
+		leo.addSequence("resources/leosprite.png", 180,0, 0, 28, 32, 3);
+		Thread me = new Thread(leo);
+		me.start();
+		viewObjects.add(leo);
+		
+		myHP = new HealthBar(100, 470, 100, 10, MainGUI.leo);
+		myHP.update();
+		viewObjects.add(myHP);
 		
 
 	}

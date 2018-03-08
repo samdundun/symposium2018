@@ -35,8 +35,7 @@ public class MainMenuScreen extends FullFunctionScreen implements IState {
 
 	@Override
 	public void OnEnter() {
-		// TODO Auto-generated method stub
-
+		MainGUI.currScreen = this;
 	}
 
 	@Override
@@ -68,7 +67,9 @@ public class MainMenuScreen extends FullFunctionScreen implements IState {
 			@Override
 			public void act() {
 				MainGUI.game.setScreen(MainGUI.localMap);
+				MainGUI.localMap.setNewGame(true);
 				MainGUI.game.localMap.OnEnter();
+				MainGUI.game.mainMenu.OnExit();
 			}
 		});
 		newGame.setBackgroundColor(Color.white);
