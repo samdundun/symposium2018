@@ -55,7 +55,7 @@ public class MainGUI extends GUIApplication {
 
 	@Override
 	public void initScreen() {
-		leo = new Character(0, 0, 0, 0, 0, 0, 0);
+		leo = new Character(0, 0, 0, 0, 0, 0, 0,0);
 		leo.setNewStats();
 		mainMenu = new MainMenuScreen(getWidth(), getHeight());
 		localMap = new IntroMap(getWidth(), getHeight());

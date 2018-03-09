@@ -66,11 +66,15 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 				MainGUI.currScreen.OnExit();
 				MainGUI.game.setScreen(MainGUI.mainMenu);
 				MainGUI.mainMenu.OnEnter();
+				setVy(0);
+				setVx(0);
 			}
 			if (e.getKeyCode() == KeyEvent.VK_C) {
 				MainGUI.currScreen.OnExit();
 				MainGUI.game.setScreen(MainGUI.cScreen);
 				MainGUI.cScreen.OnEnter();
+				setVy(0);
+				setVx(0);
 			}
 		}
 	}
@@ -113,8 +117,11 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		}
 		if(getY() < 0) {
 			setY(20);
+			MainGUI.currScreen.OnExit();
 			MainGUI.game.setScreen(MainGUI.battle);
+			MainGUI.battle.OnEnter();
 			setVy(0);
+			setVx(0);
 		}
 
 		//bottom boundaries
@@ -129,8 +136,11 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		}
 		if(getY() > 600) {
 			setY(550);
+			MainGUI.currScreen.OnExit();
 			MainGUI.game.setScreen(MainGUI.battle);
+			MainGUI.battle.OnEnter();
 			setVy(0);
+			setVx(0);
 		}
 	}
 

@@ -18,7 +18,6 @@ public class HealthBar extends Component {
 	public void update(Graphics2D g) {
 		clear();
 		float thing = (float)a.getCurrentHP()/(float)a.getMaxHP() * 100;
-		System.out.println(thing);
 		g.setColor(Color.blue);
 		g.fillRect(0,0,(int)thing,10);
 		g.setColor(Color.red);

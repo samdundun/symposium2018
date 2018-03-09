@@ -3,7 +3,7 @@ package rpg;
 import guiTeacher.components.Action;
 
 public class Character {
-	
+
 	private int maxHP;
 	private int currentHP;
 	private int maxMana;
@@ -16,6 +16,7 @@ public class Character {
 	private int currentXP;
 	private int level;
 	private boolean dead;
+	private int giveXP;
 
 	public static final Attack[] attacks = {new Attack() {
 
@@ -23,17 +24,16 @@ public class Character {
 		//Basic Attack
 		public void attack(Character a, Character b) {
 			b.setCurrentHP(b.currentHP - a.strength);
-			System.out.println(b.currentHP);
-			
+
 		}
 	}
-	
-	
-	
-	
+
+
+
+
 	};
-	
-	public Character(int maxHP, int maxMana, int strength, int vitality, int agility, int intelligence, int level) {
+
+	public Character(int maxHP, int maxMana, int strength, int vitality, int agility, int intelligence, int level, int giveXP) {
 		this.maxHP = maxHP;
 		this.currentHP = maxHP;
 		this.maxMana = maxMana;
@@ -43,8 +43,10 @@ public class Character {
 		this.agility = agility;
 		this.intelligence = intelligence;
 		this.level = level;
+		this.dead = false;
+		this.giveXP = giveXP;
 	}
-	
+
 	public int getMaxHP() {
 		return maxHP;
 	}
@@ -122,7 +124,7 @@ public class Character {
 	}
 
 	public void setNeededXP() {
-		this.neededXP = 500 * (level ^ 2) - (500 * level);
+		this.neededXP = (500 * (level * level) - (500 * level)) + 1000;
 	}
 
 	public int getCurrentXP() {
@@ -154,5 +156,40 @@ public class Character {
 	public void setDead(boolean dead) {
 		this.dead = dead;
 	}
+
+	public void checkDead() {
+		if(currentHP <= 0) {
+			this.dead = true;
+		}
+		else {
+			this.dead = false;
+		}
+
+	}
+
+	public void gainXP(int a) {
+		this.currentXP = this.currentXP + a;
+		checkLevelUp();
+	}
+
+	public void checkLevelUp() {
+		if(this.currentXP >=this. neededXP) {
+			this.currentXP = this.currentXP - this.neededXP;
+			level++;
+			this.maxHP= this.maxHP + 10;
+			this.currentHP = this.currentHP + 5;
+			setNeededXP();
+			checkLevelUp();
+		}
+	}
+
+	public void setGiveXP(int giveXP) {
+		this.giveXP = giveXP;
+	}
+
+	public int getGiveXP() {
+		return giveXP;
+	}
+
 
 }

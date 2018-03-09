@@ -10,6 +10,7 @@ import guiTeacher.components.Graphic;
 import guiTeacher.components.StyledComponent;
 import guiTeacher.interfaces.Visible;
 import guiTeacher.userInterfaces.FullFunctionScreen;
+import guiTeacher.userInterfaces.Screen;
 
 public class BattleScreen extends FullFunctionScreen implements IState {
 
@@ -28,23 +29,26 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 
 	@Override
 	public void OnEnter() {
-		// TODO Auto-generated method stub
+		bSlime.setCurrentHP(bSlime.getMaxHP());
+		bSlime.setDead(false);
+		enemyHP.update();
+		MainGUI.currScreen = this;
 
 	}
 
 	@Override
 	public void OnExit() {
-		// TODO Auto-generated method stub
+		MainGUI.prevScreen = this;
 
 	}
 
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
-		bSlime = new Character(20, 0, 1, 1, 1, 1, 1);
-		
+		bSlime = new Character(20, 0, 1, 1, 1, 1, 1, 1000);
+
 		background = new Graphic(0, 0, "resources/battlescene.jpg");
 		viewObjects.add(background);
-		
+
 		try {
 			File fontFile = new File("resources/Holiday.ttf");
 			//			File fontFile = new File("resources//DayRoman.ttf");
@@ -54,37 +58,35 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		String[] options = {"Attack", "Magic", "Items", "Run"};
 		Action[] a = {new Action() {
-			
+
 			@Override
 			public void act() {
-				MainGUI.leo.attacks[0].attack(MainGUI.leo, bSlime);
-				bSlime.attacks[0].attack(bSlime, MainGUI.leo);
-				myHP.update();
-				enemyHP.update();
-				
+
+				turn(MainGUI.leo.attacks[0]);
+
 			}},new Action() {
-				
+
 				@Override
 				public void act() {
 					// TODO Auto-generated method stub
-					
+
 				}
 			},new Action() {
-				
+
 				@Override
 				public void act() {
 					// TODO Auto-generated method stub
-					
+
 				}
 			},new Action() {
-				
+
 				@Override
 				public void act() {
 					MainGUI.game.setScreen(MainGUI.localMap);
-					
+
 				}
 			}
 		};
@@ -92,30 +94,51 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 		attackBox.setOActions(a);
 		viewObjects.add(attackBox);
 		moveFocus(attackBox);
-		
+
 		slime = new AnimatedComponent(600, 500, 32, 32);
 		slime.addSequence("resources/characters.png", 180, 0, 64, 16, 16, 3);
 		Thread monster = new Thread(slime);
 		monster.start();
 		viewObjects.add(slime);
-		
+
 		enemyHP = new HealthBar(600, 470, 100, 10, bSlime);
 		enemyHP.update();
 		viewObjects.add(enemyHP);
-		
-		
-		
+
+
+
 		leo = new AnimatedComponent(100, 500, 32, 32);
 		leo.addSequence("resources/leosprite.png", 180,0, 0, 28, 32, 3);
 		Thread me = new Thread(leo);
 		me.start();
 		viewObjects.add(leo);
-		
+
 		myHP = new HealthBar(100, 470, 100, 10, MainGUI.leo);
 		myHP.update();
 		viewObjects.add(myHP);
-		
 
+
+	}
+	
+	public void turn(Attack a) {
+		if(!MainGUI.leo.isDead() && !bSlime.isDead()) {
+			a.attack(MainGUI.leo, bSlime);
+			bSlime.attacks[0].attack(bSlime, MainGUI.leo);
+			myHP.update();
+			enemyHP.update();
+			MainGUI.leo.checkDead();
+			bSlime.checkDead();
+			if(MainGUI.leo.isDead()) {
+				System.exit(0);
+			}
+			if(bSlime.isDead()) {
+				MainGUI.game.setScreen((Screen) MainGUI.prevScreen);
+				MainGUI.prevScreen.OnEnter();
+				this.OnExit();
+				MainGUI.leo.gainXP(bSlime.getGiveXP());
+				MainGUI.cScreen.update();
+			}
+		}
 	}
 
 }

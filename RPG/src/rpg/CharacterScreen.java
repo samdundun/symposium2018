@@ -62,12 +62,20 @@ public class CharacterScreen extends FullFunctionScreen implements IState{
 	@Override
 	public void OnEnter() {
 		MainGUI.currScreen = this;
+		update(0);
 	}
 
 	@Override
 	public void OnExit() {
 		MainGUI.prevScreen = this;
 		
+	}
+	
+	public void update(int a) {
+		super.update();
+		xp.setText(" XP: " + MainGUI.leo.getCurrentXP() + "/" + MainGUI.leo.getNeededXP());
+		xp.update();
+		level.setText("         Leo Lvl:" + MainGUI.leo.getLevel() + "\n          Mage");
 	}
 
 }
