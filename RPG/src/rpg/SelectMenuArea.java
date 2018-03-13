@@ -9,10 +9,14 @@ import guiTeacher.interfaces.KeyedComponent;
 
 public class SelectMenuArea extends SamCustomArea implements KeyedComponent {
 
-//	private final static String[] actions = {"Attack", "Magic", "Items","Run"};
+
+	//preset conditions options and oActions are the same length
+
+	//	private final static String[] actions = {"Attack", "Magic", "Items","Run"};
 	private Action[] oActions;
 	private String[] options;
 	private int selected;
+	private boolean active;
 
 	public SelectMenuArea(int x, int y, int w, int h, String[] text) {
 		super(x, y, w, h, "");
@@ -21,33 +25,36 @@ public class SelectMenuArea extends SamCustomArea implements KeyedComponent {
 		for(int i = 0; i < options.length; i++) {
 			this.setText(this.getText() + options[i] + "\n");
 		}
+		this.active = false;
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			if(selected == this.options.length-1) {
-				selected = 0;
+		if(active) {
+			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+				if(selected == this.options.length-1) {
+					selected = 0;
+				}
+				else {
+					selected++;
+				}
 			}
-			else {
-				selected++;
+			if (e.getKeyCode() == KeyEvent.VK_UP) {
+				if(selected == 0) {
+					selected = this.options.length-1;
+				}
+				else {
+					selected--;
+				}
 			}
-		}
-		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			if(selected == 0) {
-				selected = this.options.length-1;
-			}
-			else {
-				selected--;
-			}
-		}
-		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
-			if(oActions[selected] != null) {
-				oActions[selected].act();;
+				if(oActions[selected] != null) {
+					oActions[selected].act();;
+				}
 			}
+			update();
 		}
-		update();
 
 	}
 
@@ -55,6 +62,7 @@ public class SelectMenuArea extends SamCustomArea implements KeyedComponent {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 
+		
 	}
 
 	@Override
@@ -71,17 +79,17 @@ public class SelectMenuArea extends SamCustomArea implements KeyedComponent {
 
 	@Override
 	public void setFocus(boolean b) {
-		// TODO Auto-generated method stub
-
+		active = b;
+		
 	}
 
 	public void update(Graphics2D g) {
 		super.update(g);
 		g.drawRect(2, (5+(36*selected)), 300, 30);
 	}
-	
+
 	public void setOActions(Action[] a) {
 		this.oActions = a;
 	}
-
+	
 }

@@ -17,6 +17,7 @@ public class Character {
 	private int level;
 	private boolean dead;
 	private int giveXP;
+	private boolean stunned;
 
 	public static final Attack[] attacks = {new Attack() {
 
@@ -26,10 +27,34 @@ public class Character {
 			b.setCurrentHP(b.currentHP - a.strength);
 
 		}
+	},
+
+			
+	//FireBall
+	new Attack() {
+		
+		@Override
+		public void attack(Character a, Character b) {
+			b.setCurrentHP(b.currentHP-a.intelligence);			
+		}
+	},
+	//ThunderBolt
+	new Attack() {
+		
+		@Override
+		public void attack(Character a, Character b) {
+			b.setCurrentHP(b.currentHP - (a.intelligence/2));
+			if(Math.random() > .8) {
+			b.stunned = true;
+			System.out.println(b + " is stunned");
+			}
+			
+		}
 	}
 
 
-
+	
+	
 
 	};
 
@@ -45,6 +70,7 @@ public class Character {
 		this.level = level;
 		this.dead = false;
 		this.giveXP = giveXP;
+		this.setStunned(false);
 	}
 
 	public int getMaxHP() {
@@ -189,6 +215,14 @@ public class Character {
 
 	public int getGiveXP() {
 		return giveXP;
+	}
+
+	public boolean isStunned() {
+		return stunned;
+	}
+
+	public void setStunned(boolean stunned) {
+		this.stunned = stunned;
 	}
 
 

@@ -8,6 +8,7 @@ import guiTeacher.components.Action;
 import guiTeacher.components.AnimatedComponent;
 import guiTeacher.components.Graphic;
 import guiTeacher.components.StyledComponent;
+import guiTeacher.interfaces.FocusController;
 import guiTeacher.interfaces.Visible;
 import guiTeacher.userInterfaces.FullFunctionScreen;
 import guiTeacher.userInterfaces.Screen;
@@ -16,11 +17,13 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 
 	private Graphic background;
 	private SelectMenuArea attackBox;
+	private SelectMenuArea magic;
 	private AnimatedComponent slime;
 	private Character bSlime;
 	private AnimatedComponent leo;
 	private HealthBar enemyHP;
 	private HealthBar myHP;
+	private SelectMenuArea current;
 
 	public BattleScreen(int width, int height) {
 		super(width, height);
@@ -71,7 +74,9 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 
 				@Override
 				public void act() {
-					// TODO Auto-generated method stub
+					current = magic;
+					viewObjects.add(current);
+					moveFocus(current);
 
 				}
 			},new Action() {
@@ -90,10 +95,35 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 				}
 			}
 		};
+
+		String[] magicArray = {"FireBall", "ThunderBolt"};
+		Action[] b = {new Action() {
+
+			@Override
+			public void act() {
+				turn(MainGUI.leo.attacks[1]);
+
+			}
+		},
+				new Action() {
+
+			@Override
+			public void act() {
+				turn(MainGUI.leo.attacks[2]);
+
+			}
+		}
+		};
+
+		magic = new SelectMenuArea(0,20,794,150,magicArray);
+		magic.setOActions(b);
+
 		attackBox = new SelectMenuArea(0, 20, 794, 150, options);
 		attackBox.setOActions(a);
-		viewObjects.add(attackBox);
-		moveFocus(attackBox);
+
+		current = attackBox;
+		viewObjects.add(current);
+		moveFocus(current);
 
 		slime = new AnimatedComponent(600, 500, 32, 32);
 		slime.addSequence("resources/characters.png", 180, 0, 64, 16, 16, 3);
@@ -119,11 +149,21 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 
 
 	}
-	
+
 	public void turn(Attack a) {
 		if(!MainGUI.leo.isDead() && !bSlime.isDead()) {
-			a.attack(MainGUI.leo, bSlime);
-			bSlime.attacks[0].attack(bSlime, MainGUI.leo);
+			if(!MainGUI.leo.isStunned()) {
+				a.attack(MainGUI.leo, bSlime);
+			}
+			else if (MainGUI.leo.isStunned()) {
+				MainGUI.leo.setStunned(false);
+			}
+			if(!bSlime.isStunned()) {
+				bSlime.attacks[0].attack(bSlime, MainGUI.leo);
+			}
+			else if (bSlime.isStunned()) {
+				bSlime.setStunned(false);
+			}
 			myHP.update();
 			enemyHP.update();
 			MainGUI.leo.checkDead();
@@ -139,6 +179,11 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 				MainGUI.cScreen.update();
 			}
 		}
+		
+		current = attackBox;
+		viewObjects.add(current);
+		moveFocus(current);
+		update();
 	}
 
 }
