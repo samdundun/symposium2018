@@ -63,16 +63,16 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 				setVy(3);
 			}
 			if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-				MainGUI.currScreen.OnExit();
+				MainGUI.currScreen.onExit();
 				MainGUI.game.setScreen(MainGUI.mainMenu);
-				MainGUI.mainMenu.OnEnter();
+				MainGUI.mainMenu.onEnter();
 				setVy(0);
 				setVx(0);
 			}
 			if (e.getKeyCode() == KeyEvent.VK_C) {
-				MainGUI.currScreen.OnExit();
+				MainGUI.currScreen.onExit();
 				MainGUI.game.setScreen(MainGUI.cScreen);
-				MainGUI.cScreen.OnEnter();
+				MainGUI.cScreen.onEnter();
 				setVy(0);
 				setVx(0);
 			}
@@ -117,9 +117,9 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		}
 		if(getY() < 0) {
 			setY(20);
-			MainGUI.currScreen.OnExit();
+			MainGUI.currScreen.onExit();
 			MainGUI.game.setScreen(MainGUI.battle);
-			MainGUI.battle.OnEnter();
+			MainGUI.battle.onEnter();
 			setVy(0);
 			setVx(0);
 		}
@@ -136,9 +136,9 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		}
 		if(getY() > 600) {
 			setY(550);
-			MainGUI.currScreen.OnExit();
+			MainGUI.currScreen.onExit();
 			MainGUI.game.setScreen(MainGUI.battle);
-			MainGUI.battle.OnEnter();
+			MainGUI.battle.onEnter();
 			setVy(0);
 			setVx(0);
 		}

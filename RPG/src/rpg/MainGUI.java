@@ -62,7 +62,7 @@ public class MainGUI extends GUIApplication {
 		battle = new BattleScreen(getWidth(), getHeight());
 		cScreen = new CharacterScreen(getWidth(), getHeight());
 		setScreen(mainMenu);
-		mainMenu.OnEnter();
+		mainMenu.onEnter();
 
 	}
 	

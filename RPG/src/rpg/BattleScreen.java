@@ -31,7 +31,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 	}
 
 	@Override
-	public void OnEnter() {
+	public void onEnter() {
 		bSlime.setCurrentHP(bSlime.getMaxHP());
 		bSlime.setDead(false);
 		enemyHP.update();
@@ -40,7 +40,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 	}
 
 	@Override
-	public void OnExit() {
+	public void onExit() {
 		MainGUI.prevScreen = this;
 
 	}
@@ -90,7 +90,9 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 
 				@Override
 				public void act() {
+					MainGUI.prevScreen.onEnter();
 					MainGUI.game.setScreen(MainGUI.localMap);
+					onExit();
 
 				}
 			}
@@ -173,8 +175,8 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 			}
 			if(bSlime.isDead()) {
 				MainGUI.game.setScreen((Screen) MainGUI.prevScreen);
-				MainGUI.prevScreen.OnEnter();
-				this.OnExit();
+				MainGUI.prevScreen.onEnter();
+				this.onExit();
 				MainGUI.leo.gainXP(bSlime.getGiveXP());
 				MainGUI.cScreen.update();
 			}

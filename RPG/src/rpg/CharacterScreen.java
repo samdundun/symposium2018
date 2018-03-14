@@ -47,9 +47,9 @@ public class CharacterScreen extends FullFunctionScreen implements IState{
 			
 			@Override
 			public void act() {
-				MainGUI.prevScreen.OnEnter();
+				MainGUI.prevScreen.onEnter();
 				MainGUI.game.setScreen((Screen) MainGUI.prevScreen);
-				MainGUI.cScreen.OnExit();
+				MainGUI.cScreen.onExit();
 				
 			}
 		});
@@ -60,13 +60,13 @@ public class CharacterScreen extends FullFunctionScreen implements IState{
 	}
 
 	@Override
-	public void OnEnter() {
+	public void onEnter() {
 		MainGUI.currScreen = this;
 		update(0);
 	}
 
 	@Override
-	public void OnExit() {
+	public void onExit() {
 		MainGUI.prevScreen = this;
 		
 	}

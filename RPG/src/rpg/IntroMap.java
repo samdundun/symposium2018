@@ -32,7 +32,7 @@ public class IntroMap extends FullFunctionScreen implements IState {
 	}
 
 	@Override
-	public void OnEnter() {
+	public void onEnter() {
 		MainGUI.currScreen = this;
 		
 		if(newGame) {
@@ -83,7 +83,7 @@ public class IntroMap extends FullFunctionScreen implements IState {
 	}
 
 	@Override
-	public void OnExit() {
+	public void onExit() {
 		MainGUI.prevScreen = this;
 
 	}

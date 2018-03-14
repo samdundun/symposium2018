@@ -8,12 +8,16 @@ import guiTeacher.components.Component;
 public class HealthBar extends Component {
 
 	private Character a;
+
 	
 	public HealthBar(int x, int y, int w, int h, Character a) {
 		super(x, y, w, h);
 		this.a = a;
 	}
 
+	
+	//Condition: the bar must always be 100 pixels x 10 pixels
+	//If smaller bar will not show properly
 	@Override
 	public void update(Graphics2D g) {
 		clear();
