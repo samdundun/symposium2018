@@ -224,6 +224,24 @@ public class Character {
 	public void setStunned(boolean stunned) {
 		this.stunned = stunned;
 	}
+	
+	public int[] getStats() {
+		int[] a = {maxHP,currentHP, maxMana, currentMana,strength, vitality, agility, intelligence, level, currentXP};
+		return a;
+	}
+	public void setStats(int[] a) {
+		this.maxHP = a[0];
+		this.currentHP = a[1];
+		this.maxMana = a[2];
+		this.currentMana = a[3];
+		this.strength = a[4];
+		this.vitality = a[5];
+		this.agility = a[6];
+		this.intelligence = a[7];
+		this.level = a[8];
+		this.currentXP = a[9];
+		this.setNeededXP();
+	}
 
 
 }

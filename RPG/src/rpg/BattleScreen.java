@@ -42,6 +42,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 	@Override
 	public void onExit() {
 		MainGUI.prevScreen = this;
+		MainGUI.save1.save();
 
 	}
 
@@ -176,9 +177,9 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 			if(bSlime.isDead()) {
 				MainGUI.game.setScreen((Screen) MainGUI.prevScreen);
 				MainGUI.prevScreen.onEnter();
-				this.onExit();
 				MainGUI.leo.gainXP(bSlime.getGiveXP());
 				MainGUI.cScreen.update();
+				this.onExit();
 			}
 		}
 		

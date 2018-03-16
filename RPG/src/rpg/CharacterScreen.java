@@ -49,7 +49,7 @@ public class CharacterScreen extends FullFunctionScreen implements IState{
 			public void act() {
 				MainGUI.prevScreen.onEnter();
 				MainGUI.game.setScreen((Screen) MainGUI.prevScreen);
-				MainGUI.cScreen.onExit();
+				MainGUI.cScreen.onExit(); 
 				
 			}
 		});

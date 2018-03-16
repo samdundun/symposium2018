@@ -70,6 +70,7 @@ public class MainMenuScreen extends FullFunctionScreen implements IState {
 				MainGUI.localMap.setNewGame(true);
 				MainGUI.game.localMap.onEnter();
 				MainGUI.game.mainMenu.onExit();
+				MainGUI.save1.save();
 			}
 		});
 		newGame.setBackgroundColor(Color.white);
@@ -82,6 +83,9 @@ public class MainMenuScreen extends FullFunctionScreen implements IState {
 			@Override
 			public void act() {
 				MainGUI.game.setScreen(MainGUI.localMap);
+				MainGUI.game.localMap.onEnter();
+				MainGUI.game.mainMenu.onExit();
+				MainGUI.save1.load();
 
 			}
 		});

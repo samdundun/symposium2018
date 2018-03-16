@@ -26,6 +26,7 @@ public class MainGUI extends GUIApplication {
 	public static IntroMap localMap;
 	public static Character leo;
 	public static CharacterScreen cScreen;
+	public static SaveFile save1;
 	
 	public static IState prevScreen;
 	public static IState currScreen;
@@ -42,7 +43,7 @@ public class MainGUI extends GUIApplication {
 		super(width, height);
 		setVisible(true);
 		
-		//for resizing but will work on later
+//		for resizing but will work on later
 //		addComponentListener(new ComponentAdapter() 
 //		{  
 //		        public void componentResized(ComponentEvent evt) {
@@ -57,6 +58,7 @@ public class MainGUI extends GUIApplication {
 	public void initScreen() {
 		leo = new Character(0, 0, 0, 0, 0, 0, 0,0);
 		leo.setNewStats();
+		save1 = new SaveFile();
 		mainMenu = new MainMenuScreen(getWidth(), getHeight());
 		localMap = new IntroMap(getWidth(), getHeight());
 		battle = new BattleScreen(getWidth(), getHeight());
