@@ -92,4 +92,10 @@ public class SelectMenuArea extends SamCustomArea implements KeyedComponent {
 		this.oActions = a;
 	}
 	
+	public void setText(String[] a) {
+		this.setText("");
+		for(int i = 0; i < a.length; i++) {
+			this.setText(this.getText() + a[i] + "\n");
+		}
+	}
 }

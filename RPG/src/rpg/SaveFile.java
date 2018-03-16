@@ -53,10 +53,10 @@ public class SaveFile{
 			while((line = br.readLine()) != null) {
 
 				String[] param = line.split(",");
-				if(param.length == 10) {
+				if(param.length == 11) {
 					int[] a = {Integer.parseInt(param[0]),Integer.parseInt(param[1]),Integer.parseInt(param[2]),Integer.parseInt(param[3]),
 							Integer.parseInt(param[4]),Integer.parseInt(param[5]),Integer.parseInt(param[6]),
-							Integer.parseInt(param[7]),Integer.parseInt(param[8]),Integer.parseInt(param[9])};
+							Integer.parseInt(param[7]),Integer.parseInt(param[8]),Integer.parseInt(param[9]), Integer.parseInt(param[10])};
 					MainGUI.leo.setStats(a);
 				}
 			}

@@ -20,7 +20,7 @@ public class IntroMap extends FullFunctionScreen implements IState {
 	private Graphic leo;
 	private MovingCharacter leoSprite;
 	private boolean newGame;
-	
+
 
 	public void setNewGame(boolean newGame) {
 		this.newGame = newGame;
@@ -34,51 +34,61 @@ public class IntroMap extends FullFunctionScreen implements IState {
 	@Override
 	public void onEnter() {
 		MainGUI.currScreen = this;
-		
+
 		if(newGame) {
-		newGame = false;
-		intro.setVisible(true);
-		leo.setVisible(true);
-		String start = "My name is Leo and I'm a mage, unknown to the world until today!\nI have entered this mage tournament in the continent of Varathia.\nThis tournament has a prize of the rumored magium, a power which one knows no bounds!\nI intend to seize this power for myself and that begins here.\nI have been magically teleported into the island continent and no word has been spoken yet.\nThe best thing to do for now is to wander and gather intel on what is going on.";
-		intro.setText(start.substring(0,1));
-		Thread printer = new Thread(new Runnable() {
+			newGame = false;
+			leoSprite.setCanMove(false);
+			leoSprite.setX(100);
+			leoSprite.setY(100);
+			leoSprite.setDirection(0);
+			intro.setVisible(true);
+			leo.setVisible(true);
+			String start = "My name is Leo and I'm a mage, unknown to the world until today!\nI have entered this mage tournament in the continent of Varathia.\nThis tournament has a prize of the rumored magium, a power which one knows no bounds!\nI intend to seize this power for myself and that begins here.\nI have been magically teleported into the island continent and no word has been spoken yet.\nThe best thing to do for now is to wander and gather intel on what is going on.";
+			intro.setText(start.substring(0,1));
+			Thread printer = new Thread(new Runnable() {
 
-			@Override
-			public void run() {
-				for(int i = 1; i< start.length(); i++) {
-					try {
-						Thread.sleep(25);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					String contents = "";
-
-					 contents = intro.getText() + start.substring(i, i+1);
-					 intro.setText(contents);
-					 if(i%278 ==0) {
-						 try {
-							Thread.sleep(3000);
+				@Override
+				public void run() {
+					for(int i = 1; i< start.length(); i++) {
+						try {
+							Thread.sleep(25);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						intro.setText("");
-					 }
+						String contents = "";
+
+						contents = intro.getText() + start.substring(i, i+1);
+						intro.setText(contents);
+						if(i%278 ==0) {
+							try {
+								Thread.sleep(3000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							intro.setText("");
+						}
+					}
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					intro.setVisible(false);
+					leo.setVisible(false);
+					leoSprite.setCanMove(true);
 				}
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				intro.setVisible(false);
-				leo.setVisible(false);
-				leoSprite.setCanMove(true);
-			}
-		});
-		printer.start();
+			});
+			printer.start();
 		}
+		else {
+			intro.setVisible(false);
+			leo.setVisible(false);
+			leoSprite.setCanMove(true);
+		}
+
 
 	}
 
@@ -146,7 +156,7 @@ public class IntroMap extends FullFunctionScreen implements IState {
 				//test = null;
 			}
 		}
-		
+
 		try {
 			File fontFile = new File("resources/Holiday.ttf");
 			//			File fontFile = new File("resources//DayRoman.ttf");
@@ -156,21 +166,21 @@ public class IntroMap extends FullFunctionScreen implements IState {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		intro = new SamCustomArea(0, 400, 800, 200, "");
 		viewObjects.add(intro);
-		
+
 		leo = new Graphic(400,147,450,253,"resources/leooverhead.png");
 		viewObjects.add(leo);
-		
+
 		leoSprite = new MovingCharacter(100,100,32,32);
 		Thread move = new Thread(leoSprite);
 		move.start();
 		viewObjects.add(leoSprite);
 		moveFocus(leoSprite);
-		leoSprite.setCanMove(true);
+		leoSprite.setCanMove(false);
 
 	}
-	
+
 
 }

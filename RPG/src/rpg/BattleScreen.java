@@ -35,6 +35,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 		bSlime.setCurrentHP(bSlime.getMaxHP());
 		bSlime.setDead(false);
 		enemyHP.update();
+		myHP.update();
 		MainGUI.currScreen = this;
 
 	}
@@ -48,7 +49,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
-		bSlime = new Character(20, 0, 1, 1, 1, 1, 1, 1000);
+		bSlime = new Character(20, 0, 1, 1, 1, 1, 1, 10000);
 
 		background = new Graphic(0, 0, "resources/battlescene.jpg");
 		viewObjects.add(background);
@@ -99,7 +100,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 			}
 		};
 
-		String[] magicArray = {"FireBall", "ThunderBolt"};
+		String[] magicArray = {"FireBall", "ThunderBolt", "Cure"};
 		Action[] b = {new Action() {
 
 			@Override
@@ -113,6 +114,14 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 			@Override
 			public void act() {
 				turn(MainGUI.leo.attacks[2]);
+
+			}
+		},
+				new Action() {
+
+			@Override
+			public void act() {
+				turn(MainGUI.leo.attacks[3]);
 
 			}
 		}
@@ -182,7 +191,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 				this.onExit();
 			}
 		}
-		
+
 		current = attackBox;
 		viewObjects.add(current);
 		moveFocus(current);

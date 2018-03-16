@@ -41,6 +41,10 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		direction = 0;
 	}
 
+	public void setDirection(int direction) {
+		this.direction = direction;
+	}
+
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int x = getX();
@@ -73,6 +77,13 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 				MainGUI.currScreen.onExit();
 				MainGUI.game.setScreen(MainGUI.cScreen);
 				MainGUI.cScreen.onEnter();
+				setVy(0);
+				setVx(0);
+			}
+			if (e.getKeyCode() == KeyEvent.VK_I) {
+				MainGUI.currScreen.onExit();
+				MainGUI.game.setScreen(MainGUI.iScreen);
+				MainGUI.iScreen.onEnter();
 				setVy(0);
 				setVx(0);
 			}

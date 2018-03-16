@@ -2,10 +2,13 @@ package rpg;
 
 import java.util.List;
 
+import guiTeacher.components.Graphic;
 import guiTeacher.interfaces.Visible;
 import guiTeacher.userInterfaces.FullFunctionScreen;
 
 public class InventoryScreen extends FullFunctionScreen implements IState {
+	
+	private Graphic body;
 
 	public InventoryScreen(int width, int height) {
 		super(width, height);
@@ -14,19 +17,20 @@ public class InventoryScreen extends FullFunctionScreen implements IState {
 
 	@Override
 	public void onEnter() {
-		// TODO Auto-generated method stub
+		MainGUI.currScreen = this;
 
 	}
 
 	@Override
 	public void onExit() {
-		// TODO Auto-generated method stub
+		MainGUI.prevScreen = this;
 
 	}
 
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
-		// TODO Auto-generated method stub
+		body = new Graphic(60, 100,250,451, "resources/body.png");
+		viewObjects.add(body);
 
 	}
 

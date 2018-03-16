@@ -26,6 +26,7 @@ public class MainGUI extends GUIApplication {
 	public static IntroMap localMap;
 	public static Character leo;
 	public static CharacterScreen cScreen;
+	public static InventoryScreen iScreen;
 	public static SaveFile save1;
 	
 	public static IState prevScreen;
@@ -63,6 +64,7 @@ public class MainGUI extends GUIApplication {
 		localMap = new IntroMap(getWidth(), getHeight());
 		battle = new BattleScreen(getWidth(), getHeight());
 		cScreen = new CharacterScreen(getWidth(), getHeight());
+		iScreen = new InventoryScreen(getWidth(), getHeight());
 		setScreen(mainMenu);
 		mainMenu.onEnter();
 

@@ -18,6 +18,7 @@ public class Character {
 	private boolean dead;
 	private int giveXP;
 	private boolean stunned;
+	private int statPoints;
 
 	public static final Attack[] attacks = {new Attack() {
 
@@ -50,6 +51,19 @@ public class Character {
 			}
 			
 		}
+	},
+	
+	//Cure
+	new Attack() {
+		
+		@Override
+		public void attack(Character a, Character b) {
+			a.setCurrentHP(a.getCurrentHP() + a.getIntelligence());
+			if(a.getCurrentHP() > a.getMaxHP()) {
+				a.setCurrentHP(a.getMaxHP());
+			}
+			
+		}
 	}
 
 
@@ -71,6 +85,7 @@ public class Character {
 		this.dead = false;
 		this.giveXP = giveXP;
 		this.setStunned(false);
+		this.setStatPoints(0);
 	}
 
 	public int getMaxHP() {
@@ -172,6 +187,7 @@ public class Character {
 		this.intelligence = 5;
 		this.level = 1;
 		this.currentXP = 0;
+		this.setStatPoints(0);
 		this.setNeededXP();
 	}
 
@@ -204,6 +220,7 @@ public class Character {
 			level++;
 			this.maxHP= this.maxHP + 10;
 			this.currentHP = this.currentHP + 5;
+			this.statPoints++;
 			setNeededXP();
 			checkLevelUp();
 		}
@@ -226,7 +243,7 @@ public class Character {
 	}
 	
 	public int[] getStats() {
-		int[] a = {maxHP,currentHP, maxMana, currentMana,strength, vitality, agility, intelligence, level, currentXP};
+		int[] a = {maxHP,currentHP, maxMana, currentMana,strength, vitality, agility, intelligence, level, currentXP, statPoints};
 		return a;
 	}
 	public void setStats(int[] a) {
@@ -240,7 +257,16 @@ public class Character {
 		this.intelligence = a[7];
 		this.level = a[8];
 		this.currentXP = a[9];
+		this.setStatPoints(a[10]);
 		this.setNeededXP();
+	}
+
+	public int getStatPoints() {
+		return statPoints;
+	}
+
+	public void setStatPoints(int statPoints) {
+		this.statPoints = statPoints;
 	}
 
 

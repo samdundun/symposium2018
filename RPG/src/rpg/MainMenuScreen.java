@@ -70,6 +70,7 @@ public class MainMenuScreen extends FullFunctionScreen implements IState {
 				MainGUI.localMap.setNewGame(true);
 				MainGUI.game.localMap.onEnter();
 				MainGUI.game.mainMenu.onExit();
+				MainGUI.leo.setNewStats();
 				MainGUI.save1.save();
 			}
 		});
