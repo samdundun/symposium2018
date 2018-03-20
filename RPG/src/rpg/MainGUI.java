@@ -24,10 +24,12 @@ public class MainGUI extends GUIApplication {
 	public static MainGUI game;
 	public static MainMenuScreen mainMenu;
 	public static IntroMap localMap;
+	
 	public static Character leo;
 	public static CharacterScreen cScreen;
 	public static InventoryScreen iScreen;
 	public static SaveFile save1;
+	public static Inventory myInventory;
 	
 	public static IState prevScreen;
 	public static IState currScreen;
@@ -57,6 +59,7 @@ public class MainGUI extends GUIApplication {
 
 	@Override
 	public void initScreen() {
+		myInventory = new Inventory();
 		leo = new Character(0, 0, 0, 0, 0, 0, 0,0);
 		leo.setNewStats();
 		save1 = new SaveFile();

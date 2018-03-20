@@ -19,6 +19,7 @@ public class Character {
 	private int giveXP;
 	private boolean stunned;
 	private int statPoints;
+	private boolean[] equips;
 
 	public static final Attack[] attacks = {new Attack() {
 
@@ -86,6 +87,23 @@ public class Character {
 		this.giveXP = giveXP;
 		this.setStunned(false);
 		this.setStatPoints(0);
+//		this.setWeaponEquipped(false);
+//		this.setHeadEquipped(false);
+//		this.setChestequipped(false);
+//		this.setPantsEquipped(false);
+//		this.setBootsEquipped(false);
+		this.equips = new boolean[5];
+		for (int i = 0 ; i < equips.length; i++) {
+			equips[i] = false;
+		}
+	}
+
+	public boolean[] getEquips() {
+		return equips;
+	}
+
+	public void setEquips(boolean equip, int type) {
+		this.equips[type] = equip;
 	}
 
 	public int getMaxHP() {
@@ -218,7 +236,7 @@ public class Character {
 		if(this.currentXP >=this. neededXP) {
 			this.currentXP = this.currentXP - this.neededXP;
 			level++;
-			this.maxHP= this.maxHP + 10;
+			this.maxHP= this.maxHP + 5 + (2*this.vitality);
 			this.currentHP = this.currentHP + 5;
 			this.statPoints++;
 			setNeededXP();
@@ -268,6 +286,8 @@ public class Character {
 	public void setStatPoints(int statPoints) {
 		this.statPoints = statPoints;
 	}
+
+
 
 
 }
