@@ -1,6 +1,10 @@
 package rpg;
 
-public class Item {
+import java.awt.image.BufferedImage;
+
+import guiTeacher.components.Graphic;
+
+public class Item extends Graphic {
 
 	private int strengthBuff;
 	private int vitalityBuff;
@@ -8,12 +12,14 @@ public class Item {
 	private int intelligenceBuff;
 	private String name;
 	
-	public Item(String name, int strengthBuff, int vitalityBuff, int agilityBuff, int intelligenceBuff) {
+	public Item(int x, int y, BufferedImage image,String name, int strengthBuff, int vitalityBuff, int agilityBuff, int intelligenceBuff) {
+		super(x, y, image);
 		this.name = name;
 		this.strengthBuff = strengthBuff;
 		this.vitalityBuff = vitalityBuff;
 		this.agilityBuff = agilityBuff;
 		this.intelligenceBuff = intelligenceBuff;
 	}
+	
 
 }
