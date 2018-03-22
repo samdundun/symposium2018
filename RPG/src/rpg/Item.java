@@ -3,6 +3,10 @@ package rpg;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import guiTeacher.components.Action;
 import guiTeacher.components.CustomImageButton;
@@ -32,7 +36,10 @@ public class Item extends CustomImageButton implements Clickable {
 	public static final int HEIGHT = 48;
 	public static final int WIDTH = 48;
 	
-	public static final Graphic[] ITEMS = {new Graphic(0,0,48,48, "resources/excalibur.png")};
+	
+	public static final Graphic[] ITEMS = {new Graphic(0,0,48,48, "resources/excalibur.png"), new Graphic(0,0,48,48,MainGUI.MYTHRILARMOR.getSubimage(0, 0, 256, 256)),
+			new Graphic(0,0,48,48,MainGUI.MYTHRILARMOR.getSubimage(256, 0, 256, 256)),new Graphic(0,0,48,48,MainGUI.MYTHRILARMOR.getSubimage(0, 256, 256, 256)),
+			new Graphic(0,0,48,48,MainGUI.MYTHRILARMOR.getSubimage(256, 256, 256, 256))};
 	
 	public Item(String name, int strengthBuff, int vitalityBuff, int agilityBuff, int intelligenceBuff, int imageIndex , int type) {
 		super(0,0,48,48,new DrawInstructions() {

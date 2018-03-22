@@ -42,9 +42,12 @@ public class MainGUI extends GUIApplication {
 	public static final Tileset setOfTiles = new Tileset(0, 0, 16, 16, "resources/basictiles.png");
 	public static final Graphic[] allTiles = setOfTiles.getTiles();
 	
+	public static BufferedImage MYTHRILARMOR;
+	
 	public MainGUI(int width, int height) {
 		super(width, height);
 		setVisible(true);
+		
 		
 //		for resizing but will work on later
 //		addComponentListener(new ComponentAdapter() 
@@ -59,6 +62,12 @@ public class MainGUI extends GUIApplication {
 
 	@Override
 	public void initScreen() {
+		try {
+			 MYTHRILARMOR = ImageIO.read(new File("resources/mythrilarmor.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		myInventory = new Inventory();
 		leo = new Character(0, 0, 0, 0, 0, 0, 0,0);
 		leo.setNewStats();
