@@ -14,7 +14,7 @@ import guiTeacher.components.Graphic;
 import guiTeacher.interfaces.Clickable;
 import guiTeacher.interfaces.DrawInstructions;
 
-public class Item extends CustomImageButton implements Clickable {
+public class Item extends CustomImageButton implements Clickable, Equip {
 
 	private int strengthBuff;
 	private int vitalityBuff;
@@ -32,6 +32,7 @@ public class Item extends CustomImageButton implements Clickable {
 	 * 5- NonEquippable
 	 */
 	private int type;
+	private int imageIndex;
 	
 	public static final int HEIGHT = 48;
 	public static final int WIDTH = 48;
@@ -67,6 +68,7 @@ public class Item extends CustomImageButton implements Clickable {
 		this.setAgilityBuff(agilityBuff);
 		this.setIntelligenceBuff(intelligenceBuff);
 		this.setType(type);
+		this.imageIndex = imageIndex;
 	}
 
 	public int getType() {
@@ -115,6 +117,78 @@ public class Item extends CustomImageButton implements Clickable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public void equip() {
+		if(this.getType() < 5 ) {
+			if(MainGUI.leo.getEquips()[this.getType()] == false) {
+				MainGUI.myInventory.removeItem(this);
+				MainGUI.myInventory.getEquipped().add(this);
+				MainGUI.leo.setEquips(true, this.getType());
+				MainGUI.leo.setStrength(MainGUI.leo.getStrength() + this.getStrengthBuff());
+				MainGUI.leo.setVitality(MainGUI.leo.getVitality() + this.getVitalityBuff());
+				MainGUI.leo.setAgility(MainGUI.leo.getAgility() + this.getAgilityBuff());
+				MainGUI.leo.setIntelligence(MainGUI.leo.getIntelligence() + this.getIntelligenceBuff());
+				MainGUI.save1.save();
+				if(this.getType() == 0) {
+					this.setX(75);
+					this.setY(310);	
+				}
+				if(this.getType() == 1) {
+					this.setX(168);
+					this.setY(100);	
+				}
+				if(this.getType() == 2) {
+					this.setX(168);
+					this.setY(200);	
+				}
+				if(this.getType() == 3) {
+					this.setX(168);
+					this.setY(325);	
+				}
+				if(this.getType() == 4) {
+					this.setX(168);
+					this.setY(500);	
+				}
+				this.setAction(new Action() {
+					
+					@Override
+					public void act() {
+						unequip();
+						
+					}
+				});
+
+			}
+		}
+		
+	}
+
+	@Override
+	public void unequip() {
+		MainGUI.myInventory.addItem(this);
+		MainGUI.myInventory.getEquipped().remove(this);
+		MainGUI.leo.setEquips(false, this.getType());
+		MainGUI.leo.setStrength(MainGUI.leo.getStrength() - this.getStrengthBuff());
+		MainGUI.leo.setVitality(MainGUI.leo.getVitality() - this.getVitalityBuff());
+		MainGUI.leo.setAgility(MainGUI.leo.getAgility() - this.getAgilityBuff());
+		MainGUI.leo.setIntelligence(MainGUI.leo.getIntelligence() - this.getIntelligenceBuff());
+		MainGUI.save1.save();
+		this.setAction(new Action() {
+			
+			@Override
+			public void act() {
+				equip();
+				
+			}
+		});
+		
+	}
+	
+	public String toString() {
+		return this.name + "," + this.strengthBuff + "," + this.vitalityBuff + "," + this.agilityBuff + "," + this.intelligenceBuff + ","+imageIndex +","+ type;
+		
 	}
 	
 	

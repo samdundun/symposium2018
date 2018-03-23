@@ -105,6 +105,10 @@ public class Character {
 	public void setEquips(boolean equip, int type) {
 		this.equips[type] = equip;
 	}
+	
+	public void setEquipped(boolean[] b) {
+		this.equips = b;
+	}
 
 	public int getMaxHP() {
 		return maxHP;
