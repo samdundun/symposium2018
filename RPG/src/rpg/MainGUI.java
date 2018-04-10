@@ -43,6 +43,7 @@ public class MainGUI extends GUIApplication {
 	public static final Graphic[] allTiles = setOfTiles.getTiles();
 	
 	public static BufferedImage MYTHRILARMOR;
+	public static BufferedImage ARMOR;
 	
 	public MainGUI(int width, int height) {
 		super(width, height);
@@ -64,6 +65,7 @@ public class MainGUI extends GUIApplication {
 	public void initScreen() {
 		try {
 			 MYTHRILARMOR = ImageIO.read(new File("resources/mythrilarmor.png"));
+			 ARMOR = ImageIO.read(new File("resources/armor.png"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

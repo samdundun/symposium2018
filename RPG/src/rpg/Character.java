@@ -240,7 +240,7 @@ public class Character {
 		if(this.currentXP >=this. neededXP) {
 			this.currentXP = this.currentXP - this.neededXP;
 			level++;
-			this.maxHP= this.maxHP + 5 + (2*this.vitality);
+			this.maxHP= this.maxHP + 5;
 			this.currentHP = this.currentHP + 5;
 			this.statPoints++;
 			setNeededXP();

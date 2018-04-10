@@ -13,6 +13,7 @@ import guiTeacher.userInterfaces.Screen;
 public class InventoryScreen extends FullFunctionScreen implements IState,KeyListener {
 
 	private Graphic body;
+	SamCustomArea desc;
 
 	public InventoryScreen(int width, int height) {
 		super(width, height);
@@ -45,7 +46,6 @@ public class InventoryScreen extends FullFunctionScreen implements IState,KeyLis
 		int col = 0;
 		int row = 0;
 		for(Item i: MainGUI.myInventory.getItems()) {
-
 
 			i.setAction(new Action() {
 
@@ -84,8 +84,20 @@ public class InventoryScreen extends FullFunctionScreen implements IState,KeyLis
 				i.setX(168);
 				i.setY(500);	
 			}
+			i.setAction(new Action() {
+				
+				@Override
+				public void act() {
+					i.unequip();
+					
+				}
+			});
 			viewObjects.add(i);
 		}
+		
+		desc = new SamCustomArea(400, 400, 350, 150, "");
+		viewObjects.add( desc);
+		
 
 	}
 
@@ -100,4 +112,21 @@ public class InventoryScreen extends FullFunctionScreen implements IState,KeyLis
 //	public void update(int x) {
 //		super.update();
 //	}
+	
+	public void update() {
+		super.update();
+		int initialX = 400;
+		int initialY = 100;
+		int col = 0;
+		int row = 0;
+		for(Item i : MainGUI.myInventory.getItems()) {
+			i.setX(initialX + (col *48));
+			i.setY(initialY + (row * 48));
+			col++;
+			if(col >= 10) {
+				col = 0;
+				row++;
+			}
+		}
+	}
 }

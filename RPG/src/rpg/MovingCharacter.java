@@ -82,8 +82,8 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 			}
 			if (e.getKeyCode() == KeyEvent.VK_I) {
 				MainGUI.currScreen.onExit();
-				MainGUI.game.setScreen(MainGUI.iScreen);
 				MainGUI.iScreen.onEnter();
+				MainGUI.game.setScreen(MainGUI.iScreen);
 				setVy(0);
 				setVx(0);
 			}

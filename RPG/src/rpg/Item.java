@@ -40,7 +40,7 @@ public class Item extends CustomImageButton implements Clickable, Equip {
 	
 	public static final Graphic[] ITEMS = {new Graphic(0,0,48,48, "resources/excalibur.png"), new Graphic(0,0,48,48,MainGUI.MYTHRILARMOR.getSubimage(0, 0, 256, 256)),
 			new Graphic(0,0,48,48,MainGUI.MYTHRILARMOR.getSubimage(256, 0, 256, 256)),new Graphic(0,0,48,48,MainGUI.MYTHRILARMOR.getSubimage(0, 256, 256, 256)),
-			new Graphic(0,0,48,48,MainGUI.MYTHRILARMOR.getSubimage(256, 256, 256, 256))};
+			new Graphic(0,0,48,48,MainGUI.MYTHRILARMOR.getSubimage(256, 256, 256, 256)), new Graphic(0, 0,48,48,MainGUI.ARMOR.getSubimage(50, 0, 50, 50) )};
 	
 	public Item(String name, int strengthBuff, int vitalityBuff, int agilityBuff, int intelligenceBuff, int imageIndex , int type) {
 		super(0,0,48,48,new DrawInstructions() {
@@ -131,6 +131,7 @@ public class Item extends CustomImageButton implements Clickable, Equip {
 				MainGUI.leo.setAgility(MainGUI.leo.getAgility() + this.getAgilityBuff());
 				MainGUI.leo.setIntelligence(MainGUI.leo.getIntelligence() + this.getIntelligenceBuff());
 				MainGUI.save1.save();
+				MainGUI.iScreen.update();
 				if(this.getType() == 0) {
 					this.setX(75);
 					this.setY(310);	
@@ -175,6 +176,7 @@ public class Item extends CustomImageButton implements Clickable, Equip {
 		MainGUI.leo.setAgility(MainGUI.leo.getAgility() - this.getAgilityBuff());
 		MainGUI.leo.setIntelligence(MainGUI.leo.getIntelligence() - this.getIntelligenceBuff());
 		MainGUI.save1.save();
+		MainGUI.iScreen.update();
 		this.setAction(new Action() {
 			
 			@Override
