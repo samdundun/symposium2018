@@ -130,6 +130,7 @@ public class Item extends CustomImageButton implements Clickable, Equip {
 				MainGUI.leo.setVitality(MainGUI.leo.getVitality() + this.getVitalityBuff());
 				MainGUI.leo.setAgility(MainGUI.leo.getAgility() + this.getAgilityBuff());
 				MainGUI.leo.setIntelligence(MainGUI.leo.getIntelligence() + this.getIntelligenceBuff());
+				MainGUI.leo.setMaxHP(MainGUI.leo.getMaxHP() + 5*this.getVitalityBuff());
 				MainGUI.save1.save();
 				MainGUI.iScreen.update();
 				if(this.getType() == 0) {
@@ -175,6 +176,7 @@ public class Item extends CustomImageButton implements Clickable, Equip {
 		MainGUI.leo.setVitality(MainGUI.leo.getVitality() - this.getVitalityBuff());
 		MainGUI.leo.setAgility(MainGUI.leo.getAgility() - this.getAgilityBuff());
 		MainGUI.leo.setIntelligence(MainGUI.leo.getIntelligence() - this.getIntelligenceBuff());
+		MainGUI.leo.setMaxHP(MainGUI.leo.getMaxHP() - 5*this.getVitalityBuff());
 		MainGUI.save1.save();
 		MainGUI.iScreen.update();
 		this.setAction(new Action() {
@@ -191,6 +193,14 @@ public class Item extends CustomImageButton implements Clickable, Equip {
 	public String toString() {
 		return this.name + "," + this.strengthBuff + "," + this.vitalityBuff + "," + this.agilityBuff + "," + this.intelligenceBuff + ","+imageIndex +","+ type;
 		
+	}
+
+	public int getImageIndex() {
+		return imageIndex;
+	}
+
+	public void setImageIndex(int imageIndex) {
+		this.imageIndex = imageIndex;
 	}
 	
 	

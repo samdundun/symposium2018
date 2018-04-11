@@ -21,7 +21,7 @@ public class Character {
 	private int statPoints;
 	private boolean[] equips;
 
-	public static final Attack[] attacks = {new Attack() {
+	public static final Attack[] ATTACKS = {new Attack() {
 
 		@Override
 		//Basic Attack

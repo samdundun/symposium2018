@@ -18,13 +18,20 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 	private Graphic background;
 	private SelectMenuArea attackBox;
 	private SelectMenuArea magic;
-	private AnimatedComponent slime;
-	private Character bSlime;
 	private AnimatedComponent leo;
 	private HealthBar enemyHP;
 	private HealthBar myHP;
 	private SelectMenuArea current;
+	private Character curBEnemy;
+	private AnimatedComponent curEnemy; 
+	
+	public static final Character[] BENEMIES = {/*slime*/new Character(20, 0, 1, 1, 1, 1, 1, 400),
+			/*skeleton*/new Character(40, 0, 3, 2, 1, 1, 1, 1000),new Character(20, 0, 1, 1, 1, 1, 1, 2500),
+			new Character(20, 0, 1, 1, 1, 1, 1, 4000),new Character(20, 0, 1, 1, 1, 1, 1, 6000)};
 
+	public static final AnimatedComponent[] ENEMIES = {new AnimatedComponent(600, 500, 32, 32),
+			new AnimatedComponent(600, 500, 32, 32),new AnimatedComponent(600, 500, 32, 32),
+			new AnimatedComponent(600, 500, 32, 32),new AnimatedComponent(600, 500, 32, 32)};
 	public BattleScreen(int width, int height) {
 		super(width, height);
 		// TODO Auto-generated constructor stub
@@ -32,8 +39,14 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 
 	@Override
 	public void onEnter() {
-		bSlime.setCurrentHP(bSlime.getMaxHP());
-		bSlime.setDead(false);
+		int mob = (int)(Math.random()*2);
+		curBEnemy = BENEMIES[mob];
+		curEnemy = ENEMIES[mob];
+		System.out.println(mob);
+		curEnemy.setVisible(true);
+		curBEnemy.setCurrentHP(curBEnemy.getMaxHP());
+		curBEnemy.setDead(false);
+		enemyHP.update(curBEnemy);
 		enemyHP.update();
 		myHP.update();
 		MainGUI.currScreen = this;
@@ -42,6 +55,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 
 	@Override
 	public void onExit() {
+		curEnemy.setVisible(false);
 		MainGUI.prevScreen = this;
 		MainGUI.save1.save();
 
@@ -49,7 +63,9 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
-		bSlime = new Character(20, 0, 1, 1, 1, 1, 1, 10000);
+		int mob = (int)Math.random()*2;
+		curBEnemy = BENEMIES[mob];
+		curEnemy = ENEMIES[mob];
 
 		background = new Graphic(0, 0, "resources/battlescene.jpg");
 		viewObjects.add(background);
@@ -70,7 +86,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 			@Override
 			public void act() {
 
-				turn(MainGUI.leo.attacks[0]);
+				turn(MainGUI.leo.ATTACKS[0]);
 
 			}},new Action() {
 
@@ -105,7 +121,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 
 			@Override
 			public void act() {
-				turn(MainGUI.leo.attacks[1]);
+				turn(MainGUI.leo.ATTACKS[1]);
 
 			}
 		},
@@ -113,7 +129,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 
 			@Override
 			public void act() {
-				turn(MainGUI.leo.attacks[2]);
+				turn(MainGUI.leo.ATTACKS[2]);
 
 			}
 		},
@@ -121,7 +137,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 
 			@Override
 			public void act() {
-				turn(MainGUI.leo.attacks[3]);
+				turn(MainGUI.leo.ATTACKS[3]);
 
 			}
 		}
@@ -137,13 +153,21 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 		viewObjects.add(current);
 		moveFocus(current);
 
-		slime = new AnimatedComponent(600, 500, 32, 32);
-		slime.addSequence("resources/characters.png", 180, 0, 64, 16, 16, 3);
-		Thread monster = new Thread(slime);
+		//ESTABLISHING ENEMY SPRITES
+		//SLIME
+		ENEMIES[0].addSequence("resources/characters.png", 180, 0, 64, 16, 16, 3);
+		Thread monster = new Thread(ENEMIES[0]);
 		monster.start();
-		viewObjects.add(slime);
+		ENEMIES[0].setVisible(false);
+		viewObjects.add(ENEMIES[0]);
+		//SKELETON
+		ENEMIES[1].addSequence("resources/characters.png", 180, 144, 0, 16, 16, 3);
+		Thread monster1 = new Thread(ENEMIES[1]);
+		monster1.start();
+		ENEMIES[1].setVisible(false);
+		viewObjects.add(ENEMIES[1]);
 
-		enemyHP = new HealthBar(600, 470, 100, 10, bSlime);
+		enemyHP = new HealthBar(600, 470, 100, 10, curBEnemy);
 		enemyHP.update();
 		viewObjects.add(enemyHP);
 
@@ -163,31 +187,53 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 	}
 
 	public void turn(Attack a) {
-		if(!MainGUI.leo.isDead() && !bSlime.isDead()) {
+		if(!MainGUI.leo.isDead() && !curBEnemy.isDead()) {
 			if(!MainGUI.leo.isStunned()) {
-				a.attack(MainGUI.leo, bSlime);
+				a.attack(MainGUI.leo, curBEnemy);
 			}
 			else if (MainGUI.leo.isStunned()) {
 				MainGUI.leo.setStunned(false);
 			}
-			if(!bSlime.isStunned()) {
-				bSlime.attacks[0].attack(bSlime, MainGUI.leo);
+			if(!curBEnemy.isStunned()) {
+				curBEnemy.ATTACKS[0].attack(curBEnemy, MainGUI.leo);
 			}
-			else if (bSlime.isStunned()) {
-				bSlime.setStunned(false);
+			else if (curBEnemy.isStunned()) {
+				curBEnemy.setStunned(false);
 			}
 			myHP.update();
 			enemyHP.update();
 			MainGUI.leo.checkDead();
-			bSlime.checkDead();
+			curBEnemy.checkDead();
 			if(MainGUI.leo.isDead()) {
 				System.exit(0);
 			}
-			if(bSlime.isDead()) {
+			if(curBEnemy.isDead()) {
 				MainGUI.game.setScreen((Screen) MainGUI.prevScreen);
 				MainGUI.prevScreen.onEnter();
-				MainGUI.leo.gainXP(bSlime.getGiveXP());
+				MainGUI.leo.gainXP(curBEnemy.getGiveXP());
 				MainGUI.cScreen.update();
+				
+				int drop = (int)(Math.random()*100);
+				if(drop > 95) {
+					int dropItem = (int)(Math.random()*5);
+					MainGUI.myInventory.addItem(new Item(MainGUI.myInventory.ITEMS[dropItem].getName(),
+							MainGUI.myInventory.ITEMS[dropItem].getStrengthBuff(),
+							MainGUI.myInventory.ITEMS[dropItem].getVitalityBuff(),
+							MainGUI.myInventory.ITEMS[dropItem].getAgilityBuff(),
+							MainGUI.myInventory.ITEMS[dropItem].getIntelligenceBuff(),
+							MainGUI.myInventory.ITEMS[dropItem].getImageIndex(),
+							MainGUI.myInventory.ITEMS[dropItem].getType()));
+				}
+				else if(drop >80) {
+					MainGUI.myInventory.addItem(new Item(MainGUI.myInventory.ITEMS[5].getName(),
+							MainGUI.myInventory.ITEMS[5].getStrengthBuff(),
+							MainGUI.myInventory.ITEMS[5].getVitalityBuff(),
+							MainGUI.myInventory.ITEMS[5].getAgilityBuff(),
+							MainGUI.myInventory.ITEMS[5].getIntelligenceBuff(),
+							MainGUI.myInventory.ITEMS[5].getImageIndex(),
+							MainGUI.myInventory.ITEMS[5].getType()));
+				}
+				
 				this.onExit();
 			}
 		}

@@ -57,7 +57,7 @@ public class InventoryScreen extends FullFunctionScreen implements IState,KeyLis
 			i.setX(initialX + (col *48));
 			i.setY(initialY + (row * 48));
 			col++;
-			if(col >= 10) {
+			if(col >= 8) {
 				col = 0;
 				row++;
 			}
@@ -123,7 +123,7 @@ public class InventoryScreen extends FullFunctionScreen implements IState,KeyLis
 			i.setX(initialX + (col *48));
 			i.setY(initialY + (row * 48));
 			col++;
-			if(col >= 10) {
+			if(col >= 8) {
 				col = 0;
 				row++;
 			}

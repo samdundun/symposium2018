@@ -52,7 +52,7 @@ public class CharacterScreen extends FullFunctionScreen implements IState{
 					public void act() {
 						if(MainGUI.leo.getStatPoints() > 0) {
 							MainGUI.leo.setVitality(MainGUI.leo.getVitality() + 1);
-							MainGUI.leo.setMaxHP(MainGUI.leo.getMaxHP() + 2);
+							MainGUI.leo.setMaxHP(MainGUI.leo.getMaxHP() + 5);
 							MainGUI.leo.setStatPoints(MainGUI.leo.getStatPoints() - 1);
 							update(0);
 						}

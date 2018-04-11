@@ -9,7 +9,7 @@ public class Inventory {
 	private int gold;
 	private ArrayList<Item> equipped;
 	
-	public static final Item[] items = {new Item("Excalibur", 100, 100, 100, 100, 0, 0), new Item("Mythril Helmet", 10, 10, 0, 10, 1, 1),new Item("Mythril Chestplate", 15, 20, 0, 15, 2, 2),
+	public static final Item[] ITEMS = {new Item("Excalibur", 100, 100, 100, 100, 0, 0), new Item("Mythril Helmet", 10, 10, 0, 10, 1, 1),new Item("Mythril Chestplate", 15, 20, 0, 15, 2, 2),
 			new Item("Mythril Pants", 10, 15, 0, 10, 3, 3),new Item("Mythril Boots", 10, 10, 0, 10, 4, 4), new Item("Casual Shirt",0,0,0,0,5,2)};
 	
 	public Inventory() {

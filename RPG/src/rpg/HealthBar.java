@@ -28,5 +28,11 @@ public class HealthBar extends Component {
 		g.fillRect((int) (thing), 0, (int) (100-thing), 10);
 
 	}
+	
+	public void update(Character b) {
+		a = b;
+		update();
+		
+	}
 
 }
