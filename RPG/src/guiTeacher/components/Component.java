@@ -39,6 +39,7 @@ public abstract class Component implements Visible {
 	private Visible containingComponent;
 	private boolean visible;
 	private Action hoverAction;
+	private Action unHoverAction;
 	private boolean left;//a boolean to keep track of when a pointer leaves this object
 	
 	public Component(int x, int y, int w, int h){
@@ -220,6 +221,10 @@ public abstract class Component implements Visible {
 	public void setHoverAction(Action a){
 		this.hoverAction = a;
 	}
+	
+	public void setUnHoverAction(Action a){
+		this.unHoverAction = a;
+	}
 
 
 	public boolean isVisible() {
@@ -236,8 +241,12 @@ public abstract class Component implements Visible {
 	
 	@Override
 	public void unhoverAction() {
-		// TODO Auto-generated method stub
+		doUnHoverAction();
 		
+	}
+	
+	public void doUnHoverAction(){
+		if(unHoverAction!=null)unHoverAction.act();
 	}
 	
 	

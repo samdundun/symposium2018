@@ -42,7 +42,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 		int mob = (int)(Math.random()*2);
 		curBEnemy = BENEMIES[mob];
 		curEnemy = ENEMIES[mob];
-		System.out.println(mob);
+
 		curEnemy.setVisible(true);
 		curBEnemy.setCurrentHP(curBEnemy.getMaxHP());
 		curBEnemy.setDead(false);
@@ -224,14 +224,15 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 							MainGUI.myInventory.ITEMS[dropItem].getImageIndex(),
 							MainGUI.myInventory.ITEMS[dropItem].getType()));
 				}
-				else if(drop >80) {
-					MainGUI.myInventory.addItem(new Item(MainGUI.myInventory.ITEMS[5].getName(),
-							MainGUI.myInventory.ITEMS[5].getStrengthBuff(),
-							MainGUI.myInventory.ITEMS[5].getVitalityBuff(),
-							MainGUI.myInventory.ITEMS[5].getAgilityBuff(),
-							MainGUI.myInventory.ITEMS[5].getIntelligenceBuff(),
-							MainGUI.myInventory.ITEMS[5].getImageIndex(),
-							MainGUI.myInventory.ITEMS[5].getType()));
+				else if(drop >55) {
+					int dropItem = (int)(Math.random()*3 + 5);
+					MainGUI.myInventory.addItem(new Item(MainGUI.myInventory.ITEMS[dropItem].getName(),
+							MainGUI.myInventory.ITEMS[dropItem].getStrengthBuff(),
+							MainGUI.myInventory.ITEMS[dropItem].getVitalityBuff(),
+							MainGUI.myInventory.ITEMS[dropItem].getAgilityBuff(),
+							MainGUI.myInventory.ITEMS[dropItem].getIntelligenceBuff(),
+							MainGUI.myInventory.ITEMS[dropItem].getImageIndex(),
+							MainGUI.myInventory.ITEMS[dropItem].getType()));
 				}
 				
 				this.onExit();

@@ -39,8 +39,8 @@ public class Button extends TextLabel implements Clickable{
 
 	private Action action;
 	private BufferedImage hoverImage;
-	private boolean hovered;
-	private boolean enabled;
+	protected boolean hovered;
+	protected boolean enabled;
 	protected int curveX;
 	protected int curveY;
 	protected Color outlineColorActive;
@@ -246,6 +246,7 @@ public class Button extends TextLabel implements Clickable{
 	public void hoverAction(){
 		GUIApplication.mainFrame.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		setLeft(false);
+		doHoverAction();
 	}
 	
 	/**
@@ -254,6 +255,7 @@ public class Button extends TextLabel implements Clickable{
 	public void unhoverAction(){
 		setLeft(true);
 		GUIApplication.mainFrame.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		doUnHoverAction();
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package rpg;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -8,6 +9,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import guiTeacher.Utilities;
 import guiTeacher.components.Action;
 import guiTeacher.components.CustomImageButton;
 import guiTeacher.components.Graphic;
@@ -40,7 +42,11 @@ public class Item extends CustomImageButton implements Clickable, Equip {
 	
 	public static final Graphic[] ITEMS = {new Graphic(0,0,48,48, "resources/excalibur.png"), new Graphic(0,0,48,48,MainGUI.MYTHRILARMOR.getSubimage(0, 0, 256, 256)),
 			new Graphic(0,0,48,48,MainGUI.MYTHRILARMOR.getSubimage(256, 0, 256, 256)),new Graphic(0,0,48,48,MainGUI.MYTHRILARMOR.getSubimage(0, 256, 256, 256)),
-			new Graphic(0,0,48,48,MainGUI.MYTHRILARMOR.getSubimage(256, 256, 256, 256)), new Graphic(0, 0,48,48,MainGUI.ARMOR.getSubimage(50, 0, 50, 50) )};
+			new Graphic(0,0,48,48,MainGUI.MYTHRILARMOR.getSubimage(256, 256, 256, 256)),
+			/*Basic armor*/ new Graphic(0, 0,48,48,MainGUI.ARMOR.getSubimage(50, 0, 50, 50)), new Graphic(0, 0,48,48,MainGUI.ARMOR.getSubimage(150, 0, 50, 50)),
+			new Graphic(0, 0,48,48,MainGUI.ARMOR.getSubimage(200, 0, 50, 50)),
+			/*Magic armor*/  new Graphic(0, 0,48,48,MainGUI.ARMOR.getSubimage(0, 50, 50, 50)), new Graphic(0, 0,48,48,MainGUI.ARMOR.getSubimage(50, 50, 50, 50)), 
+			new Graphic(0, 0,48,48,MainGUI.ARMOR.getSubimage(150, 50, 50, 50)),new Graphic(0, 0,48,48,MainGUI.ARMOR.getSubimage(200, 50, 50, 50))};
 	
 	public Item(String name, int strengthBuff, int vitalityBuff, int agilityBuff, int intelligenceBuff, int imageIndex , int type) {
 		super(0,0,48,48,new DrawInstructions() {
@@ -54,6 +60,7 @@ public class Item extends CustomImageButton implements Clickable, Equip {
 					g.drawImage(image.getImage(), 0, 0, null);
 					g.setColor(new Color(0,0,0,30));
 					g.fillRect(0, 0, WIDTH, HEIGHT);
+					
 
 				}
 				
@@ -177,6 +184,9 @@ public class Item extends CustomImageButton implements Clickable, Equip {
 		MainGUI.leo.setAgility(MainGUI.leo.getAgility() - this.getAgilityBuff());
 		MainGUI.leo.setIntelligence(MainGUI.leo.getIntelligence() - this.getIntelligenceBuff());
 		MainGUI.leo.setMaxHP(MainGUI.leo.getMaxHP() - 5*this.getVitalityBuff());
+		if(MainGUI.leo.getCurrentHP() > MainGUI.leo.getMaxHP()) {
+			MainGUI.leo.setCurrentHP(MainGUI.leo.getMaxHP());
+		}
 		MainGUI.save1.save();
 		MainGUI.iScreen.update();
 		this.setAction(new Action() {
@@ -203,6 +213,19 @@ public class Item extends CustomImageButton implements Clickable, Equip {
 		this.imageIndex = imageIndex;
 	}
 	
-	
+	public boolean isHovered(int x, int y) {
+		boolean b = x>getX() && x<getX()+getWidth() 
+		&& y > getY() && y<getY()+getHeight();
+//		if(b != hovered){
+//			
+//		}
+		hovered = b && enabled;
+		if(hovered){
+			hoverAction();
+		}else if (!hasLeft()){
+			unhoverAction();
+		}
+		return hovered;
+	}
 
 }

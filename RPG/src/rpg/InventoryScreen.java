@@ -24,7 +24,7 @@ public class InventoryScreen extends FullFunctionScreen implements IState,KeyLis
 	public void onEnter() {
 		MainGUI.currScreen = this;
 		MainGUI.iScreen = new InventoryScreen(getWidth(), getHeight());
-//		this.update(0);
+		//		this.update(0);
 
 	}
 
@@ -61,6 +61,22 @@ public class InventoryScreen extends FullFunctionScreen implements IState,KeyLis
 				col = 0;
 				row++;
 			}
+			i.setHoverAction(new Action() {
+
+				@Override
+				public void act() {
+					desc.setText("Name: " + i.getName() + " \nSTR: " + i.getStrengthBuff() + " VIT: "+ i.getVitalityBuff() + " AGI: " + i.getAgilityBuff() + " INT: " + i.getIntelligenceBuff());
+
+				}
+			});
+			i.setUnHoverAction(new Action() {
+
+				@Override
+				public void act() {
+					desc.setText("");
+
+				}
+			});
 			viewObjects.add(i);
 		}
 		for(Item i: MainGUI.myInventory.getEquipped()) {
@@ -85,19 +101,35 @@ public class InventoryScreen extends FullFunctionScreen implements IState,KeyLis
 				i.setY(500);	
 			}
 			i.setAction(new Action() {
-				
+
 				@Override
 				public void act() {
 					i.unequip();
-					
+
+				}
+			});
+			i.setUnHoverAction(new Action() {
+
+				@Override
+				public void act() {
+					desc.setText("Name: " + i.getName() + " \nSTR: " + i.getStrengthBuff() + " VIT: "+ i.getVitalityBuff() + " AGI: " + i.getAgilityBuff() + " INT: " + i.getIntelligenceBuff());
+
+				}
+			});
+			i.setHoverAction(new Action() {
+
+				@Override
+				public void act() {
+					desc.setText("");
+
 				}
 			});
 			viewObjects.add(i);
 		}
-		
+
 		desc = new SamCustomArea(400, 400, 350, 150, "");
 		viewObjects.add( desc);
-		
+
 
 	}
 
@@ -109,10 +141,10 @@ public class InventoryScreen extends FullFunctionScreen implements IState,KeyLis
 		}
 	}
 
-//	public void update(int x) {
-//		super.update();
-//	}
-	
+	//	public void update(int x) {
+	//		super.update();
+	//	}
+
 	public void update() {
 		super.update();
 		int initialX = 400;
