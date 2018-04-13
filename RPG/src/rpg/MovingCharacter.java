@@ -87,6 +87,13 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 				setVy(0);
 				setVx(0);
 			}
+			if (e.getKeyCode() == KeyEvent.VK_M) {
+				MainGUI.currScreen.onExit();
+				MainGUI.worldMap.onEnter();
+				MainGUI.game.setScreen(MainGUI.worldMap);
+				setVy(0);
+				setVx(0);
+			}
 		}
 	}
 
@@ -148,7 +155,7 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		if(getY() > 600) {
 			setY(550);
 			MainGUI.currScreen.onExit();
-			MainGUI.game.setScreen(MainGUI.battle);
+			MainGUI.game.setScreen(MainGUI.map2);
 			MainGUI.battle.onEnter();
 			setVy(0);
 			setVx(0);

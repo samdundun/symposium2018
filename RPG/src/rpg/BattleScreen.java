@@ -24,9 +24,9 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 	private SelectMenuArea current;
 	private Character curBEnemy;
 	private AnimatedComponent curEnemy; 
-	
+
 	public static final Character[] BENEMIES = {/*slime*/new Character(20, 0, 1, 1, 1, 1, 1, 400),
-			/*skeleton*/new Character(40, 0, 3, 2, 1, 1, 1, 1000),new Character(20, 0, 1, 1, 1, 1, 1, 2500),
+			/*skeleton*/new Character(40, 0, 3, 2, 1, 1, 1, 1000),new Character(20, 0, 2, 1, 2, 1, 1, 1000),
 			new Character(20, 0, 1, 1, 1, 1, 1, 4000),new Character(20, 0, 1, 1, 1, 1, 1, 6000)};
 
 	public static final AnimatedComponent[] ENEMIES = {new AnimatedComponent(600, 500, 32, 32),
@@ -39,7 +39,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 
 	@Override
 	public void onEnter() {
-		int mob = (int)(Math.random()*2);
+		int mob = (int)(Math.random()*3);
 		curBEnemy = BENEMIES[mob];
 		curEnemy = ENEMIES[mob];
 
@@ -63,7 +63,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
-		int mob = (int)Math.random()*2;
+		int mob = (int)Math.random()*3;
 		curBEnemy = BENEMIES[mob];
 		curEnemy = ENEMIES[mob];
 
@@ -166,6 +166,12 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 		monster1.start();
 		ENEMIES[1].setVisible(false);
 		viewObjects.add(ENEMIES[1]);
+		//BAT
+		ENEMIES[2].addSequence("resources/characters.png", 180, 48, 64, 16, 16, 3);
+		Thread monster2 = new Thread(ENEMIES[2]);
+		monster2.start();
+		ENEMIES[2].setVisible(false);
+		viewObjects.add(ENEMIES[2]);
 
 		enemyHP = new HealthBar(600, 470, 100, 10, curBEnemy);
 		enemyHP.update();
@@ -212,7 +218,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 				MainGUI.prevScreen.onEnter();
 				MainGUI.leo.gainXP(curBEnemy.getGiveXP());
 				MainGUI.cScreen.update();
-				
+
 				int drop = (int)(Math.random()*100);
 				if(drop > 95) {
 					int dropItem = (int)(Math.random()*5);
@@ -224,7 +230,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 							MainGUI.myInventory.ITEMS[dropItem].getImageIndex(),
 							MainGUI.myInventory.ITEMS[dropItem].getType()));
 				}
-				else if(drop >55) {
+				else if(drop >75) {
 					int dropItem = (int)(Math.random()*3 + 5);
 					MainGUI.myInventory.addItem(new Item(MainGUI.myInventory.ITEMS[dropItem].getName(),
 							MainGUI.myInventory.ITEMS[dropItem].getStrengthBuff(),
@@ -234,7 +240,17 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 							MainGUI.myInventory.ITEMS[dropItem].getImageIndex(),
 							MainGUI.myInventory.ITEMS[dropItem].getType()));
 				}
-				
+				else if(drop >55) {
+					int dropItem = (int)(Math.random()*3 + 9);
+					MainGUI.myInventory.addItem(new Item(MainGUI.myInventory.ITEMS[dropItem].getName(),
+							MainGUI.myInventory.ITEMS[dropItem].getStrengthBuff(),
+							MainGUI.myInventory.ITEMS[dropItem].getVitalityBuff(),
+							MainGUI.myInventory.ITEMS[dropItem].getAgilityBuff(),
+							MainGUI.myInventory.ITEMS[dropItem].getIntelligenceBuff(),
+							MainGUI.myInventory.ITEMS[dropItem].getImageIndex(),
+							MainGUI.myInventory.ITEMS[dropItem].getType()));
+				}
+
 				this.onExit();
 			}
 		}

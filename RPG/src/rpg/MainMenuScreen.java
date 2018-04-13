@@ -71,6 +71,8 @@ public class MainMenuScreen extends FullFunctionScreen implements IState {
 				MainGUI.game.localMap.onEnter();
 				MainGUI.game.mainMenu.onExit();
 				MainGUI.leo.setNewStats();
+				boolean[] a = {false,false,false,false,false};
+				MainGUI.leo.setEquipped(a);
 				MainGUI.myInventory = new Inventory();
 				MainGUI.save1.save();
 			}

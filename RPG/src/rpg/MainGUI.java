@@ -24,6 +24,7 @@ public class MainGUI extends GUIApplication {
 	public static MainGUI game;
 	public static MainMenuScreen mainMenu;
 	public static IntroMap localMap;
+	public static Map2 map2;
 	
 	public static Character leo;
 	public static CharacterScreen cScreen;
@@ -34,9 +35,9 @@ public class MainGUI extends GUIApplication {
 	public static IState prevScreen;
 	public static IState currScreen;
 	
-	public static MusicPlayer player;
+//	public static MusicPlayer player;
 
-//	public static WorldMap worldMap;
+	public static WorldMap worldMap;
 	public static BattleScreen battle;
 	
 	public static final Tileset setOfTiles = new Tileset(0, 0, 16, 16, "resources/basictiles.png");
@@ -79,17 +80,19 @@ public class MainGUI extends GUIApplication {
 		battle = new BattleScreen(getWidth(), getHeight());
 		cScreen = new CharacterScreen(getWidth(), getHeight());
 		iScreen = new InventoryScreen(getWidth(), getHeight());
+		worldMap = new WorldMap(getWidth(), getHeight());
+		map2 = new Map2(getWidth(), getHeight());
 		setScreen(mainMenu);
 		mainMenu.onEnter();
 
 	}
 	
 	public static void main(String[] args) {
-		player = new MusicPlayer("bgm");
+//		player = new MusicPlayer("bgm");
 		game = new MainGUI(810, 600);
 		Thread runner = new Thread(game);
 		runner.start();
-		player.run();
+//		player.run();
 	}
 	
 
