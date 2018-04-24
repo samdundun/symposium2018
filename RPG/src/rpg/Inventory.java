@@ -12,7 +12,7 @@ public class Inventory {
 	public static final Item[] ITEMS = {new Item("Excalibur", 100, 100, 100, 100, 0, 0), new Item("Mythril Helmet", 10, 10, 0, 10, 1, 1),new Item("Mythril Chestplate", 15, 20, 0, 15, 2, 2),
 			new Item("Mythril Pants", 10, 15, 5, 10, 3, 3),new Item("Mythril Boots", 10, 10, 10, 10, 4, 4), 
 			/*Basic Armor*/new Item("Basic Shirt",1,1,0,0,5,2),new Item("Basic Pants",1,1,0,0,6,3),new Item("Basic Shoes",1,0,1,0,7,4),
-			/*Magic Armor*/new Item("Magic Hood",0,1,0,2,5,2),new Item("Magic Shirt",0,1,0,3,6,3),new Item("Magic Kilt",0,1,0,2,7,4),new Item("Magic Boots",0,1,1,1,7,4)};
+			/*Magic Armor*/new Item("Magic Hood",0,1,0,2,8,1),new Item("Magic Shirt",0,1,0,3,8,2),new Item("Magic Kilt",0,1,0,2,10,3),new Item("Magic Boots",0,1,1,1,11,4)};
 
 	public Inventory() {
 		myInventory = new ArrayList<Item>();

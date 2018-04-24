@@ -31,7 +31,7 @@ public class Tileset {
 			int tilelength = 0;
 			for(int i = 0; i<col; i++) {
 				for(int j = 0; j<row; j++) {
-					tiles[tilelength] = new Graphic(x,y,originalImage.getSubimage(x+pixelWidth*j, y+pixelHeight*i, pixelWidth, pixelHeight));
+					tiles[tilelength] = new Tile(x,y,originalImage.getSubimage(x+pixelWidth*j, y+pixelHeight*i, pixelWidth, pixelHeight));
 					tilelength++;
 				}
 			}
