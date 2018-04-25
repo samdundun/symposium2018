@@ -20,6 +20,11 @@ public class IntroMap extends FullFunctionScreen implements IState {
 	private Graphic leo;
 	private MovingCharacter leoSprite;
 	private boolean newGame;
+	
+	
+	int width;
+	int height;
+	private int [][] tiles;
 
 
 	public void setNewGame(boolean newGame) {
@@ -97,36 +102,52 @@ public class IntroMap extends FullFunctionScreen implements IState {
 		MainGUI.prevScreen = this;
 
 	}
+	
+	public Tile getTile(int x, int y) {
+		Tile t = Tile.tiles[tiles[x][y]];
+		if(t == null) {
+			return Tile.grassTile;
+		}
+		return t;
+	}
 
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
-		Graphic currentTile = null;
-		Graphic test = null;
+		Tile currentTile = null;
+		Tile test = null;
 		//int random = 0;
 
+		this.width = this.getWidth()/16;
+		this.height = this.getHeight()/16;
+		for(int x=0; x < width; x++) {
+			for(int y = 0; y < height; y++) {
+				tiles[x][y]= 0;
+			}
+		}
 		//LAYER 1
 		for(int i = 0; i < this.getHeight()/16; i++) {
 			for(int j = 0; j < this.getWidth()/16; j++) {
 				//This was a test for selecting random tiles, can select tiles freely
 				//while(test == null) {
 				//random = (int) (Math.round(Math.random()*1))+56;
-				if(i< 9 && j > 40) {
-					test = MainGUI.allTiles[13];
-				}
-				else if ((i <10 &&j >= 40) || (j>40 && i <= 9) || (i < 10 && i > 4 && j >38) ||(j < 45 && j > 38 && i ==10)) {
-					test = MainGUI.allTiles[10];
-				}
-				else if(i%2 == 0 || j%2 == 0) {
-					test = MainGUI.allTiles[64];
-				}
-				else if (i%3 == 0 && j%3 == 0) {
-					test = MainGUI.allTiles[12];
-				}
-				else {
-					test = MainGUI.allTiles[65];
-				}
+//				if(i< 9 && j > 40) {
+//					test = MainGUI.allTiles[13];
+//				}
+//				else if ((i <10 &&j >= 40) || (j>40 && i <= 9) || (i < 10 && i > 4 && j >38) ||(j < 45 && j > 38 && i ==10)) {
+//					test = MainGUI.allTiles[10];
+//				}
+//				else if(i%2 == 0 || j%2 == 0) {
+//					test = MainGUI.allTiles[64];
+//				}
+//				else if (i%3 == 0 && j%3 == 0) {
+//					test = MainGUI.allTiles[12];
+//				}
+//				else {
+//					test = MainGUI.allTiles[65];
+//				}
 				//}
-				currentTile = new Graphic(0,0,test.getImage());
+				test = getTile(i,j);
+				currentTile = new Tile(0,0,test.getImage(), test.id);
 				currentTile.setX(16*j);
 				currentTile.setY(16*i);
 				viewObjects.add(currentTile);
@@ -134,28 +155,28 @@ public class IntroMap extends FullFunctionScreen implements IState {
 			}
 		}
 
-		for(int i = 0; i < this.getHeight()/16; i++) {
-			for(int j = 0; j < this.getWidth()/16; j++) {
-				//This was a test for selecting random tiles, can select tiles freely
-				//while(test == null) {
-				//random = (int) (Math.round(Math.random()*1))+56;
-				if((i<5 || i> 31)&& !(j>5 && j<10) && !(j>40 && i <5) || j==0) {
-					test = MainGUI.allTiles[30];
-					currentTile = new Graphic(0,0,test.getImage());
-					currentTile.setX(16*j);
-					currentTile.setY(16*i);
-					viewObjects.add(currentTile);
-				}
-				else if(j> 44 && !(i<9)){
-					test = MainGUI.allTiles[38];
-					currentTile = new Graphic(0,0,test.getImage());
-					currentTile.setX(16*j);
-					currentTile.setY(16*i);
-					viewObjects.add(currentTile);
-				}
-				//test = null;
-			}
-		}
+//		for(int i = 0; i < this.getHeight()/16; i++) {
+//			for(int j = 0; j < this.getWidth()/16; j++) {
+//				//This was a test for selecting random tiles, can select tiles freely
+//				//while(test == null) {
+//				//random = (int) (Math.round(Math.random()*1))+56;
+//				if((i<5 || i> 31)&& !(j>5 && j<10) && !(j>40 && i <5) || j==0) {
+//					test = MainGUI.allTiles[30];
+//					currentTile = new Tile(0,0,test.getImage());
+//					currentTile.setX(16*j);
+//					currentTile.setY(16*i);
+//					viewObjects.add(currentTile);
+//				}
+//				else if(j> 44 && !(i<9)){
+//					test = MainGUI.allTiles[38];
+//					currentTile = new Tile(0,0,test.getImage());
+//					currentTile.setX(16*j);
+//					currentTile.setY(16*i);
+//					viewObjects.add(currentTile);
+//				}
+//				//test = null;
+//			}
+//		}
 
 		try {
 			File fontFile = new File("resources/Holiday.ttf");

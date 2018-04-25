@@ -94,6 +94,14 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 				setVy(0);
 				setVx(0);
 			}
+			
+			if(((e.getKeyCode() == KeyEvent.VK_LEFT) || (e.getKeyCode() == KeyEvent.VK_RIGHT) || (e.getKeyCode() == KeyEvent.VK_UP) || (e.getKeyCode() == KeyEvent.VK_DOWN) )&& Math.random() > .9) {
+				MainGUI.currScreen.onExit();
+				MainGUI.game.setScreen(MainGUI.battle);
+				MainGUI.battle.onEnter();
+				setVy(0);
+				setVx(0);
+			}
 		}
 	}
 

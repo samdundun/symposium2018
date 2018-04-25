@@ -1,19 +1,22 @@
 package rpg;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
 
 import guiTeacher.components.Action;
+import guiTeacher.components.Button;
 import guiTeacher.components.Graphic;
 import guiTeacher.interfaces.Visible;
 import guiTeacher.userInterfaces.FullFunctionScreen;
 import guiTeacher.userInterfaces.Screen;
 
-public class InventoryScreen extends FullFunctionScreen implements IState,KeyListener {
+public class InventoryScreen extends FullFunctionScreen implements IState {
 
 	private Graphic body;
 	SamCustomArea desc;
+	private Button exit;
 
 	public InventoryScreen(int width, int height) {
 		super(width, height);
@@ -129,21 +132,24 @@ public class InventoryScreen extends FullFunctionScreen implements IState,KeyLis
 
 		desc = new SamCustomArea(400, 400, 350, 150, "");
 		viewObjects.add( desc);
+		
+		exit = new Button(740, 30, 50, 50, "X", new Action() {
+
+			@Override
+			public void act() {
+				MainGUI.prevScreen.onEnter();
+				MainGUI.game.setScreen((Screen) MainGUI.prevScreen);
+				MainGUI.cScreen.onExit(); 
+
+			}
+		});
+		exit.setForeground(Color.black);
+		exit.setBackground(Color.red);
+		exit.update();
+		viewObjects.add(exit);
 
 
 	}
-
-	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-			MainGUI.game.setScreen((Screen) MainGUI.prevScreen);
-			MainGUI.prevScreen.onEnter();
-			MainGUI.currScreen.onExit();
-		}
-	}
-
-	//	public void update(int x) {
-	//		super.update();
-	//	}
 
 	public void update() {
 		super.update();
