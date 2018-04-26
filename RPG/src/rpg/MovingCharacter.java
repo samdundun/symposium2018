@@ -125,22 +125,6 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		if (getVx() == 0 && getVy() == 0) {
 			characterActions[direction].setCurrentFrame(0);
 		}
-		if(getX() < 16) {
-			setX(16);
-		}
-		if(getX() > 700) {
-			setX(695);
-		}
-		//top boundaries
-		if(getY() < 64 && !(getX() > 90 && getX() < 148)) {
-			setY(64);
-		}
-		if(getY() < 64 && (getX() < 94)) {
-			setX(94);
-		}
-		if(getY() < 64 && (getX() > 138 )) {
-			setX(138);
-		}
 		if(getY() < 0) {
 			setY(20);
 			MainGUI.currScreen.onExit();
@@ -148,17 +132,6 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 			MainGUI.battle.onEnter();
 			setVy(0);
 			setVx(0);
-		}
-
-		//bottom boundaries
-		if(getY() > 482 && !(getX() > 90 && getX() < 148)) {
-			setY(482);
-		}
-		if(getY() > 482 && getX() < 94 ) {
-			setX(94);
-		}
-		if(getY() > 482 &&  getX() > 138) {
-			setX(138);
 		}
 		if(getY() > 600) {
 			setY(550);

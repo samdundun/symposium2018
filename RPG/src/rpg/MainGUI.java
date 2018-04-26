@@ -46,6 +46,8 @@ public class MainGUI extends GUIApplication {
 	public static BufferedImage MYTHRILARMOR;
 	public static BufferedImage ARMOR;
 	
+	public static final Tile tiles= new Tile(0, 0, allTiles[0].getImage(), 0);
+	
 	public MainGUI(int width, int height) {
 		super(width, height);
 		setVisible(true);

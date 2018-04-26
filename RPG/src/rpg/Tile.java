@@ -10,6 +10,7 @@ public class Tile extends Graphic {
 
 	public static Tile[] tiles = new Tile[256];
 	public static Tile grassTile = new GrassTile(0);
+	public static Tile treeTile = new TreeTile(1);
 
 	protected final int id;
 

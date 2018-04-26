@@ -114,19 +114,17 @@ public class IntroMap extends FullFunctionScreen implements IState {
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
 		Tile currentTile = null;
-		Tile test = null;
-		//int random = 0;
-
 		this.width = this.getWidth()/16;
 		this.height = this.getHeight()/16;
+		tiles = new int[this.width][this.height];
 		for(int x=0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
 				tiles[x][y]= 0;
 			}
 		}
 		//LAYER 1
-		for(int i = 0; i < this.getHeight()/16; i++) {
-			for(int j = 0; j < this.getWidth()/16; j++) {
+		for(int i = 0; i < this.height; i++) {
+			for(int j = 0; j < this.width; j++) {
 				//This was a test for selecting random tiles, can select tiles freely
 				//while(test == null) {
 				//random = (int) (Math.round(Math.random()*1))+56;
@@ -146,7 +144,9 @@ public class IntroMap extends FullFunctionScreen implements IState {
 //					test = MainGUI.allTiles[65];
 //				}
 				//}
-				test = getTile(i,j);
+				
+				Tile test = getTile(j,i);
+				System.out.print(Tile.tiles[1]);
 				currentTile = new Tile(0,0,test.getImage(), test.id);
 				currentTile.setX(16*j);
 				currentTile.setY(16*i);
@@ -154,6 +154,47 @@ public class IntroMap extends FullFunctionScreen implements IState {
 				//test = null;
 			}
 		}
+		
+		for(int i = 0; i < this.width; i++) {
+			tiles[i][0] = 1;
+			if(i == 5) {
+				i = i + 5;
+			}
+		}
+		for(int i = 0; i < this.height; i++) {
+			for(int j = 0; j < this.width; j++) {
+				//This was a test for selecting random tiles, can select tiles freely
+				//while(test == null) {
+				//random = (int) (Math.round(Math.random()*1))+56;
+//				if(i< 9 && j > 40) {
+//					test = MainGUI.allTiles[13];
+//				}
+//				else if ((i <10 &&j >= 40) || (j>40 && i <= 9) || (i < 10 && i > 4 && j >38) ||(j < 45 && j > 38 && i ==10)) {
+//					test = MainGUI.allTiles[10];
+//				}
+//				else if(i%2 == 0 || j%2 == 0) {
+//					test = MainGUI.allTiles[64];
+//				}
+//				else if (i%3 == 0 && j%3 == 0) {
+//					test = MainGUI.allTiles[12];
+//				}
+//				else {
+//					test = MainGUI.allTiles[65];
+//				}
+				//}
+				
+				Tile test = getTile(j,i);
+				System.out.print(Tile.tiles[1]);
+				currentTile = new Tile(0,0,test.getImage(), test.id);
+				currentTile.setX(16*j);
+				currentTile.setY(16*i);
+				viewObjects.add(currentTile);
+				//test = null;
+			}
+		}
+		
+		//LAYER 2
+		
 
 //		for(int i = 0; i < this.getHeight()/16; i++) {
 //			for(int j = 0; j < this.getWidth()/16; j++) {

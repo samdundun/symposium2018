@@ -25,7 +25,7 @@ public class Tileset {
 			//sets array length and row and col sizes
 			int col = set.getHeight()/pixelHeight;
 			int row =set.getWidth()/pixelWidth;
-			tiles = new Tile[row*col];
+			tiles = new Graphic[row*col];
 			
 			//cuts the tiles up
 			int tilelength = 0;
