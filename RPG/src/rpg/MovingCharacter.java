@@ -1,6 +1,8 @@
 package rpg;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 import guiTeacher.components.AnimatedComponent;
@@ -13,6 +15,7 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 	static final AnimatedComponent[] characterActions = {new AnimatedComponent(100, 100, 32, 32),new AnimatedComponent(100, 100, 32, 32),new AnimatedComponent(100, 100, 32, 32),new AnimatedComponent(100, 100, 32, 32)};
 	private int direction;
 	private boolean canMove;
+	protected Rectangle bounds;
 
 	public MovingCharacter(int x, int y, int w, int h) {
 		super(x, y, w, h);
@@ -39,6 +42,12 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		characterActions[3].setVisible(false);
 
 		direction = 0;
+		
+		bounds =  new Rectangle (0,0, this.getWidth(), this.getHeight());
+		bounds.x = 4;
+		bounds.y = 16;
+		bounds.width = 18;
+		bounds.height = 32;
 	}
 
 	public void setDirection(int direction) {
@@ -56,7 +65,13 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 			}
 			else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 				direction = 3;
-				setVx(3);
+				int tx = (int) (x + 32 + bounds.x + bounds.width) / 16;
+				if(collisionWithTile(tx,(y + bounds.y)/16)) {
+					setVx(3);	
+				}
+				else {
+					setVx(0);
+				}
 			}
 			else if (e.getKeyCode() == KeyEvent.VK_UP) {
 				direction = 2;
@@ -103,6 +118,11 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 				setVx(0);
 			}
 		}
+	}
+
+	private boolean collisionWithTile(int x, int y) {
+		System.out.println( MainGUI.currScreen.getTile(x,y));
+		return MainGUI.currScreen.getTile(x,y).isWalkable();
 	}
 
 	@Override
@@ -170,6 +190,9 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		AnimatedComponent currentAction = characterActions[direction];
 		//		clear();
 		setImage(currentAction.getImage());
+		
+		g.setColor(Color.red);
+		g.fillRect((int)bounds.x, (int)bounds.y, bounds.width, bounds.height);
 		//g.drawImage(currentAction.getImage(),0, 0,this.getWidth(),this.getHeight(), null);
 	}
 
