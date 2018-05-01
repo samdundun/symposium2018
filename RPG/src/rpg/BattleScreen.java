@@ -261,4 +261,10 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 		update();
 	}
 
+	@Override
+	public Tile getTile(int x, int y) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

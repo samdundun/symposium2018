@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 import guiTeacher.components.AnimatedComponent;
 import guiTeacher.components.Component;
@@ -122,7 +123,7 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 
 	private boolean collisionWithTile(int x, int y) {
 		System.out.println( MainGUI.currScreen.getTile(x,y));
-		return MainGUI.currScreen.getTile(x,y).isWalkable();
+		return  MainGUI.currScreen.getTile(x,y).isWalkable();
 	}
 
 	@Override

@@ -107,5 +107,11 @@ public class MainMenuScreen extends FullFunctionScreen implements IState {
 
 	}
 
+	@Override
+	public Tile getTile(int x, int y) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

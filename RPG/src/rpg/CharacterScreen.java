@@ -143,4 +143,10 @@ public class CharacterScreen extends FullFunctionScreen implements IState{
 		options.setText(stats);
 	}
 
+	@Override
+	public Tile getTile(int x, int y) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
