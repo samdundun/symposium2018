@@ -120,6 +120,8 @@ public class IntroMap extends FullFunctionScreen implements IState {
 		Tile currentTile = null;
 		this.width = this.getWidth()/16;
 		this.height = this.getHeight()/16;
+		System.out.println(width);
+		System.out.println(height);
 		tiles = new int[this.width][this.height];
 		for(int x=0; x < width; x++) {
 			for(int y = 0; y < height; y++) {

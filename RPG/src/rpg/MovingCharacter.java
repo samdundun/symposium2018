@@ -5,6 +5,10 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import guiTeacher.components.AnimatedComponent;
 import guiTeacher.components.Component;
@@ -17,6 +21,7 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 	private int direction;
 	private boolean canMove;
 	protected Rectangle bounds;
+	public final int[] directionspeeds = {3,-3,-3,3};
 
 	public MovingCharacter(int x, int y, int w, int h) {
 		super(x, y, w, h);
@@ -43,7 +48,7 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		characterActions[3].setVisible(false);
 
 		direction = 0;
-		
+
 		bounds =  new Rectangle (0,0, this.getWidth(), this.getHeight());
 		bounds.x = 4;
 		bounds.y = 16;
@@ -66,13 +71,7 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 			}
 			else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 				direction = 3;
-				int tx = (int) (x + 32 + bounds.x + bounds.width) / 16;
-				if(collisionWithTile(tx,(y + bounds.y)/16)) {
-					setVx(3);	
-				}
-				else {
-					setVx(0);
-				}
+				setVx(3);
 			}
 			else if (e.getKeyCode() == KeyEvent.VK_UP) {
 				direction = 2;
@@ -110,19 +109,31 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 				setVy(0);
 				setVx(0);
 			}
-			
-			if(((e.getKeyCode() == KeyEvent.VK_LEFT) || (e.getKeyCode() == KeyEvent.VK_RIGHT) || (e.getKeyCode() == KeyEvent.VK_UP) || (e.getKeyCode() == KeyEvent.VK_DOWN) )&& Math.random() > .9) {
-				MainGUI.currScreen.onExit();
-				MainGUI.game.setScreen(MainGUI.battle);
-				MainGUI.battle.onEnter();
-				setVy(0);
-				setVx(0);
+			if (e.getKeyCode() == KeyEvent.VK_P) {
+				try {
+				    // retrieve image
+				    BufferedImage bi = MainGUI.game.getScreen().getImage();
+				    File outputfile = new File(System.currentTimeMillis() + ".png");
+				    ImageIO.write(bi, "png", outputfile);
+				} catch (IOException a) {
+				    a.printStackTrace();
+				}
 			}
+			if (e.getKeyCode() == KeyEvent.VK_H) {
+				this.setVisible(!this.isVisible());
+			}
+
+			//			if(((e.getKeyCode() == KeyEvent.VK_LEFT) || (e.getKeyCode() == KeyEvent.VK_RIGHT) || (e.getKeyCode() == KeyEvent.VK_UP) || (e.getKeyCode() == KeyEvent.VK_DOWN) )&& Math.random() > .9) {
+			//				MainGUI.currScreen.onExit();
+			//				MainGUI.game.setScreen(MainGUI.battle);
+			//				MainGUI.battle.onEnter();
+			//				setVy(0);
+			//				setVx(0);
+			//			}
 		}
 	}
 
 	private boolean collisionWithTile(int x, int y) {
-		System.out.println( MainGUI.currScreen.getTile(x,y));
 		return  MainGUI.currScreen.getTile(x,y).isWalkable();
 	}
 
@@ -143,6 +154,8 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 	}
 
 	public void checkBehaviors() {
+		int x = getX();
+		int y = getY(); 
 		if (getVx() == 0 && getVy() == 0) {
 			characterActions[direction].setCurrentFrame(0);
 		}
@@ -161,6 +174,32 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 			MainGUI.battle.onEnter();
 			setVy(0);
 			setVx(0);
+		}
+		if(getVx() > 0) {
+			int tx = (int) (x + 3 + bounds.x + bounds.width) / 16;
+			if(!collisionWithTile(tx,(y + bounds.y)/16) || !collisionWithTile(tx,(y + bounds.y + bounds.height)/16)) {
+				setVx(0);
+			}
+			
+		}
+		if(getVy() > 0) {
+			int ty = (int) (y + 3 + bounds.y + bounds.height) / 16;
+			if(!collisionWithTile((x + bounds.x)/16,ty) || !collisionWithTile((x + bounds.x + bounds.width)/16,ty)) {
+				setVy(0);
+			}
+		}
+		if(getVx() < 0) {
+			int tx = (int) (x - 3) / 16;
+			if(!collisionWithTile(tx,(y + bounds.y)/16) || !collisionWithTile(tx,(y + bounds.y + bounds.height)/16)) {
+				setVx(0);
+			}
+			
+		}
+		if(getVy() < 0) {
+			int ty = (int) (y -3) / 16;
+			if(!collisionWithTile((x + bounds.x)/16,ty) || !collisionWithTile((x + bounds.x + bounds.width)/16,ty)) {
+				setVy(0);
+			}
 		}
 	}
 
@@ -191,9 +230,6 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		AnimatedComponent currentAction = characterActions[direction];
 		//		clear();
 		setImage(currentAction.getImage());
-		
-		g.setColor(Color.red);
-		g.fillRect((int)bounds.x, (int)bounds.y, bounds.width, bounds.height);
 		//g.drawImage(currentAction.getImage(),0, 0,this.getWidth(),this.getHeight(), null);
 	}
 

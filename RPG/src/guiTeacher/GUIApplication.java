@@ -176,4 +176,8 @@ public abstract class GUIApplication extends JFrame implements Runnable, Compone
 		
 	}
 	
+	public Screen getScreen() {
+		return currentScreen;
+	}
+	
 }
