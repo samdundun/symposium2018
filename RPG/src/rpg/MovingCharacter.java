@@ -196,7 +196,7 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 			
 		}
 		if(getVy() < 0) {
-			int ty = (int) (y -3) / 16;
+			int ty = (int) (y -3 + bounds.y) / 16;
 			if(!collisionWithTile((x + bounds.x)/16,ty) || !collisionWithTile((x + bounds.x + bounds.width)/16,ty)) {
 				setVy(0);
 			}
