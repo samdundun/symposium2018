@@ -33,6 +33,9 @@ public class Transition {
 	public static final int ENTER_LEFT = 0;
 	public static final int ENTER_RIGHT = 1;
 	public static final int REVEAL_RIGHT= 2;
+	public static final int ENTER_BOTTOM = 3;
+	public static final int ENTER_TOP = 4;
+	
 	
 	private int type;
 	private JFrame frame;
@@ -54,6 +57,12 @@ public class Transition {
 		this.time = time;
 		this.type = type;
 		switch(type){
+		case(ENTER_BOTTOM):
+			xScreen = 0;
+		yScreen = frame.getHeight();
+		changeY = (int) ((-frame.getHeight())/time);
+		if(changeY <=0)changeY = -1;
+		break;
 		case(ENTER_LEFT):
 			xScreen = -frame.getWidth();
 		yScreen = 0;

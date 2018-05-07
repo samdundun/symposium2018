@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 Benjamin Nockles
+` * Copyright (c) 2017 Benjamin Nockles
  *
  * This file is part of OrcMath.
  *

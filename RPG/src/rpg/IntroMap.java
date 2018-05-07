@@ -120,8 +120,6 @@ public class IntroMap extends FullFunctionScreen implements IState {
 		Tile currentTile = null;
 		this.width = this.getWidth()/16;
 		this.height = this.getHeight()/16;
-		System.out.println(width);
-		System.out.println(height);
 		tiles = new int[this.width][this.height];
 		for(int x=0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
@@ -152,7 +150,6 @@ public class IntroMap extends FullFunctionScreen implements IState {
 				//}
 
 				Tile test = getTile(j,i);
-				System.out.print(Tile.tiles[1]);
 				currentTile = new Tile(0,0,test.getImage(), test.id);
 				currentTile.setX(16*j);
 				currentTile.setY(16*i);
@@ -164,14 +161,36 @@ public class IntroMap extends FullFunctionScreen implements IState {
 		//LAYER 2
 
 		for(int i = 0; i < this.width; i++) {
-			for(int j = 1; j < 5; j++) {
+			for(int j = 0; j < 5; j++) {
 				tiles[i][j] = 1;
 				if(i == 5) {
 					i = i + 5;
 				}
 			}
 		}
-		for(int i = 1; i < 5; i++) {
+		for(int i = 0; i < 5; i++) {
+			for(int j = 0; j < this.width; j++) {
+				if(j == 5) {
+					j = j + 5;
+				}
+				Tile test = getTile(j,i);
+				currentTile = new Tile(0,0,test.getImage(), test.id);
+				currentTile.setX(16*j);
+				currentTile.setY(16*i);
+				viewObjects.add(currentTile);
+				//test = null;
+			}
+		}
+		
+		for(int i = 0; i < this.width; i++) {
+			for(int j = 32; j < this.height; j++) {
+				tiles[i][j] = 1;
+				if(i == 5) {
+					i = i + 5;
+				}
+			}
+		}
+		for(int i = 32; i < this.height; i++) {
 			for(int j = 0; j < this.width; j++) {
 				if(j == 5) {
 					j = j + 5;

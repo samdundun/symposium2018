@@ -14,6 +14,8 @@ import guiTeacher.components.AnimatedComponent;
 import guiTeacher.components.Component;
 import guiTeacher.components.MovingComponent;
 import guiTeacher.interfaces.KeyedComponent;
+import guiTeacher.userInterfaces.Transition;
+import main.OrcMath;
 
 public class MovingCharacter extends AnimatedComponent implements KeyedComponent {
 
@@ -170,7 +172,7 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		if(getY() > 600) {
 			setY(550);
 			MainGUI.currScreen.onExit();
-			MainGUI.game.setScreen(MainGUI.map2);
+			MainGUI.game.setScreen(MainGUI.map2,new Transition(MainGUI.game,Transition.ENTER_BOTTOM,700));
 			MainGUI.battle.onEnter();
 			setVy(0);
 			setVx(0);
@@ -183,7 +185,7 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 			
 		}
 		if(getVy() > 0) {
-			int ty = (int) (y + 3 + bounds.y + bounds.height) / 16;
+			int ty = (int) (y + 3+ bounds.height) / 16;
 			if(!collisionWithTile((x + bounds.x)/16,ty) || !collisionWithTile((x + bounds.x + bounds.width)/16,ty)) {
 				setVy(0);
 			}
