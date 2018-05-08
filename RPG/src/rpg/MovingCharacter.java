@@ -179,27 +179,27 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		}
 		if(getVx() > 0) {
 			int tx = (int) (x + 3 + bounds.x + bounds.width) / 16;
-			if(!collisionWithTile(tx,(y + bounds.y)/16) || !collisionWithTile(tx,(y + bounds.y + bounds.height)/16)) {
+			if(!collisionWithTile(tx,(y + bounds.y)/16) && !collisionWithTile(tx,(y + bounds.y + bounds.height)/16)) {
 				setVx(0);
 			}
 			
 		}
 		if(getVy() > 0) {
 			int ty = (int) (y + 3+ bounds.height) / 16;
-			if(!collisionWithTile((x + bounds.x)/16,ty) || !collisionWithTile((x + bounds.x + bounds.width)/16,ty)) {
+			if(!collisionWithTile((x + bounds.x)/16,ty) && !collisionWithTile((x + bounds.x + bounds.width)/16,ty)) {
 				setVy(0);
 			}
 		}
 		if(getVx() < 0) {
 			int tx = (int) (x - 3) / 16;
-			if(!collisionWithTile(tx,(y + bounds.y)/16) || !collisionWithTile(tx,(y + bounds.y + bounds.height)/16)) {
+			if(!collisionWithTile(tx,(y + bounds.y)/16) && !collisionWithTile(tx,(y + bounds.y + bounds.height)/16)) {
 				setVx(0);
 			}
 			
 		}
 		if(getVy() < 0) {
 			int ty = (int) (y -3 + bounds.y) / 16;
-			if(!collisionWithTile((x + bounds.x)/16,ty) || !collisionWithTile((x + bounds.x + bounds.width)/16,ty)) {
+			if(!collisionWithTile((x + bounds.x)/16,ty) && !collisionWithTile((x + bounds.x + bounds.width)/16,ty)) {
 				setVy(0);
 			}
 		}
