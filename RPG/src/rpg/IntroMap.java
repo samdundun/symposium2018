@@ -15,29 +15,45 @@ import guiTeacher.interfaces.Visible;
 import guiTeacher.userInterfaces.FullFunctionScreen;
 
 public class IntroMap extends FullFunctionScreen implements IState {
+	
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 600;
+	
+	private int row;
+	private int col;
 
 	private SamCustomArea intro;
 	private Graphic leo;
 	private MovingCharacter leoSprite;
 	private boolean newGame;
+	
+	private MapLoader map;
 
-
-	int width;
-	int height;
 	private int [][] tiles;
+	private int[][] topLayer;
 
 
 	public void setNewGame(boolean newGame) {
 		this.newGame = newGame;
 	}
 
-	public IntroMap(int width, int height) {
-		super(width, height);
+	public IntroMap() {
+		super(WIDTH, HEIGHT);
 		this.newGame = false;
+		this.row = 0;
+		this.col = 0;
+		setMapContent();
+	}
+	
+	public IntroMap(int row, int col) {
+		super(WIDTH , HEIGHT);
+		this.newGame = false;
+		loadMap(row, col);
 	}
 
 	@Override
 	public void onEnter() {
+		MainGUI.offScreen = MainGUI.currScreen;
 		MainGUI.currScreen = this;
 
 		if(newGame) {
@@ -103,123 +119,104 @@ public class IntroMap extends FullFunctionScreen implements IState {
 
 	}
 
-	public Tile getTile(int x, int y) {
-		if(x < 0 || y < 0|| x >= width || y >= height) {
-			return Tile.grassTile;
-		}
+	public Tile getTile(int[][] tileset, int x, int y) {
+//		if(x < 0 || y < 0|| x >= tileWidth || y >= tileHeight) {
+//			return Tile.grassTile;
+//		}
 
-		Tile t = Tile.tiles[tiles[x][y]];
+		Tile t = Tile.tiles[tileset[x][y]];
 		if(t == null) {
 			return Tile.grassTile;
 		}
 		return t;
 	}
 
-	@Override
-	public void initAllObjects(List<Visible> viewObjects) {
+	public void setMapContent() {
+		map = new MapLoader( "resources/0," +this.row + "," + this.col + ".txt");
+		
+		topLayer = new MapLoader("resources/1,"+this.row + "," + this.col + ".txt").load();
+		tiles = map.load();
 		Tile currentTile = null;
-		this.width = this.getWidth()/16;
-		this.height = this.getHeight()/16;
-		tiles = new int[this.width][this.height];
-		for(int x=0; x < width; x++) {
-			for(int y = 0; y < height; y++) {
-				tiles[x][y]= 0;
-			}
-		}
+//		tiles = new int[this.tileWidth][this.tileHeight];
+//		for(int x=0; x < tileWidth; x++) {
+//			for(int y = 0; y < tileHeight; y++) {
+//				tiles[x][y]= 0;
+//			}
+//		}
 		//LAYER 1
-		for(int i = 0; i < this.height; i++) {
-			for(int j = 0; j < this.width; j++) {
+		for(int i = 0; i < tiles.length; i++) {
+			for(int j = 0; j < tiles[0].length; j++) {
 
-				Tile test = getTile(j,i);
-				currentTile = new Tile(0,0,test.getImage(), test.id);
-				currentTile.setX(16*j);
-				currentTile.setY(16*i);
-				viewObjects.add(currentTile);
+				//set base tile location 
+				Tile test = getTile(tiles,i,j);
+				addTile(test,i,j);
 				//test = null;
-			}
-		}
-
-		//LAYER 2
-		
-		for(int i = 0; i < 5; i++) {
-			for(int j = 0; j < this.width; j++) {
-				if(j == 5) {
-					j = j + 5;
+				
+				
+				if(topLayer[i][j] != 0) {
+				test = getTile(topLayer,i,j);
+				addTile(test,i,j);
 				}
-				Tile test = getTile(j,i);
-				currentTile = new Tile(0,0,test.getImage(), test.id);
-				currentTile.setX(16*j);
-				currentTile.setY(16*i);
-				viewObjects.add(currentTile);
-				//test = null;
-			}
-		}
-		
-		for(int i = 32; i < this.height; i++) {
-			for(int j = 0; j < this.width; j++) {
-				if(j == 5) {
-					j = j + 5;
-				}
-				Tile test = getTile(j,i);
-				currentTile = new Tile(0,0,test.getImage(), test.id);
-				currentTile.setX(16*j);
-				currentTile.setY(16*i);
-				viewObjects.add(currentTile);
-				//test = null;
-			}
-		}
-		for(int i = 5; i < 32; i++) {
-			for(int j = 0; j < 3; j++) {
-				if(j == 5) {
-					j = j + 5;
-				}
-				Tile test = getTile(j,i);
-				currentTile = new Tile(0,0,test.getImage(), test.id);
-				currentTile.setX(16*j);
-				currentTile.setY(16*i);
-				viewObjects.add(currentTile);
-				//test = null;
-			}
-		}
-		
-		for(int i = 5; i < 32; i++) {
-			for(int j = 47; j < 50; j++) {
-				if(j == 5) {
-					j = j + 5;
-				}
-				Tile test = getTile(j,i);
-				currentTile = new Tile(0,0,test.getImage(), test.id);
-				currentTile.setX(16*j);
-				currentTile.setY(16*i);
-				viewObjects.add(currentTile);
-				//test = null;
+				
 			}
 		}
 
-
-
-		//		for(int i = 0; i < this.getHeight()/16; i++) {
-		//			for(int j = 0; j < this.getWidth()/16; j++) {
-		//				//This was a test for selecting random tiles, can select tiles freely
-		//				//while(test == null) {
-		//				//random = (int) (Math.round(Math.random()*1))+56;
-		//				if((i<5 || i> 31)&& !(j>5 && j<10) && !(j>40 && i <5) || j==0) {
-		//					test = MainGUI.allTiles[30];
-		//					currentTile = new Tile(0,0,test.getImage());
-		//					currentTile.setX(16*j);
-		//					currentTile.setY(16*i);
-		//					viewObjects.add(currentTile);
-		//				}
-		//				else if(j> 44 && !(i<9)){
-		//					test = MainGUI.allTiles[38];
-		//					currentTile = new Tile(0,0,test.getImage());
-		//					currentTile.setX(16*j);
-		//					currentTile.setY(16*i);
-		//					viewObjects.add(currentTile);
-		//				}
-		//				//test = null;
-		//			}
-		//		}
+//		//LAYER 2
+//		
+//		for(int i = 0; i < 5; i++) {
+//			for(int j = 0; j < this.tileWidth; j++) {
+//				if(j == 5) {
+//					j = j + 5;
+//				}
+//				Tile test = getTile(j,i);
+//				currentTile = new Tile(0,0,test.getImage(), test.id);
+//				currentTile.setX(16*j);
+//				currentTile.setY(16*i);
+//				addObject(currentTile);
+//				//test = null;
+//			}
+//		}
+//		
+//		for(int i = 32; i < this.tileHeight; i++) {
+//			for(int j = 0; j < this.tileWidth; j++) {
+//				if(j == 5) {
+//					j = j + 5;
+//				}
+//				Tile test = getTile(j,i);
+//				currentTile = new Tile(0,0,test.getImage(), test.id);
+//				currentTile.setX(16*j);
+//				currentTile.setY(16*i);
+//				addObject(currentTile);
+//				//test = null;
+//			}
+//		}
+//		for(int i = 5; i < 32; i++) {
+//			for(int j = 0; j < 3; j++) {
+//				if(j == 5) {
+//					j = j + 5;
+//				}
+//				Tile test = getTile(j,i);
+//				currentTile = new Tile(0,0,test.getImage(), test.id);
+//				currentTile.setX(16*j);
+//				currentTile.setY(16*i);
+//				addObject(currentTile);
+//				//test = null;
+//			}
+//		}
+//		
+//		for(int i = 5; i < 32; i++) {
+//			for(int j = 47; j < 50; j++) {
+//				if(j == 5) {
+//					j = j + 5;
+//				}
+//				Tile test = getTile(j,i);
+//				currentTile = new Tile(0,0,test.getImage(), test.id);
+//				currentTile.setX(16*j);
+//				currentTile.setY(16*i);
+//				addObject(currentTile);
+//				//test = null;
+//			}
+//		}
 
 		try {
 			File fontFile = new File("resources/Holiday.ttf");
@@ -232,19 +229,51 @@ public class IntroMap extends FullFunctionScreen implements IState {
 		}
 
 		intro = new SamCustomArea(0, 400, 800, 200, "");
-		viewObjects.add(intro);
+		addObject(intro);
 
 		leo = new Graphic(400,147,450,253,"resources/leooverhead.png");
-		viewObjects.add(leo);
+		addObject(leo);
 
 		leoSprite = new MovingCharacter(100,100,32,32);
 		Thread move = new Thread(leoSprite);
 		move.start();
-		viewObjects.add(leoSprite);
+		addObject(leoSprite);
 		moveFocus(leoSprite);
 		leoSprite.setCanMove(false);
 
+		update();
+	}
+	
+	public void addTile(Tile test, int i, int j) {
+		Tile currentTile = new Tile(0,0,test.getImage(), test.id);
+		currentTile.setX(16*j);
+		currentTile.setY(16*i);
+		addObject(currentTile);
+		System.out.println("tile added to "+currentTile.getX()+", "+currentTile.getY());
 	}
 
+	@Override
+	public void initAllObjects(List<Visible> viewObjects) {
+		//Add permanent fixtures such as buttons that are always permanent
+		
+	}
+	
+	public int[][] getTopTileSet(){
+		return topLayer;
+	}
+
+	public void loadMap(int row, int col) {
+		this.row = row;
+		this.col = col;
+		setMapContent();
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public int getCol() {
+		return col;
+	}
 
 }

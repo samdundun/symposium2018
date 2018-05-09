@@ -35,7 +35,6 @@ public class MainMenuScreen extends FullFunctionScreen implements IState {
 
 	@Override
 	public void onEnter() {
-		MainGUI.currScreen = this;
 	}
 
 	@Override
@@ -105,12 +104,6 @@ public class MainMenuScreen extends FullFunctionScreen implements IState {
 		viewObjects.add(title);
 
 
-	}
-
-	@Override
-	public Tile getTile(int x, int y) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 

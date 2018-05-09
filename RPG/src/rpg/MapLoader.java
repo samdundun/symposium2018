@@ -8,6 +8,9 @@ import java.io.IOException;
 
 public class MapLoader {
 	
+	public static final int TILEWIDTH = 50;
+	public static final int TILEHEIGHT = 37;
+	
 	String fileName;
 
 	public MapLoader(String fileName) {
@@ -17,7 +20,7 @@ public class MapLoader {
 	public int[][] load() {
 		int[][] opened = read(new File(fileName));
 		if(opened == null) {
-			opened = new int[50][27];
+			opened = new int[TILEHEIGHT][TILEWIDTH];
 			save(opened);
 		}
 		return opened;
@@ -30,6 +33,7 @@ public class MapLoader {
 				for(int j = 0; j  < a[0].length; j++) {
 					fw.write(a[i][j] + " ");
 				}
+				if(i != a.length-1)
 				fw.write("\n");
 			}
 			fw.close();
@@ -42,7 +46,7 @@ public class MapLoader {
 	
 	public int[][] read(File f) {
 		FileReader fileReader;
-		int[][] output = new int[50][27];
+		int[][] output = new int[TILEHEIGHT][TILEWIDTH];
 		try {
 			fileReader = new FileReader(f);
 			String line = "";
@@ -54,6 +58,7 @@ public class MapLoader {
 
 				String[] param = line.split(" ");
 				for(int i = 0; i < output[0].length; i++) {
+					if(!param[i].equals(""))
 					output[row][i] = Integer.parseInt(param[i]);
 				}
 			row++;

@@ -33,7 +33,8 @@ public class MainGUI extends GUIApplication {
 	public static Inventory myInventory;
 	
 	public static IState prevScreen;
-	public static IState currScreen;
+	public static IntroMap offScreen;
+	public static IntroMap currScreen;
 	
 //	public static MusicPlayer player;
 
@@ -78,7 +79,7 @@ public class MainGUI extends GUIApplication {
 		leo.setNewStats();
 		save1 = new SaveFile();
 		mainMenu = new MainMenuScreen(getWidth(), getHeight());
-		localMap = new IntroMap(getWidth(), getHeight());
+		localMap = new IntroMap();
 		battle = new BattleScreen(getWidth(), getHeight());
 		cScreen = new CharacterScreen(getWidth(), getHeight());
 		iScreen = new InventoryScreen(getWidth(), getHeight());
@@ -86,12 +87,13 @@ public class MainGUI extends GUIApplication {
 		map2 = new Map2(getWidth(), getHeight());
 		setScreen(mainMenu);
 		mainMenu.onEnter();
-
+		currScreen = localMap;
+		offScreen = new IntroMap();
 	}
 	
 	public static void main(String[] args) {
 //		player = new MusicPlayer("bgm");
-		game = new MainGUI(810, 600);
+		game = new MainGUI(800, 600);
 		Thread runner = new Thread(game);
 		runner.start();
 //		player.run();

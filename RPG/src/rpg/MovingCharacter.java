@@ -136,7 +136,7 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 	}
 
 	private boolean collisionWithTile(int x, int y) {
-		return  MainGUI.currScreen.getTile(x,y).isWalkable();
+		return  MainGUI.currScreen.getTile(MainGUI.currScreen.getTopTileSet(),x,y).isWalkable();
 	}
 
 	@Override
@@ -164,16 +164,36 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		if(getY() < 0) {
 			setY(20);
 			MainGUI.currScreen.onExit();
-			MainGUI.game.setScreen(MainGUI.battle);
-			MainGUI.battle.onEnter();
+			MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow()-1, MainGUI.currScreen.getCol());
+			MainGUI.offScreen.onEnter();
+			MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_TOP,700));
 			setVy(0);
 			setVx(0);
 		}
 		if(getY() > 600) {
 			setY(550);
 			MainGUI.currScreen.onExit();
-			MainGUI.game.setScreen(MainGUI.map2,new Transition(MainGUI.game,Transition.ENTER_BOTTOM,700));
-			MainGUI.battle.onEnter();
+			MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow()+1, MainGUI.currScreen.getCol());
+			MainGUI.offScreen.onEnter();
+			MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_BOTTOM,700));
+			setVy(0);
+			setVx(0);
+		}
+		if(getX() < 0) {
+			setX(10);
+			MainGUI.currScreen.onExit();
+			MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow(), MainGUI.currScreen.getCol()-1);
+			MainGUI.offScreen.onEnter();
+			MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_LEFT,700));
+			setVy(0);
+			setVx(0);
+		}
+		if(getX() > 800) {
+			setX(770);
+			MainGUI.currScreen.onExit();
+			MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow(), MainGUI.currScreen.getCol()+1);
+			MainGUI.offScreen.onEnter();
+			MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_RIGHT,700));
 			setVy(0);
 			setVx(0);
 		}

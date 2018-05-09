@@ -25,7 +25,6 @@ public class InventoryScreen extends FullFunctionScreen implements IState {
 
 	@Override
 	public void onEnter() {
-		MainGUI.currScreen = this;
 		MainGUI.iScreen = new InventoryScreen(getWidth(), getHeight());
 		//		this.update(0);
 
@@ -168,9 +167,4 @@ public class InventoryScreen extends FullFunctionScreen implements IState {
 		}
 	}
 
-	@Override
-	public Tile getTile(int x, int y) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
