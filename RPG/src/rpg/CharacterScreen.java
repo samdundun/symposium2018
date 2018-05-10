@@ -122,7 +122,6 @@ public class CharacterScreen extends FullFunctionScreen implements IState{
 
 	@Override
 	public void onEnter() {
-		MainGUI.currScreen = this;
 		update(0);
 	}
 
@@ -141,12 +140,6 @@ public class CharacterScreen extends FullFunctionScreen implements IState{
 		hp.update();
 		String[] stats = {"Strength : " + MainGUI.leo.getStrength(),"Vitality : "+ MainGUI.leo.getVitality(),"Agility : "+ MainGUI.leo.getAgility(),"Intelligence : "+ MainGUI.leo.getIntelligence()};
 		options.setText(stats);
-	}
-
-	@Override
-	public Tile getTile(int x, int y) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

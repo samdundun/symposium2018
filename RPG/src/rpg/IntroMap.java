@@ -15,10 +15,10 @@ import guiTeacher.interfaces.Visible;
 import guiTeacher.userInterfaces.FullFunctionScreen;
 
 public class IntroMap extends FullFunctionScreen implements IState {
-	
+
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
-	
+
 	private int row;
 	private int col;
 
@@ -26,8 +26,9 @@ public class IntroMap extends FullFunctionScreen implements IState {
 	private Graphic leo;
 	private MovingCharacter leoSprite;
 	private boolean newGame;
-	
+
 	private MapLoader map;
+	private MapLoader topMap;
 
 	private int [][] tiles;
 	private int[][] topLayer;
@@ -44,7 +45,7 @@ public class IntroMap extends FullFunctionScreen implements IState {
 		this.col = 0;
 		setMapContent();
 	}
-	
+
 	public IntroMap(int row, int col) {
 		super(WIDTH , HEIGHT);
 		this.newGame = false;
@@ -120,9 +121,9 @@ public class IntroMap extends FullFunctionScreen implements IState {
 	}
 
 	public Tile getTile(int[][] tileset, int x, int y) {
-//		if(x < 0 || y < 0|| x >= tileWidth || y >= tileHeight) {
-//			return Tile.grassTile;
-//		}
+		//		if(x < 0 || y < 0|| x >= tileWidth || y >= tileHeight) {
+		//			return Tile.grassTile;
+		//		}
 
 		Tile t = Tile.tiles[tileset[x][y]];
 		if(t == null) {
@@ -133,16 +134,11 @@ public class IntroMap extends FullFunctionScreen implements IState {
 
 	public void setMapContent() {
 		map = new MapLoader( "resources/0," +this.row + "," + this.col + ".txt");
-		
-		topLayer = new MapLoader("resources/1,"+this.row + "," + this.col + ".txt").load();
+
+		topMap = new MapLoader("resources/1,"+this.row + "," + this.col + ".txt");
+		topLayer = topMap.load();
 		tiles = map.load();
 		Tile currentTile = null;
-//		tiles = new int[this.tileWidth][this.tileHeight];
-//		for(int x=0; x < tileWidth; x++) {
-//			for(int y = 0; y < tileHeight; y++) {
-//				tiles[x][y]= 0;
-//			}
-//		}
 		//LAYER 1
 		for(int i = 0; i < tiles.length; i++) {
 			for(int j = 0; j < tiles[0].length; j++) {
@@ -151,72 +147,15 @@ public class IntroMap extends FullFunctionScreen implements IState {
 				Tile test = getTile(tiles,i,j);
 				addTile(test,i,j);
 				//test = null;
-				
-				
+
+
 				if(topLayer[i][j] != 0) {
-				test = getTile(topLayer,i,j);
-				addTile(test,i,j);
+					test = getTile(topLayer,i,j);
+					addTile(test,i,j);
 				}
-				
+
 			}
 		}
-
-//		//LAYER 2
-//		
-//		for(int i = 0; i < 5; i++) {
-//			for(int j = 0; j < this.tileWidth; j++) {
-//				if(j == 5) {
-//					j = j + 5;
-//				}
-//				Tile test = getTile(j,i);
-//				currentTile = new Tile(0,0,test.getImage(), test.id);
-//				currentTile.setX(16*j);
-//				currentTile.setY(16*i);
-//				addObject(currentTile);
-//				//test = null;
-//			}
-//		}
-//		
-//		for(int i = 32; i < this.tileHeight; i++) {
-//			for(int j = 0; j < this.tileWidth; j++) {
-//				if(j == 5) {
-//					j = j + 5;
-//				}
-//				Tile test = getTile(j,i);
-//				currentTile = new Tile(0,0,test.getImage(), test.id);
-//				currentTile.setX(16*j);
-//				currentTile.setY(16*i);
-//				addObject(currentTile);
-//				//test = null;
-//			}
-//		}
-//		for(int i = 5; i < 32; i++) {
-//			for(int j = 0; j < 3; j++) {
-//				if(j == 5) {
-//					j = j + 5;
-//				}
-//				Tile test = getTile(j,i);
-//				currentTile = new Tile(0,0,test.getImage(), test.id);
-//				currentTile.setX(16*j);
-//				currentTile.setY(16*i);
-//				addObject(currentTile);
-//				//test = null;
-//			}
-//		}
-//		
-//		for(int i = 5; i < 32; i++) {
-//			for(int j = 47; j < 50; j++) {
-//				if(j == 5) {
-//					j = j + 5;
-//				}
-//				Tile test = getTile(j,i);
-//				currentTile = new Tile(0,0,test.getImage(), test.id);
-//				currentTile.setX(16*j);
-//				currentTile.setY(16*i);
-//				addObject(currentTile);
-//				//test = null;
-//			}
-//		}
 
 		try {
 			File fontFile = new File("resources/Holiday.ttf");
@@ -243,21 +182,20 @@ public class IntroMap extends FullFunctionScreen implements IState {
 
 		update();
 	}
-	
+
 	public void addTile(Tile test, int i, int j) {
 		Tile currentTile = new Tile(0,0,test.getImage(), test.id);
 		currentTile.setX(16*j);
 		currentTile.setY(16*i);
 		addObject(currentTile);
-		System.out.println("tile added to "+currentTile.getX()+", "+currentTile.getY());
 	}
 
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
 		//Add permanent fixtures such as buttons that are always permanent
-		
+
 	}
-	
+
 	public int[][] getTopTileSet(){
 		return topLayer;
 	}
@@ -274,6 +212,15 @@ public class IntroMap extends FullFunctionScreen implements IState {
 
 	public int getCol() {
 		return col;
+	}
+
+	public void changeTile(int x, int y, int value) {
+		if(topLayer[y][x] != value) {
+			topLayer[y][x] = value;
+			Tile test = getTile(topLayer,y,x);
+			addTile(test,y,x);
+			topMap.save(topLayer);
+		}
 	}
 
 }

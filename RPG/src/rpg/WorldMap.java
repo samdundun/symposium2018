@@ -23,7 +23,6 @@ public class WorldMap extends FullFunctionScreen implements IState{
 
 	@Override
 	public void onEnter() {
-		MainGUI.currScreen = this;
 		
 	}
 
@@ -31,12 +30,6 @@ public class WorldMap extends FullFunctionScreen implements IState{
 	public void onExit() {
 		MainGUI.prevScreen = this;
 		
-	}
-
-	@Override
-	public Tile getTile(int x, int y) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
