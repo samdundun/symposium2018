@@ -174,42 +174,42 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		if (getVx() == 0 && getVy() == 0) {
 			characterActions[direction].setCurrentFrame(0);
 		}
-//		if(getY() < 10) {
-//			setY(20);
-//			MainGUI.currScreen.onExit();
-//			MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow()-1, MainGUI.currScreen.getCol());
-//			MainGUI.offScreen.onEnter();
-//			MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_TOP,700));
-//			setVy(0);
-//			setVx(0);
-//		}
-//		if(getY() > 550) {
-//			setY(550);
-//			MainGUI.currScreen.onExit();
-//			MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow()+1, MainGUI.currScreen.getCol());
-//			MainGUI.offScreen.onEnter();
-//			MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_BOTTOM,700));
-//			setVy(0);
-//			setVx(0);
-//		}
-//		if(getX() < 5) {
-//			setX(10);
-//			MainGUI.currScreen.onExit();
-//			MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow(), MainGUI.currScreen.getCol()-1);
-//			MainGUI.offScreen.onEnter();
-//			MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_LEFT,700));
-//			setVy(0);
-//			setVx(0);
-//		}
-//		if(getX() > 770) {
-//			setX(770);
-//			MainGUI.currScreen.onExit();
-//			MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow(), MainGUI.currScreen.getCol()+1);
-//			MainGUI.offScreen.onEnter();
-//			MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_RIGHT,700));
-//			setVy(0);
-//			setVx(0);
-//		}
+		if(getY() < 10) {
+			setY(20);
+			MainGUI.currScreen.onExit();
+			MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow()-1, MainGUI.currScreen.getCol());
+			MainGUI.offScreen.onEnter();
+			MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_TOP,700));
+			setVy(0);
+			setVx(0);
+		}
+		if(getY() > 550) {
+			setY(550);
+			MainGUI.currScreen.onExit();
+			MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow()+1, MainGUI.currScreen.getCol());
+			MainGUI.offScreen.onEnter();
+			MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_BOTTOM,700));
+			setVy(0);
+			setVx(0);
+		}
+		if(getX() < 5) {
+			setX(10);
+			MainGUI.currScreen.onExit();
+			MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow(), MainGUI.currScreen.getCol()-1);
+			MainGUI.offScreen.onEnter();
+			MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_LEFT,700));
+			setVy(0);
+			setVx(0);
+		}
+		if(getX() > 770) {
+			setX(770);
+			MainGUI.currScreen.onExit();
+			MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow(), MainGUI.currScreen.getCol()+1);
+			MainGUI.offScreen.onEnter();
+			MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_RIGHT,700));
+			setVy(0);
+			setVx(0);
+		}
 		if(!editing) {
 			if(getVx() > 0) {
 				int tx = (int) (x + 3 + bounds.x + bounds.width) / 16;
