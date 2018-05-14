@@ -1,6 +1,8 @@
-package rpg;
+package Tiles;
 
 import java.awt.image.BufferedImage;
+
+import rpg.MainGUI;
 
 public class TreeTile extends Tile {
 

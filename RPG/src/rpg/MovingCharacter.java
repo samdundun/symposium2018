@@ -23,7 +23,7 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 	private int direction;
 	private boolean canMove;
 	protected Rectangle bounds;
-	public final int[] directionspeeds = {3,-3,-3,3};
+	public final int[] directionSpeeds = {3,-3,-3,3};
 	private boolean editing;
 	private int value;
 
@@ -126,16 +126,31 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 				}
 			}
 			if (e.getKeyCode() == KeyEvent.VK_H) {
-//				this.setVisible(!this.isVisible());
+				//				this.setVisible(!this.isVisible());
 				this.editing = !editing;
 			}
 			if(e.getKeyCode() == KeyEvent.VK_1) {
-				if(value == 1) {
-					value = 0;
+				value++;
+				if(value > 5) {
+					value= 0;
 				}
-				else if(value == 0) {
-					value = 1;
+			}
+			if(e.getKeyCode() == KeyEvent.VK_E) {
+				if(direction%2 == 1) {
+					int curX = (x + directionSpeeds[direction]+bounds.width)/16;
+					int curY = y/16;
+					if(MainGUI.currScreen.getTile(MainGUI.currScreen.getTopTileSet(),curX, curY).isInteractable()) {
+						MainGUI.currScreen.getTile(MainGUI.currScreen.getTopTileSet(), curX,curY).interact(curX,curY);
+					}
 				}
+				if(direction%2 == 0) {
+					int curX = x/16;
+					int curY = (y -3)/16;
+					if(MainGUI.currScreen.getTile(MainGUI.currScreen.getTopTileSet(), curX,curY).isInteractable()) {
+						MainGUI.currScreen.getTile(MainGUI.currScreen.getTopTileSet(), curX , curY).interact(curX,curY);
+					}
+				}
+
 			}
 
 			//			if(((e.getKeyCode() == KeyEvent.VK_LEFT) || (e.getKeyCode() == KeyEvent.VK_RIGHT) || (e.getKeyCode() == KeyEvent.VK_UP) || (e.getKeyCode() == KeyEvent.VK_DOWN) )&& Math.random() > .9) {
@@ -174,67 +189,69 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		if (getVx() == 0 && getVy() == 0) {
 			characterActions[direction].setCurrentFrame(0);
 		}
-		if(getY() < 10) {
-			setY(20);
-			MainGUI.currScreen.onExit();
-			MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow()-1, MainGUI.currScreen.getCol());
-			MainGUI.offScreen.onEnter();
-			MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_TOP,700));
-			setVy(0);
-			setVx(0);
-		}
-		if(getY() > 550) {
-			setY(550);
-			MainGUI.currScreen.onExit();
-			MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow()+1, MainGUI.currScreen.getCol());
-			MainGUI.offScreen.onEnter();
-			MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_BOTTOM,700));
-			setVy(0);
-			setVx(0);
-		}
-		if(getX() < 5) {
-			setX(10);
-			MainGUI.currScreen.onExit();
-			MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow(), MainGUI.currScreen.getCol()-1);
-			MainGUI.offScreen.onEnter();
-			MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_LEFT,700));
-			setVy(0);
-			setVx(0);
-		}
-		if(getX() > 770) {
-			setX(770);
-			MainGUI.currScreen.onExit();
-			MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow(), MainGUI.currScreen.getCol()+1);
-			MainGUI.offScreen.onEnter();
-			MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_RIGHT,700));
-			setVy(0);
-			setVx(0);
-		}
 		if(!editing) {
-			if(getVx() > 0) {
-				int tx = (int) (x + 3 + bounds.x + bounds.width) / 16;
-				if(!collisionWithTile(tx,(y + bounds.y)/16) || !collisionWithTile(tx,(y + bounds.y + bounds.height)/16)) {
-					setVx(0);
-				}
+			if(getY() < 10) {
+				setY(20);
+				MainGUI.currScreen.onExit();
+				MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow()-1, MainGUI.currScreen.getCol());
+				MainGUI.offScreen.onEnter();
+				MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_TOP,700));
+				setVy(0);
+				setVx(0);
+			}
+			if(getY() > 550) {
+				setY(550);
+				MainGUI.currScreen.onExit();
+				MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow()+1, MainGUI.currScreen.getCol());
+				MainGUI.offScreen.onEnter();
+				MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_BOTTOM,700));
+				setVy(0);
+				setVx(0);
+			}
+			if(getX() < 5) {
+				setX(10);
+				MainGUI.currScreen.onExit();
+				MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow(), MainGUI.currScreen.getCol()-1);
+				MainGUI.offScreen.onEnter();
+				MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_LEFT,700));
+				setVy(0);
+				setVx(0);
+			}
+			if(getX() > 770) {
+				setX(770);
+				MainGUI.currScreen.onExit();
+				MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow(), MainGUI.currScreen.getCol()+1);
+				MainGUI.offScreen.onEnter();
+				MainGUI.game.setScreen(MainGUI.offScreen,new Transition(MainGUI.game,Transition.ENTER_RIGHT,700));
+				setVy(0);
+				setVx(0);
+			}
+			if(!editing) {
+				if(getVx() > 0) {
+					int tx = (int) (x + 3 + bounds.x + bounds.width) / 16;
+					if(!collisionWithTile(tx,(y + bounds.y)/16) || !collisionWithTile(tx,(y + bounds.height)/16)) {
+						setVx(0);
+					}
 
-			}
-			if(getVy() > 0) {
-				int ty = (int) (y + 3+ bounds.height) / 16;
-				if(!collisionWithTile((x + bounds.x)/16,ty) || !collisionWithTile((x + bounds.x + bounds.width)/16,ty)) {
-					setVy(0);
 				}
-			}
-			if(getVx() < 0) {
-				int tx = (int) (x - 3) / 16;
-				if(!collisionWithTile(tx,(y + bounds.y)/16) || !collisionWithTile(tx,(y + bounds.y + bounds.height)/16)) {
-					setVx(0);
+				if(getVy() > 0) {
+					int ty = (int) (y+ bounds.height + 3) / 16;
+					if(!collisionWithTile((x + bounds.x)/16,ty) || !collisionWithTile((x + bounds.x + bounds.width)/16,ty)) {
+						setVy(0);
+					}
 				}
+				if(getVx() < 0) {
+					int tx = (int) (x - 3) / 16;
+					if(!collisionWithTile(tx,(y + bounds.y)/16) || !collisionWithTile(tx,(y + bounds.height)/16)) {
+						setVx(0);
+					}
 
-			}
-			if(getVy() < 0) {
-				int ty = (int) (y -3 + bounds.y) / 16;
-				if(!collisionWithTile((x + bounds.x)/16,ty) || !collisionWithTile((x + bounds.x + bounds.width)/16,ty)) {
-					setVy(0);
+				}
+				if(getVy() < 0) {
+					int ty = (int) (y -3 + bounds.y) / 16;
+					if(!collisionWithTile((x + bounds.x)/16,ty) || !collisionWithTile((x + bounds.x + bounds.width)/16,ty)) {
+						setVy(0);
+					}
 				}
 			}
 		}
@@ -270,6 +287,8 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		AnimatedComponent currentAction = characterActions[direction];
 		//		clear();
 		setImage(currentAction.getImage());
+		g.setColor(Color.red);
+		g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
 		//g.drawImage(currentAction.getImage(),0, 0,this.getWidth(),this.getHeight(), null);
 	}
 

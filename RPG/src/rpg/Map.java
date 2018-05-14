@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import java.io.File;
 import java.util.List;
 
+import Tiles.Tile;
 import guiTeacher.components.Graphic;
 import guiTeacher.components.StyledComponent;
 import guiTeacher.components.TextArea;
@@ -14,7 +15,7 @@ import guiTeacher.components.TextBox;
 import guiTeacher.interfaces.Visible;
 import guiTeacher.userInterfaces.FullFunctionScreen;
 
-public class IntroMap extends FullFunctionScreen implements IState {
+public class Map extends FullFunctionScreen implements IState {
 
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
@@ -38,7 +39,7 @@ public class IntroMap extends FullFunctionScreen implements IState {
 		this.newGame = newGame;
 	}
 
-	public IntroMap() {
+	public Map() {
 		super(WIDTH, HEIGHT);
 		this.newGame = false;
 		this.row = 0;
@@ -46,7 +47,7 @@ public class IntroMap extends FullFunctionScreen implements IState {
 		setMapContent();
 	}
 
-	public IntroMap(int row, int col) {
+	public Map(int row, int col) {
 		super(WIDTH , HEIGHT);
 		this.newGame = false;
 		loadMap(row, col);
@@ -56,6 +57,9 @@ public class IntroMap extends FullFunctionScreen implements IState {
 	public void onEnter() {
 		MainGUI.offScreen = MainGUI.currScreen;
 		MainGUI.currScreen = this;
+		
+//		leoSprite.setX();
+//		leoSprite.setY(100);
 
 		if(newGame) {
 			newGame = false;
@@ -172,9 +176,12 @@ public class IntroMap extends FullFunctionScreen implements IState {
 
 		leo = new Graphic(400,147,450,253,"resources/leooverhead.png");
 		addObject(leo);
+		intro.setVisible(false);
+		leo.setVisible(false);
 
 		leoSprite = new MovingCharacter(100,100,32,32);
 		Thread move = new Thread(leoSprite);
+		
 		move.start();
 		addObject(leoSprite);
 		moveFocus(leoSprite);

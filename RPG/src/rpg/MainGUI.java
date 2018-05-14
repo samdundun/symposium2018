@@ -12,6 +12,8 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import Tiles.Tile;
+import Tiles.Tileset;
 import guiTeacher.GUIApplication;
 import guiTeacher.components.Graphic;
 import guiTeacher.components.StyledComponent;
@@ -23,7 +25,7 @@ public class MainGUI extends GUIApplication {
 	
 	public static MainGUI game;
 	public static MainMenuScreen mainMenu;
-	public static IntroMap localMap;
+	public static Map localMap;
 	
 	public static Character leo;
 	public static CharacterScreen cScreen;
@@ -32,8 +34,8 @@ public class MainGUI extends GUIApplication {
 	public static Inventory myInventory;
 	
 	public static IState prevScreen;
-	public static IntroMap offScreen;
-	public static IntroMap currScreen;
+	public static Map offScreen;
+	public static Map currScreen;
 	
 //	public static MusicPlayer player;
 
@@ -78,7 +80,7 @@ public class MainGUI extends GUIApplication {
 		leo.setNewStats();
 		save1 = new SaveFile();
 		mainMenu = new MainMenuScreen(getWidth(), getHeight());
-		localMap = new IntroMap();
+		localMap = new Map();
 		battle = new BattleScreen(getWidth(), getHeight());
 		cScreen = new CharacterScreen(getWidth(), getHeight());
 		iScreen = new InventoryScreen(getWidth(), getHeight());
@@ -86,7 +88,7 @@ public class MainGUI extends GUIApplication {
 		setScreen(mainMenu);
 		mainMenu.onEnter();
 		currScreen = localMap;
-		offScreen = new IntroMap();
+		offScreen = new Map();
 	}
 	
 	public static void main(String[] args) {
