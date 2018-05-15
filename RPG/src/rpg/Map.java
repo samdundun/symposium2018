@@ -113,6 +113,7 @@ public class Map extends FullFunctionScreen implements IState {
 			intro.setVisible(false);
 			leo.setVisible(false);
 			leoSprite.setCanMove(true);
+			leoSprite.setX(MainGUI.prevScreen.leoSprite.getX());
 		}
 
 

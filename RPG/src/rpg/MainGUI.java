@@ -33,7 +33,7 @@ public class MainGUI extends GUIApplication {
 	public static SaveFile save1;
 	public static Inventory myInventory;
 	
-	public static IState prevScreen;
+	public static Map prevScreen;
 	public static Map offScreen;
 	public static Map currScreen;
 	

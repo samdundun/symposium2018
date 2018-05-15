@@ -28,7 +28,6 @@ public class WorldMap extends FullFunctionScreen implements IState{
 
 	@Override
 	public void onExit() {
-		MainGUI.prevScreen = this;
 		
 	}
 

@@ -131,25 +131,46 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 			}
 			if(e.getKeyCode() == KeyEvent.VK_1) {
 				value++;
-				if(value > 5) {
+				if(value > 10) {
 					value= 0;
 				}
 			}
 			if(e.getKeyCode() == KeyEvent.VK_E) {
-				if(direction%2 == 1) {
-					int curX = (x + directionSpeeds[direction]+bounds.width)/16;
-					int curY = y/16;
-					if(MainGUI.currScreen.getTile(MainGUI.currScreen.getTopTileSet(),curX, curY).isInteractable()) {
-						MainGUI.currScreen.getTile(MainGUI.currScreen.getTopTileSet(), curX,curY).interact(curX,curY);
+				if(direction == 1) {
+					int curX = (x -3) / 16;
+					int curY = (y + (bounds.height/2))/16;
+					System.out.println(curX + " " + curY);
+					if(MainGUI.currScreen.getTile(MainGUI.currScreen.getTopTileSet(),curY, curX).isInteractable()) {
+						MainGUI.currScreen.getTile(MainGUI.currScreen.getTopTileSet(), curY, curX).interact(curY, curX);
 					}
 				}
-				if(direction%2 == 0) {
-					int curX = x/16;
-					int curY = (y -3)/16;
-					if(MainGUI.currScreen.getTile(MainGUI.currScreen.getTopTileSet(), curX,curY).isInteractable()) {
-						MainGUI.currScreen.getTile(MainGUI.currScreen.getTopTileSet(), curX , curY).interact(curX,curY);
+				if(direction == 0) {
+					int curX = (x + bounds.x)/16;
+					int curY = (y+3 + bounds.height)/16;
+					System.out.println(curX + " " + curY);
+					if(MainGUI.currScreen.getTile(MainGUI.currScreen.getTopTileSet(),curY, curX).isInteractable()) {
+						MainGUI.currScreen.getTile(MainGUI.currScreen.getTopTileSet(), curY, curX).interact(curY, curX);
 					}
 				}
+				if(direction == 2) {
+					int curX = (x + bounds.x )/16;
+					int curY = (y-3 + bounds.y)/16;
+					System.out.println(curX + " " + curY);
+					if(MainGUI.currScreen.getTile(MainGUI.currScreen.getTopTileSet(), curY, curX).isInteractable()) {
+						MainGUI.currScreen.getTile(MainGUI.currScreen.getTopTileSet(), curY, curX).interact(curY, curX);
+					}
+				}
+				if(direction == 3) {
+					int curX = (x + directionSpeeds[direction]+bounds.width + bounds.x)/16;
+					int curY = (y + (bounds.height/2))/16;
+					System.out.println(curX + " " + curY);
+					if(MainGUI.currScreen.getTile(MainGUI.currScreen.getTopTileSet(),curY, curX).isInteractable()) {
+						MainGUI.currScreen.getTile(MainGUI.currScreen.getTopTileSet(), curY, curX).interact(curY, curX);
+					}
+				}
+				
+				
+				
 
 			}
 
@@ -287,8 +308,6 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		AnimatedComponent currentAction = characterActions[direction];
 		//		clear();
 		setImage(currentAction.getImage());
-		g.setColor(Color.red);
-		g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
 		//g.drawImage(currentAction.getImage(),0, 0,this.getWidth(),this.getHeight(), null);
 	}
 

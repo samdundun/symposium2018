@@ -40,7 +40,7 @@ public class Chest extends Tile {
 	public void interact(int x, int y) {
 		setOpen(true);
 		System.out.println("Tile has been changed");
-		MainGUI.currScreen.changeTile(x, y, 6);;
+		MainGUI.currScreen.changeTile(y, x, 6);;
 	}
 
 }
