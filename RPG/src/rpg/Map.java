@@ -113,7 +113,6 @@ public class Map extends FullFunctionScreen implements IState {
 			intro.setVisible(false);
 			leo.setVisible(false);
 			leoSprite.setCanMove(true);
-			leoSprite.setX(MainGUI.prevScreen.leoSprite.getX());
 		}
 
 
@@ -229,6 +228,10 @@ public class Map extends FullFunctionScreen implements IState {
 			addTile(test,y,x);
 			topMap.save(topLayer);
 		}
+	}
+	
+	public String toString() {
+		return this.row + "\n" + this.col + "\n" + leoSprite.getX() + "\n" + leoSprite.getY();
 	}
 
 }

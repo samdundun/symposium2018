@@ -19,6 +19,7 @@ public class CharacterScreen extends FullFunctionScreen implements IState{
 	private SamCustomArea level;
 	private XPArea xp;
 	private Button exit;
+	private Button save;
 	private Graphic leo;
 	private SamCustomArea hpBack;
 	private HealthBar hp;
@@ -118,6 +119,19 @@ public class CharacterScreen extends FullFunctionScreen implements IState{
 		hp = new HealthBar(580, 143, 100, 10, MainGUI.leo);
 		hp.update();
 		viewObjects.add(hp);
+		
+		save = new Button(80,500,100,50,"Save",new Action() {
+			
+			@Override
+			public void act() {
+				MainGUI.save1.save();
+				
+			}
+		});
+		save.setForeground(Color.red);
+		save.setBackground(Color.white);
+		save.update();
+		viewObjects.add(save);
 	}
 
 	@Override

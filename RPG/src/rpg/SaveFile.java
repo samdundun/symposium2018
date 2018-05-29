@@ -50,6 +50,10 @@ public class SaveFile{
 				fw.write(MainGUI.myInventory.getItem(i).toString() + "\n");
 			}
 			fw.close();
+			
+			//Map and position
+			fw = new FileWriter("resources/map.csv");
+			fw.write(MainGUI.currScreen.toString());
 		}
 		catch(IOException e) {
 			e.printStackTrace();

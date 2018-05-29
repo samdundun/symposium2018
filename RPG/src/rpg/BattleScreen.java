@@ -55,7 +55,6 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 	@Override
 	public void onExit() {
 		curEnemy.setVisible(false);
-		MainGUI.save1.save();
 
 	}
 
