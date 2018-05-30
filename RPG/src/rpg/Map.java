@@ -2,10 +2,13 @@ package rpg;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
 import java.util.List;
+
+import javax.swing.ImageIcon;
 
 import Tiles.Tile;
 import guiTeacher.components.Graphic;
@@ -57,9 +60,9 @@ public class Map extends FullFunctionScreen implements IState {
 	public void onEnter() {
 		MainGUI.offScreen = MainGUI.currScreen;
 		MainGUI.currScreen = this;
-		
-//		leoSprite.setX();
-//		leoSprite.setY(100);
+
+		//		leoSprite.setX();
+		//		leoSprite.setY(100);
 
 		if(newGame) {
 			newGame = false;
@@ -138,12 +141,14 @@ public class Map extends FullFunctionScreen implements IState {
 
 	public void setMapContent() {
 		map = new MapLoader( "resources/0," +this.row + "," + this.col + ".txt");
-
 		topMap = new MapLoader("resources/1,"+this.row + "," + this.col + ".txt");
+
 		topLayer = topMap.load();
 		tiles = map.load();
+
+
 		Tile currentTile = null;
-		//LAYER 1
+		//Tile Placement
 		for(int i = 0; i < tiles.length; i++) {
 			for(int j = 0; j < tiles[0].length; j++) {
 
@@ -159,7 +164,9 @@ public class Map extends FullFunctionScreen implements IState {
 				}
 
 			}
+
 		}
+
 
 		try {
 			File fontFile = new File("resources/Holiday.ttf");
@@ -181,7 +188,7 @@ public class Map extends FullFunctionScreen implements IState {
 
 		leoSprite = new MovingCharacter(100,100,32,32);
 		Thread move = new Thread(leoSprite);
-		
+
 		move.start();
 		addObject(leoSprite);
 		moveFocus(leoSprite);
@@ -229,9 +236,32 @@ public class Map extends FullFunctionScreen implements IState {
 			topMap.save(topLayer);
 		}
 	}
-	
+
 	public String toString() {
-		return this.row + "\n" + this.col + "\n" + leoSprite.getX() + "\n" + leoSprite.getY();
+		return this.row + "," + this.col + "," + leoSprite.getX() + "," + leoSprite.getY();
 	}
 
+	public MovingCharacter getLeoSprite() {
+		return leoSprite;
+	}
+
+	public void setLeoSpritePosition(int direction) {
+
+		if(direction == 0) {
+			leoSprite.setY(12);
+			leoSprite.setX(MainGUI.currScreen.getLeoSprite().getX());
+		}
+		if(direction == 2) {
+			leoSprite.setY(548);
+			leoSprite.setX(MainGUI.currScreen.getLeoSprite().getX());
+		}
+		if(direction == 1) {
+			leoSprite.setX(10);
+			leoSprite.setY(MainGUI.currScreen.getLeoSprite().getY());
+		}
+		if(direction == 3) {
+			leoSprite.setX(768);
+			leoSprite.setY(MainGUI.currScreen.getLeoSprite().getY());
+		}
+	}
 }

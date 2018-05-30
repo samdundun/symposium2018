@@ -52,8 +52,9 @@ public class SaveFile{
 			fw.close();
 			
 			//Map and position
-			fw = new FileWriter("resources/map.csv");
+			fw = new FileWriter("resources/map1.csv");
 			fw.write(MainGUI.currScreen.toString());
+			fw.close();
 		}
 		catch(IOException e) {
 			e.printStackTrace();
@@ -64,15 +65,19 @@ public class SaveFile{
 		String fileName = "";
 		String fileName2 = "";
 		String fileName3 = "";
+		String fileName4 = "";
+
 
 		boolean opened = false;
 		while(!opened) {
 			fileName = "resources/save1.csv";
 			fileName2 = "resources/equipped1.csv";
 			fileName3 = "resources/inventory1.csv";
+			fileName4 = "resources/map1.csv";
 			opened = read(new File(fileName));
 			opened = read(new File(fileName2));
 			opened = read(new File(fileName3));
+			opened = read(new File(fileName4));
 		}
 	}
 
@@ -105,6 +110,12 @@ public class SaveFile{
 				if(param.length == 7 && f.getName().equals("inventory1.csv")) {
 					MainGUI.myInventory.addItem(new Item(param[0], Integer.parseInt(param[1]), Integer.parseInt(param[2]),
 							Integer.parseInt(param[3]), Integer.parseInt(param[4]), Integer.parseInt(param[5]), Integer.parseInt(param[6])));
+				}
+				
+				if(param.length == 4 && f.getName().equals("map1.csv")) {
+					MainGUI.game.localMap = new Map(Integer.parseInt(param[0]),Integer.parseInt( param[1]));
+					MainGUI.game.localMap.getLeoSprite().setX(Integer.parseInt(param[2]));
+					MainGUI.game.localMap.getLeoSprite().setY(Integer.parseInt(param[3]));
 				}
 			}
 			br.close();

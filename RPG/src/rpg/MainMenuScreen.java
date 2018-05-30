@@ -85,11 +85,11 @@ public class MainMenuScreen extends FullFunctionScreen implements IState {
 
 			@Override
 			public void act() {
+				MainGUI.myInventory=  new Inventory();
+				MainGUI.save1.load();
 				MainGUI.game.setScreen(MainGUI.localMap);
 				MainGUI.game.localMap.onEnter();
 				MainGUI.game.mainMenu.onExit();
-				MainGUI.myInventory=  new Inventory();
-				MainGUI.save1.load();
 
 			}
 		});

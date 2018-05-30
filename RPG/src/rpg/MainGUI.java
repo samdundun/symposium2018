@@ -78,9 +78,9 @@ public class MainGUI extends GUIApplication {
 		myInventory = new Inventory();
 		leo = new Character(0, 0, 0, 0, 0, 0, 0,0);
 		leo.setNewStats();
+		localMap = new Map();
 		save1 = new SaveFile();
 		mainMenu = new MainMenuScreen(getWidth(), getHeight());
-		localMap = new Map();
 		battle = new BattleScreen(getWidth(), getHeight());
 		cScreen = new CharacterScreen(getWidth(), getHeight());
 		iScreen = new InventoryScreen(getWidth(), getHeight());
