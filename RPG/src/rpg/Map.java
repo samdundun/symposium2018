@@ -58,7 +58,6 @@ public class Map extends FullFunctionScreen implements IState {
 
 	@Override
 	public void onEnter() {
-		MainGUI.offScreen = MainGUI.currScreen;
 		MainGUI.currScreen = this;
 
 		//		leoSprite.setX();
@@ -245,23 +244,26 @@ public class Map extends FullFunctionScreen implements IState {
 		return leoSprite;
 	}
 
-	public void setLeoSpritePosition(int direction) {
+	public void setLeoSpritePosition(int direction, int x, int y) {
 
+//		System.out.println(MainGUI.game.currScreen.getRow() +","+ MainGUI.game.currScreen.getCol());
+//		System.out.print(MainGUI.game.currScreen.getLeoSprite().getX());
+//		System.out.print(MainGUI.game.currScreen.getLeoSprite().getY());
 		if(direction == 0) {
-			leoSprite.setY(12);
-			leoSprite.setX(MainGUI.currScreen.getLeoSprite().getX());
+			leoSprite.setY(20);
+			leoSprite.setX(x);
 		}
 		if(direction == 2) {
-			leoSprite.setY(548);
-			leoSprite.setX(MainGUI.currScreen.getLeoSprite().getX());
+			leoSprite.setY(530);
+			leoSprite.setX(x);
 		}
 		if(direction == 1) {
-			leoSprite.setX(10);
-			leoSprite.setY(MainGUI.currScreen.getLeoSprite().getY());
+			leoSprite.setX(730);
+			leoSprite.setY(y);
 		}
 		if(direction == 3) {
-			leoSprite.setX(768);
-			leoSprite.setY(MainGUI.currScreen.getLeoSprite().getY());
+			leoSprite.setX(20);
+			leoSprite.setY(y);
 		}
 	}
 }

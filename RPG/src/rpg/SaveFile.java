@@ -114,6 +114,8 @@ public class SaveFile{
 				
 				if(param.length == 4 && f.getName().equals("map1.csv")) {
 					MainGUI.game.localMap = new Map(Integer.parseInt(param[0]),Integer.parseInt( param[1]));
+					MainGUI.game.currScreen = MainGUI.game.localMap;
+					MainGUI.game.currScreen.onEnter();
 					MainGUI.game.localMap.getLeoSprite().setX(Integer.parseInt(param[2]));
 					MainGUI.game.localMap.getLeoSprite().setY(Integer.parseInt(param[3]));
 				}

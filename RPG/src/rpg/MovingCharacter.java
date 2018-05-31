@@ -70,6 +70,7 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 	public void keyPressed(KeyEvent e) {
 		int x = getX();
 		int y = getY(); 
+//		System.out.println(x + "," + y);
 		if(canMove) {
 			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 				direction = 1;
@@ -168,19 +169,19 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 						MainGUI.currScreen.getTile(MainGUI.currScreen.getTopTileSet(), curY, curX).interact(curY, curX);
 					}
 				}
-				
-				
-				
+
+
+
 
 			}
 
-						if(((e.getKeyCode() == KeyEvent.VK_LEFT) || (e.getKeyCode() == KeyEvent.VK_RIGHT) || (e.getKeyCode() == KeyEvent.VK_UP) || (e.getKeyCode() == KeyEvent.VK_DOWN) )&& Math.random() > .9) {
-							MainGUI.currScreen.onExit();
-							MainGUI.game.setScreen(MainGUI.battle);
-							MainGUI.battle.onEnter();
-							setVy(0);
-							setVx(0);
-						}
+//			if(((e.getKeyCode() == KeyEvent.VK_LEFT) || (e.getKeyCode() == KeyEvent.VK_RIGHT) || (e.getKeyCode() == KeyEvent.VK_UP) || (e.getKeyCode() == KeyEvent.VK_DOWN) )&& Math.random() > .9) {
+//				MainGUI.currScreen.onExit();
+//				MainGUI.game.setScreen(MainGUI.battle);
+//				MainGUI.battle.onEnter();
+//				setVy(0);
+//				setVx(0);
+//			}
 		}
 	}
 
@@ -215,17 +216,17 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 				setY(20);
 				MainGUI.currScreen.onExit();
 				MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow()-1, MainGUI.currScreen.getCol());
-				MainGUI.offScreen.setLeoSpritePosition(2);
+				MainGUI.offScreen.setLeoSpritePosition(2,x, y);
 				MainGUI.offScreen.onEnter();
 				MainGUI.game.setScreen(MainGUI.offScreen);
 				setVy(0);
 				setVx(0);
 			}
 			if(getY() > 550) {
-				setY(550);
+				setY(530);
 				MainGUI.currScreen.onExit();
 				MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow()+1, MainGUI.currScreen.getCol());
-				MainGUI.offScreen.setLeoSpritePosition(0);
+				MainGUI.offScreen.setLeoSpritePosition(0,x,y);
 				MainGUI.offScreen.onEnter();
 				MainGUI.game.setScreen(MainGUI.offScreen);
 				setVy(0);
@@ -235,7 +236,7 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 				setX(10);
 				MainGUI.currScreen.onExit();
 				MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow(), MainGUI.currScreen.getCol()-1);
-				MainGUI.offScreen.setLeoSpritePosition(1);
+				MainGUI.offScreen.setLeoSpritePosition(1,x,y);
 				MainGUI.offScreen.onEnter();
 				MainGUI.game.setScreen(MainGUI.offScreen);
 				setVy(0);
@@ -245,7 +246,7 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 				setX(770);
 				MainGUI.currScreen.onExit();
 				MainGUI.offScreen.loadMap(MainGUI.currScreen.getRow(), MainGUI.currScreen.getCol()+1);
-				MainGUI.offScreen.setLeoSpritePosition(3);
+				MainGUI.offScreen.setLeoSpritePosition(3,x,y);
 				MainGUI.offScreen.onEnter();
 				MainGUI.game.setScreen(MainGUI.offScreen);
 				setVy(0);
