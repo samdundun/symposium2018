@@ -132,8 +132,14 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 			}
 			if(e.getKeyCode() == KeyEvent.VK_1) {
 				value++;
-				if(value > 10) {
+				if(value > 14) {
 					value= 0;
+				}
+			}
+			if(e.getKeyCode() == KeyEvent.VK_2) {
+				value--;
+				if(value < 0) {
+					value= 14;
 				}
 			}
 			if(e.getKeyCode() == KeyEvent.VK_E) {

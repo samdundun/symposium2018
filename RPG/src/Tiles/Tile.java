@@ -20,6 +20,10 @@ public class Tile extends Graphic {
 	public static Tile brickTile = new BrickTile(8);
 	public static Tile brickWall = new BrickWall(9);
 	public static Tile brickFloor = new BrickFloor(10);
+	public static Tile grayBlock = new GrayBlock(11);
+	public static Tile woodFloor = new WoodFloor(12);
+	public static Tile wood = new Wood(13);
+	public static Tile door = new Door(14);
 
 	public final int id;
 
