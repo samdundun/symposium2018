@@ -18,6 +18,6 @@ public class Door extends Tile {
 	
 	public void interact(int x, int y) {
 		System.out.println("Tile has been changed");
-		MainGUI.currScreen.changeTile(y, x, 12);;
+		MainGUI.currScreen.changeTile(y, x, 12);
 	}
 }

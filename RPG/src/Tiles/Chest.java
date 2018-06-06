@@ -3,6 +3,7 @@ package Tiles;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import rpg.Item;
 import rpg.MainGUI;
 
 public class Chest extends Tile {
@@ -39,7 +40,15 @@ public class Chest extends Tile {
 	
 	public void interact(int x, int y) {
 		setOpen(true);
-		System.out.println("Tile has been changed");
+		int dropItem = (int)((Math.random()*3)+8);
+		MainGUI.myInventory.addItem(new Item(MainGUI.myInventory.ITEMS[dropItem].getName(),
+				MainGUI.myInventory.ITEMS[dropItem].getStrengthBuff(),
+				MainGUI.myInventory.ITEMS[dropItem].getVitalityBuff(),
+				MainGUI.myInventory.ITEMS[dropItem].getAgilityBuff(),
+				MainGUI.myInventory.ITEMS[dropItem].getIntelligenceBuff(),
+				MainGUI.myInventory.ITEMS[dropItem].getImageIndex(),
+				MainGUI.myInventory.ITEMS[dropItem].getType()));
+		
 		MainGUI.currScreen.changeTile(y, x, 6);;
 	}
 

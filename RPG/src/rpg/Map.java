@@ -47,6 +47,7 @@ public class Map extends FullFunctionScreen implements IState {
 		this.newGame = false;
 		this.row = 0;
 		this.col = 0;
+
 		setMapContent();
 	}
 
@@ -141,6 +142,8 @@ public class Map extends FullFunctionScreen implements IState {
 	public void setMapContent() {
 		map = new MapLoader( "resources/0," +this.row + "," + this.col + ".txt");
 		topMap = new MapLoader("resources/1,"+this.row + "," + this.col + ".txt");
+		//		map.fileName = "resources/0," +this.row + "," + this.col + ".txt";
+		//		topMap.fileName="resources/1,"+this.row + "," + this.col + ".txt";
 
 		topLayer = topMap.load();
 		tiles = map.load();
@@ -180,15 +183,18 @@ public class Map extends FullFunctionScreen implements IState {
 		intro = new SamCustomArea(0, 400, 800, 200, "");
 		addObject(intro);
 
-		leo = new Graphic(400,147,450,253,"resources/leooverhead.png");
+		if (leoSprite == null) {
+			leo = new Graphic(400,147,450,253,"resources/leooverhead.png");
+			leoSprite = new MovingCharacter(100,100,32,32);
+			Thread move = new Thread(leoSprite);
+			move.start();
+		}
 		addObject(leo);
 		intro.setVisible(false);
 		leo.setVisible(false);
 
-		leoSprite = new MovingCharacter(100,100,32,32);
-		Thread move = new Thread(leoSprite);
 
-		move.start();
+
 		addObject(leoSprite);
 		moveFocus(leoSprite);
 		leoSprite.setCanMove(false);
@@ -214,6 +220,7 @@ public class Map extends FullFunctionScreen implements IState {
 	}
 
 	public void loadMap(int row, int col) {
+		removeAll();
 		this.row = row;
 		this.col = col;
 		setMapContent();
@@ -246,9 +253,9 @@ public class Map extends FullFunctionScreen implements IState {
 
 	public void setLeoSpritePosition(int direction, int x, int y) {
 
-//		System.out.println(MainGUI.game.currScreen.getRow() +","+ MainGUI.game.currScreen.getCol());
-//		System.out.print(MainGUI.game.currScreen.getLeoSprite().getX());
-//		System.out.print(MainGUI.game.currScreen.getLeoSprite().getY());
+		//		System.out.println(MainGUI.game.currScreen.getRow() +","+ MainGUI.game.currScreen.getCol());
+		//		System.out.print(MainGUI.game.currScreen.getLeoSprite().getX());
+		//		System.out.print(MainGUI.game.currScreen.getLeoSprite().getY());
 		if(direction == 0) {
 			leoSprite.setY(20);
 			leoSprite.setX(x);
