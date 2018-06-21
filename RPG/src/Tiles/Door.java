@@ -7,7 +7,7 @@ public class Door extends Tile {
 	public Door(int id) {
 		super(0, 0 , MainGUI.allTiles[48].getImage(),id);
 		tiles[id] = this;
-		interactable = true;
+		interactable = false;
 	}
 
 	@Override
@@ -16,8 +16,8 @@ public class Door extends Tile {
 		return false;
 	}
 	
-	public void interact(int x, int y) {
-		System.out.println("Tile has been changed");
-		MainGUI.currScreen.changeTile(y, x, 12);
-	}
+//	public void interact(int x, int y) {
+//		System.out.println("Tile has been changed");
+//		MainGUI.currScreen.changeTile(y, x, 12);
+//	}
 }

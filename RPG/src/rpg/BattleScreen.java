@@ -21,6 +21,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 	private AnimatedComponent leo;
 	private HealthBar enemyHP;
 	private HealthBar myHP;
+	private ManaBar mana;
 	private SelectMenuArea current;
 	private Character curBEnemy;
 	private AnimatedComponent curEnemy; 
@@ -49,6 +50,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 		enemyHP.update(curBEnemy);
 		enemyHP.update();
 		myHP.update();
+		mana.update();
 
 	}
 
@@ -106,7 +108,7 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 				@Override
 				public void act() {
 					MainGUI.prevScreen.onEnter();
-					MainGUI.game.setScreen(MainGUI.localMap);
+					MainGUI.game.setScreen(MainGUI.prevScreen);
 					onExit();
 
 				}
@@ -185,6 +187,10 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 		myHP = new HealthBar(100, 470, 100, 10, MainGUI.leo);
 		myHP.update();
 		viewObjects.add(myHP);
+		
+		mana = new ManaBar(100, 480, 100, 10, MainGUI.leo);
+		mana.update();
+		viewObjects.add(mana);
 
 
 	}
@@ -205,14 +211,15 @@ public class BattleScreen extends FullFunctionScreen implements IState {
 			}
 			myHP.update();
 			enemyHP.update();
+			mana.update();
 			MainGUI.leo.checkDead();
 			curBEnemy.checkDead();
 			if(MainGUI.leo.isDead()) {
 				System.exit(0);
 			}
 			if(curBEnemy.isDead()) {
-				MainGUI.game.setScreen((Screen) MainGUI.prevScreen);
 				MainGUI.prevScreen.onEnter();
+				MainGUI.game.setScreen((Screen) MainGUI.prevScreen);
 				MainGUI.leo.gainXP(curBEnemy.getGiveXP());
 				MainGUI.cScreen.update();
 

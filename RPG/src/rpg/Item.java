@@ -138,7 +138,7 @@ public class Item extends CustomImageButton implements Clickable, Equip {
 				MainGUI.leo.setAgility(MainGUI.leo.getAgility() + this.getAgilityBuff());
 				MainGUI.leo.setIntelligence(MainGUI.leo.getIntelligence() + this.getIntelligenceBuff());
 				MainGUI.leo.setMaxHP(MainGUI.leo.getMaxHP() + 5*this.getVitalityBuff());
-				MainGUI.save1.save();
+				MainGUI.leo.setMaxMana(MainGUI.leo.getMaxMana() + 5*this.getIntelligenceBuff());
 				MainGUI.iScreen.update();
 				if(this.getType() == 0) {
 					this.setX(75);
@@ -184,10 +184,10 @@ public class Item extends CustomImageButton implements Clickable, Equip {
 		MainGUI.leo.setAgility(MainGUI.leo.getAgility() - this.getAgilityBuff());
 		MainGUI.leo.setIntelligence(MainGUI.leo.getIntelligence() - this.getIntelligenceBuff());
 		MainGUI.leo.setMaxHP(MainGUI.leo.getMaxHP() - 5*this.getVitalityBuff());
+		MainGUI.leo.setMaxMana(MainGUI.leo.getMaxMana() - 5*this.getIntelligenceBuff());
 		if(MainGUI.leo.getCurrentHP() > MainGUI.leo.getMaxHP()) {
 			MainGUI.leo.setCurrentHP(MainGUI.leo.getMaxHP());
 		}
-		MainGUI.save1.save();
 		MainGUI.iScreen.update();
 		this.setAction(new Action() {
 			

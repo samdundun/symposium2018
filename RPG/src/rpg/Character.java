@@ -31,45 +31,51 @@ public class Character {
 		}
 	},
 
-			
-	//FireBall
-	new Attack() {
-		
+
+			//FireBall
+			new Attack() {
+
 		@Override
 		public void attack(Character a, Character b) {
-			b.setCurrentHP(b.currentHP-a.intelligence);			
+			if(a.currentMana - 5 >= 0) {
+			b.setCurrentHP(b.currentHP-a.intelligence);
+			a.setCurrentMana(a.currentMana - 5);
+			}
 		}
 	},
-	//ThunderBolt
-	new Attack() {
-		
+			//ThunderBolt
+			new Attack() {
+
 		@Override
 		public void attack(Character a, Character b) {
+			if(a.currentMana - 5 >= 0) {
 			b.setCurrentHP(b.currentHP - (a.intelligence/2));
 			if(Math.random() > .8) {
-			b.stunned = true;
-			System.out.println(b + " is stunned");
+				b.stunned = true;
 			}
-			
+			a.setCurrentMana(a.currentMana - 5);
+			}
 		}
 	},
-	
-	//Cure
-	new Attack() {
-		
+
+			//Cure
+			new Attack() {
+
 		@Override
 		public void attack(Character a, Character b) {
-			a.setCurrentHP(a.getCurrentHP() + a.getIntelligence());
-			if(a.getCurrentHP() > a.getMaxHP()) {
-				a.setCurrentHP(a.getMaxHP());
+			if(a.currentMana - 5 >= 0) {
+				a.setCurrentHP(a.getCurrentHP() + a.getIntelligence());
+				if(a.getCurrentHP() > a.getMaxHP()) {
+					a.setCurrentHP(a.getMaxHP());
+				}
+				a.setCurrentMana(a.currentMana - 5);
 			}
-			
 		}
 	}
 
 
-	
-	
+
+
 
 	};
 
@@ -87,11 +93,11 @@ public class Character {
 		this.giveXP = giveXP;
 		this.setStunned(false);
 		this.setStatPoints(0);
-//		this.setWeaponEquipped(false);
-//		this.setHeadEquipped(false);
-//		this.setChestequipped(false);
-//		this.setPantsEquipped(false);
-//		this.setBootsEquipped(false);
+		//		this.setWeaponEquipped(false);
+		//		this.setHeadEquipped(false);
+		//		this.setChestequipped(false);
+		//		this.setPantsEquipped(false);
+		//		this.setBootsEquipped(false);
 		this.equips = new boolean[5];
 		for (int i = 0 ; i < equips.length; i++) {
 			equips[i] = false;
@@ -105,7 +111,7 @@ public class Character {
 	public void setEquips(boolean equip, int type) {
 		this.equips[type] = equip;
 	}
-	
+
 	public void setEquipped(boolean[] b) {
 		this.equips = b;
 	}
@@ -242,6 +248,8 @@ public class Character {
 			level++;
 			this.maxHP= this.maxHP + 5;
 			this.currentHP = this.currentHP + 5;
+			this.maxMana = this.maxMana + 5;
+			this.currentMana = this.maxMana;
 			this.statPoints++;
 			setNeededXP();
 			checkLevelUp();
@@ -263,7 +271,7 @@ public class Character {
 	public void setStunned(boolean stunned) {
 		this.stunned = stunned;
 	}
-	
+
 	public int[] getStats() {
 		int[] a = {maxHP,currentHP, maxMana, currentMana,strength, vitality, agility, intelligence, level, currentXP, statPoints};
 		return a;

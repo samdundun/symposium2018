@@ -32,7 +32,7 @@ public class InventoryScreen extends FullFunctionScreen implements IState {
 
 	@Override
 	public void onExit() {
-		
+
 	}
 
 	@Override
@@ -131,8 +131,8 @@ public class InventoryScreen extends FullFunctionScreen implements IState {
 
 		desc = new SamCustomArea(400, 400, 350, 150, "");
 		viewObjects.add( desc);
-		
-		exit = new Button(740, 30, 50, 50, "X", new Action() {
+
+		exit = new Button(730, 30, 50, 50, "X", new Action() {
 
 			@Override
 			public void act() {

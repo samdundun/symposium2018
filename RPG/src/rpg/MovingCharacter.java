@@ -26,6 +26,7 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 	public final int[] directionSpeeds = {3,-3,-3,3};
 	private boolean editing;
 	private int value;
+	private boolean roaming;
 
 	public MovingCharacter(int x, int y, int w, int h) {
 		super(x, y, w, h);
@@ -58,6 +59,8 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 		bounds.y = 16;
 		bounds.width = 18;
 		bounds.height = 32;
+		
+		roaming = false;
 
 		editing = false;
 	}
@@ -70,7 +73,7 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 	public void keyPressed(KeyEvent e) {
 		int x = getX();
 		int y = getY(); 
-//		System.out.println(x + "," + y);
+		//		System.out.println(x + "," + y);
 		if(canMove) {
 			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 				direction = 1;
@@ -142,6 +145,9 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 					value= 14;
 				}
 			}
+			if(e.getKeyCode() == KeyEvent.VK_3) {
+				roaming = !roaming;
+			}
 			if(e.getKeyCode() == KeyEvent.VK_E) {
 				if(direction == 1) {
 					int curX = (x -3) / 16;
@@ -180,14 +186,15 @@ public class MovingCharacter extends AnimatedComponent implements KeyedComponent
 
 
 			}
-
-//			if(((e.getKeyCode() == KeyEvent.VK_LEFT) || (e.getKeyCode() == KeyEvent.VK_RIGHT) || (e.getKeyCode() == KeyEvent.VK_UP) || (e.getKeyCode() == KeyEvent.VK_DOWN) )&& Math.random() > .9) {
-//				MainGUI.currScreen.onExit();
-//				MainGUI.game.setScreen(MainGUI.battle);
-//				MainGUI.battle.onEnter();
-//				setVy(0);
-//				setVx(0);
-//			}
+			if(!roaming) {
+				if(((e.getKeyCode() == KeyEvent.VK_LEFT) || (e.getKeyCode() == KeyEvent.VK_RIGHT) || (e.getKeyCode() == KeyEvent.VK_UP) || (e.getKeyCode() == KeyEvent.VK_DOWN) )&& Math.random() > .9) {
+					MainGUI.currScreen.onExit();
+					MainGUI.game.setScreen(MainGUI.battle);
+					MainGUI.battle.onEnter();
+					setVy(0);
+					setVx(0);
+				}
+			}
 		}
 	}
 

@@ -23,6 +23,7 @@ public class CharacterScreen extends FullFunctionScreen implements IState{
 	private Graphic leo;
 	private SamCustomArea hpBack;
 	private HealthBar hp;
+	private ManaBar mana;
 
 	public CharacterScreen(int width, int height) {
 		super(width, height);
@@ -78,6 +79,7 @@ public class CharacterScreen extends FullFunctionScreen implements IState{
 					public void act() {
 						if(MainGUI.leo.getStatPoints() > 0) {
 							MainGUI.leo.setIntelligence(MainGUI.leo.getIntelligence() + 1);
+							MainGUI.leo.setMaxMana(MainGUI.leo.getMaxMana() + 5);
 							MainGUI.leo.setStatPoints(MainGUI.leo.getStatPoints() - 1);
 							update(0);
 						}
@@ -98,7 +100,7 @@ public class CharacterScreen extends FullFunctionScreen implements IState{
 		xp = new XPArea(450, 250, 300, 100, " XP: " + MainGUI.leo.getCurrentXP() + "/" + MainGUI.leo.getNeededXP());
 		viewObjects.add(xp);
 
-		exit = new Button(740, 30, 50, 50, "X", new Action() {
+		exit = new Button(730, 30, 50, 50, "X", new Action() {
 
 			@Override
 			public void act() {
@@ -113,12 +115,18 @@ public class CharacterScreen extends FullFunctionScreen implements IState{
 		exit.update();
 		viewObjects.add(exit);
 
-		hpBack = new SamCustomArea(450, 130, 300, 100, "HP:" + MainGUI.leo.getCurrentHP() + "/" + MainGUI.leo.getMaxHP());
+		hpBack = new SamCustomArea(450, 130, 300, 100, "HP:" + MainGUI.leo.getCurrentHP() + "/" + MainGUI.leo.getMaxHP() + "\nMP:"
+		+ MainGUI.leo.getCurrentMana() + "/" + MainGUI.leo.getMaxMana());
+		hpBack.update();
 		viewObjects.add(hpBack);
 
 		hp = new HealthBar(580, 143, 100, 10, MainGUI.leo);
 		hp.update();
 		viewObjects.add(hp);
+		
+		mana = new ManaBar(580, 183,100,10,MainGUI.leo);
+		mana.update();
+		viewObjects.add(mana);
 		
 		save = new Button(80,500,100,50,"Save",new Action() {
 			
@@ -150,8 +158,10 @@ public class CharacterScreen extends FullFunctionScreen implements IState{
 		xp.setText(" XP: " + MainGUI.leo.getCurrentXP() + "/" + MainGUI.leo.getNeededXP());
 		xp.update();
 		level.setText("         Leo Lvl:" + MainGUI.leo.getLevel() + "\n          Mage");
-		hpBack.setText("HP:" + MainGUI.leo.getCurrentHP() + "/" + MainGUI.leo.getMaxHP());
+		hpBack.setText("HP:" + MainGUI.leo.getCurrentHP() + "/" + MainGUI.leo.getMaxHP() + "\nMP:"
+				+ MainGUI.leo.getCurrentMana() + "/" + MainGUI.leo.getMaxMana());
 		hp.update();
+		mana.update();
 		String[] stats = {"Strength : " + MainGUI.leo.getStrength(),"Vitality : "+ MainGUI.leo.getVitality(),"Agility : "+ MainGUI.leo.getAgility(),"Intelligence : "+ MainGUI.leo.getIntelligence()};
 		options.setText(stats);
 	}
